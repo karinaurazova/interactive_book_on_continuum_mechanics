@@ -17,13 +17,13 @@ const text = {
     fieldsText: 'Каждой точке пространства и моменту времени сопоставляется значение физической величины.',
     next: 'Перейти к мысленному разрезу →',
     regimes: ['микроструктура', 'область усреднения', 'континуальное описание'],
-    micro: 'micro',
-    continuum: 'continuum',
+    micro: 'микроструктура',
+    continuum: 'континуум',
     metrics: ['масштаб', 'частицы', 'поле'],
-    prediction: 'PREDICTION',
+    prediction: 'ВОПРОС ДЛЯ ПРОВЕРКИ',
     predictionTitle: 'Когда дискретные детали перестают быть частью полезного описания?',
     predictionText: 'Двигай масштаб и найди область, где поле становится информативнее отдельных частиц.',
-    warning: 'НЕ ПЕРЕПУТАТЬ',
+    warning: 'ВАЖНО',
     warningTitle: 'Континуум ≠ «вещество реально непрерывно».',
     warningText: 'Это идеализация, корректность которой зависит от масштаба задачи.',
     aria: 'Переход от дискретной микроструктуры к непрерывному полю',
@@ -101,10 +101,10 @@ export function ScaleExplorer({ notation, language, onNext }: Props) {
         <div className="scene-card">
           <div className="scene-head">
             <div>
-              <span className="scene-kicker">SCALE EXPLORER</span>
+              <span className="scene-kicker">{language === "ru" ? "МАСШТАБ ОПИСАНИЯ" : "SCALE OF DESCRIPTION"}</span>
               <h2>{regime}</h2>
             </div>
-            <div className="live-badge">LIVE</div>
+            <div className="live-badge">{language === "ru" ? "ИНТЕРАКТИВНО" : "INTERACTIVE"}</div>
           </div>
 
           <svg className="continuum-scene" viewBox="0 0 100 70" role="img" aria-label={copy.aria}>
