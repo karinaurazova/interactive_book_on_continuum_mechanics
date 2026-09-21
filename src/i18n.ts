@@ -21,6 +21,7 @@ export const ui = {
       M02: { title: 'Вектор напряжения', subtitle: 'Нормальная и касательная составляющие' },
       M03: { title: 'Ориентация площадки', subtitle: 'Отображение n ↦ t(n)' },
       M04: { title: 'Тетраэдр Коши', subtitle: 'Переход к формуле t(n)=σn' },
+      M05: { title: 'Компоненты тензора', subtitle: 'Как читать σᵢⱼ' },
     },
   },
   en: {
@@ -42,6 +43,7 @@ export const ui = {
       M02: { title: 'Traction vector', subtitle: 'Normal and tangential components' },
       M03: { title: 'Plane orientation', subtitle: 'Mapping n ↦ t(n)' },
       M04: { title: 'Cauchy tetrahedron', subtitle: 'Toward the formula t(n)=σn' },
+      M05: { title: 'Stress components', subtitle: 'How to read σᵢⱼ' },
     },
   },
 } as const
