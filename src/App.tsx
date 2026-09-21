@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { ScaleExplorer } from './components/ScaleExplorer'
 import { CutTheBody } from './components/CutTheBody'
 import { TractionLab } from './components/TractionLab'
+import { OrientationMap } from './components/OrientationMap'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -71,10 +72,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>3 / 15</span>
+              <span>4 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '20%' }} />
+              <div className="progress-fill" style={{ width: '27%' }} />
             </div>
           </div>
         </aside>
@@ -102,6 +103,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M01')}
+              onNext={() => setActive('M03')}
+            />
+          )}
+
+          {active === 'M03' && (
+            <OrientationMap
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M02')}
             />
           )}
         </main>
