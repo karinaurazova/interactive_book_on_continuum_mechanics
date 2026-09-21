@@ -1394,3 +1394,82 @@ input[type="range"] {
     min-height: 240px;
   }
 }
+
+
+.mohr-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mohr-panel {
+  padding: 12px;
+  border-radius: 13px;
+  background: rgba(244, 242, 236, 0.045);
+  border: 1px solid rgba(244, 242, 236, 0.08);
+}
+
+.mohr-panel > span {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(244, 242, 236, 0.58);
+  font-size: 0.72rem;
+}
+
+.mohr-physical-scene,
+.mohr-circle-scene {
+  width: 100%;
+  min-height: 300px;
+  border-radius: 12px;
+  background: #111318;
+}
+
+.mohr-metrics {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mohr-metrics > div {
+  padding: 11px;
+  border-radius: 11px;
+  background: rgba(244, 242, 236, 0.055);
+  border: 1px solid rgba(244, 242, 236, 0.07);
+}
+
+.mohr-metrics span,
+.mohr-metrics strong {
+  display: block;
+}
+
+.mohr-metrics span {
+  color: rgba(244, 242, 236, 0.55);
+  font-size: 0.66rem;
+  margin-bottom: 4px;
+}
+
+.mohr-metrics strong {
+  font-size: 0.94rem;
+}
+
+@media (max-width: 920px) {
+  .mohr-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mohr-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .mohr-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .mohr-physical-scene,
+  .mohr-circle-scene {
+    min-height: 235px;
+  }
+}
