@@ -5,11 +5,12 @@ import { TractionLab } from './components/TractionLab'
 import { OrientationMap } from './components/OrientationMap'
 import { CauchyTetrahedron } from './components/CauchyTetrahedron'
 import { StressComponents } from './components/StressComponents'
+import { AngularMomentumBalance } from './components/AngularMomentumBalance'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -74,10 +75,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>6 / 15</span>
+              <span>7 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '40%' }} />
+              <div className="progress-fill" style={{ width: '47%' }} />
             </div>
           </div>
         </aside>
@@ -132,6 +133,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M04')}
+              onNext={() => setActive('M06')}
+            />
+          )}
+
+          {active === 'M06' && (
+            <AngularMomentumBalance
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M05')}
             />
           )}
         </main>
