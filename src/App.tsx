@@ -35,7 +35,7 @@ export default function App() {
             ))}
           </div>
 
-          <div className="notation-switch" aria-label="Notation mode">
+          <div className="notation-switch" aria-label={copy.notationLabel}>
             {(['Tensor', 'Index', 'Matrix', 'Python'] as const).map((item) => (
               <button
                 key={item}
