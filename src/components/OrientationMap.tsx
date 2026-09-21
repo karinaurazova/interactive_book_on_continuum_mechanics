@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -31,6 +32,7 @@ const text = {
     conclusionText: 'В следующем модуле этим объектом станет тензор напряжений Коши σ.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Окружность ориентаций с нормалью и соответствующим вектором напряжения',
+    next: 'Перейти к тетраэдру Коши →',
   },
   en: {
     back: '← M02',
@@ -55,6 +57,7 @@ const text = {
     conclusionText: 'In the next module that object will be the Cauchy stress tensor σ.',
     interactive: 'INTERACTIVE',
     aria: 'Orientation circle with a normal and the corresponding traction vector',
+    next: 'Continue to the Cauchy tetrahedron →',
   },
 } as const
 
@@ -62,7 +65,7 @@ function fmt(v: number) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(2)
 }
 
-export function OrientationMap({ notation, language, onBack }: Props) {
+export function OrientationMap({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [theta, setTheta] = useState(34)
 
@@ -124,6 +127,8 @@ export function OrientationMap({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.compact}</div>
           <p>{copy.compactText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
