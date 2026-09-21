@@ -715,3 +715,121 @@ input[type="range"] {
     white-space: normal;
   }
 }
+
+
+.stress-component-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.stress-matrix {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  align-self: center;
+}
+
+.stress-cell {
+  min-height: 82px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 242, 236, 0.08);
+  background: rgba(244, 242, 236, 0.045);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.stress-cell span,
+.stress-cell strong {
+  display: block;
+}
+
+.stress-cell span {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 1.05rem;
+  color: rgba(244, 242, 236, 0.72);
+}
+
+.stress-cell strong {
+  font-size: 0.9rem;
+}
+
+.stress-cell.active {
+  background: rgba(169, 227, 210, 0.16);
+  border-color: rgba(169, 227, 210, 0.68);
+  box-shadow: inset 0 0 0 1px rgba(169, 227, 210, 0.25);
+}
+
+.component-scene {
+  width: 100%;
+  min-height: 330px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+.component-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.component-summary > div {
+  padding: 11px;
+  border-radius: 11px;
+  background: rgba(244, 242, 236, 0.055);
+  border: 1px solid rgba(244, 242, 236, 0.07);
+}
+
+.component-summary span,
+.component-summary strong {
+  display: block;
+}
+
+.component-summary span {
+  font-size: 0.68rem;
+  color: rgba(244, 242, 236, 0.55);
+  margin-bottom: 4px;
+}
+
+.component-summary strong {
+  font-size: 0.94rem;
+}
+
+.component-vector-card {
+  margin-top: 12px;
+  background: rgba(244, 242, 236, 0.04);
+  border-color: rgba(244, 242, 236, 0.08);
+}
+
+.component-vector-card .definition-label {
+  color: var(--mint);
+}
+
+.component-vector-card p,
+.component-vector-card .formula {
+  color: var(--paper);
+}
+
+@media (max-width: 900px) {
+  .stress-component-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .component-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .stress-cell {
+    min-height: 66px;
+  }
+
+  .component-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
