@@ -22,6 +22,7 @@ export const ui = {
       M03: { title: 'Ориентация площадки', subtitle: 'Отображение n ↦ t(n)' },
       M04: { title: 'Тетраэдр Коши', subtitle: 'Переход к формуле t(n)=σn' },
       M05: { title: 'Компоненты тензора', subtitle: 'Как читать σᵢⱼ' },
+      M06: { title: 'Симметрия тензора', subtitle: 'Баланс момента импульса' },
     },
   },
   en: {
@@ -44,6 +45,7 @@ export const ui = {
       M03: { title: 'Plane orientation', subtitle: 'Mapping n ↦ t(n)' },
       M04: { title: 'Cauchy tetrahedron', subtitle: 'Toward the formula t(n)=σn' },
       M05: { title: 'Stress components', subtitle: 'How to read σᵢⱼ' },
+      M06: { title: 'Stress symmetry', subtitle: 'Angular-momentum balance' },
     },
   },
 } as const
