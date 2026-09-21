@@ -588,3 +588,41 @@ input[type="range"] {
     animation: none !important;
   }
 }
+
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.language-button {
+  border: 0;
+  background: transparent;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.language-button.active {
+  background: var(--blue);
+  color: white;
+}
+
+.mini-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .language-switch {
+    min-width: max-content;
+  }
+}
