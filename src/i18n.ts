@@ -24,6 +24,7 @@ export const ui = {
       M05: { title: 'Компоненты тензора', subtitle: 'Как читать σᵢⱼ' },
       M06: { title: 'Симметрия тензора', subtitle: 'Баланс момента импульса' },
       M07: { title: 'Разложение вектора', subtitle: 'Нормальная и касательная части' },
+      M08: { title: 'Смена базиса', subtitle: 'Компоненты в новой системе координат' },
     },
   },
   en: {
@@ -48,6 +49,7 @@ export const ui = {
       M05: { title: 'Stress components', subtitle: 'How to read σᵢⱼ' },
       M06: { title: 'Stress symmetry', subtitle: 'Angular-momentum balance' },
       M07: { title: 'Traction decomposition', subtitle: 'Normal and tangential parts' },
+      M08: { title: 'Change of basis', subtitle: 'Components in a rotated frame' },
     },
   },
 } as const
