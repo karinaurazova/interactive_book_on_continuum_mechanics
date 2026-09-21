@@ -3,11 +3,12 @@ import { ScaleExplorer } from './components/ScaleExplorer'
 import { CutTheBody } from './components/CutTheBody'
 import { TractionLab } from './components/TractionLab'
 import { OrientationMap } from './components/OrientationMap'
+import { CauchyTetrahedron } from './components/CauchyTetrahedron'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02' | 'M03'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -72,10 +73,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>4 / 15</span>
+              <span>5 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '27%' }} />
+              <div className="progress-fill" style={{ width: '33%' }} />
             </div>
           </div>
         </aside>
@@ -112,6 +113,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M02')}
+              onNext={() => setActive('M04')}
+            />
+          )}
+
+          {active === 'M04' && (
+            <CauchyTetrahedron
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M03')}
             />
           )}
         </main>
