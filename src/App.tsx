@@ -12,11 +12,12 @@ import { PrincipalStresses } from './components/PrincipalStresses'
 import { StressInvariants } from './components/StressInvariants'
 import { StressDecomposition } from './components/StressDecomposition'
 import { MohrCircle } from './components/MohrCircle'
+import { ComputationalLab } from './components/ComputationalLab'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07' | 'M08' | 'M09' | 'M10' | 'M11' | 'M12'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07' | 'M08' | 'M09' | 'M10' | 'M11' | 'M12' | 'M13'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08', 'M09', 'M10', 'M11', 'M12']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08', 'M09', 'M10', 'M11', 'M12', 'M13']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -81,10 +82,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>13 / 15</span>
+              <span>14 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '87%' }} />
+              <div className="progress-fill" style={{ width: '93%' }} />
             </div>
           </div>
         </aside>
@@ -202,6 +203,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M11')}
+              onNext={() => setActive('M13')}
+            />
+          )}
+
+          {active === 'M13' && (
+            <ComputationalLab
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M12')}
             />
           )}
         </main>
