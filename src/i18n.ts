@@ -3,27 +3,41 @@ export type NotationMode = 'Tensor' | 'Index' | 'Matrix' | 'Python'
 
 export const ui = {
   ru: {
-    eyebrow: 'ЗАКУЛИСЬЕ МАТМОДЕЛЬЕРА / MSS',
-    brand: 'Continuum Mechanics Lab',
+    eyebrow: 'МЕХАНИКА СПЛОШНЫХ СРЕД / v0.1',
+    brand: 'Интерактивный учебник',
     pilot: 'ПИЛОТНАЯ ГЛАВА',
     progress: 'Прогресс v0.1',
     language: 'Язык',
+    notationLabel: 'Форма записи',
+    notationNames: {
+      Tensor: 'Тензорная',
+      Index: 'Индексная',
+      Matrix: 'Матричная',
+      Python: 'Python',
+    },
     modules: {
       M00: { title: 'Континуум', subtitle: 'От микроструктуры к полю' },
       M01: { title: 'Мысленный разрез', subtitle: 'Как увидеть внутреннее взаимодействие' },
-      M02: { title: 'Traction Lab', subtitle: 'Нормаль, вектор напряжения и разложение' },
+      M02: { title: 'Вектор напряжения', subtitle: 'Нормальная и касательная составляющие' },
     },
   },
   en: {
-    eyebrow: 'BEHIND THE MATHMODELLER / CM',
-    brand: 'Continuum Mechanics Lab',
+    eyebrow: 'CONTINUUM MECHANICS / v0.1',
+    brand: 'Interactive Textbook',
     pilot: 'PILOT CHAPTER',
     progress: 'v0.1 progress',
     language: 'Language',
+    notationLabel: 'Notation',
+    notationNames: {
+      Tensor: 'Tensor',
+      Index: 'Index',
+      Matrix: 'Matrix',
+      Python: 'Python',
+    },
     modules: {
       M00: { title: 'Continuum', subtitle: 'From microstructure to field' },
       M01: { title: 'Imaginary cut', subtitle: 'Making internal interaction visible' },
-      M02: { title: 'Traction Lab', subtitle: 'Normal, traction vector, and decomposition' },
+      M02: { title: 'Traction vector', subtitle: 'Normal and tangential components' },
     },
   },
 } as const
