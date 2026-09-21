@@ -18,6 +18,10 @@ const text = {
     interpretationText: 'При фиксированном j мы читаем j-й столбец матрицы как вектор напряжения на площадке с нормалью eⱼ.',
     convention: 'Принятая конвенция',
     conventionText: 'Используем tᵢ = σᵢⱼ nⱼ. Поэтому j-й столбец матрицы σ равен вектору t(eⱼ). В литературе встречаются и другие соглашения, поэтому порядок индексов всегда нужно проверять.',
+    selectTitle: 'Выберите компоненту σᵢⱼ',
+    selectHint: 'Нажмите на любую ячейку матрицы. Столбец j задаёт площадку, строка i — направление компоненты.',
+    rowAxis: 'строка i → направление',
+    colAxis: 'столбец j → площадка',
     selected: 'Выбранная компонента',
     face: 'площадка',
     direction: 'направление',
@@ -44,6 +48,10 @@ const text = {
     interpretationText: 'For fixed j, the j-th matrix column is the traction vector on the plane with normal eⱼ.',
     convention: 'Convention used here',
     conventionText: 'We use tᵢ = σᵢⱼ nⱼ. Therefore the j-th column of σ equals t(eⱼ). Other conventions exist in the literature, so index order should always be checked.',
+    selectTitle: 'Choose a component σᵢⱼ',
+    selectHint: 'Click any matrix cell. Column j selects the plane, row i selects the component direction.',
+    rowAxis: 'row i → direction',
+    colAxis: 'column j → plane',
     selected: 'Selected component',
     face: 'plane',
     direction: 'direction',
@@ -148,23 +156,56 @@ export function StressComponents({ notation, language, onBack }: Props) {
             <div className="live-badge">{copy.interactive}</div>
           </div>
 
+          <div className="stress-select-panel">
+            <div className="stress-select-copy">
+              <strong>{copy.selectTitle}</strong>
+              <p>{copy.selectHint}</p>
+            </div>
+
+            <div className="matrix-axis-label matrix-axis-top">{copy.colAxis}</div>
+
+            <div className="stress-matrix-wrap">
+              <div className="matrix-axis-label matrix-axis-side">{copy.rowAxis}</div>
+
+              <div className="stress-matrix" aria-label={copy.aria}>
+                {sigma.map((r, i) =>
+                  r.map((v, j) => (
+                    <button
+                      key={`${i}-${j}`}
+                      className={row === i && col === j ? 'stress-cell active' : 'stress-cell'}
+                      onClick={() => {
+                        setRow(i)
+                        setCol(j)
+                      }}
+                      aria-pressed={row === i && col === j}
+                    >
+                      <span>σ<sub>{i + 1}{j + 1}</sub></span>
+                      <strong>{fmt(v)}</strong>
+                    </button>
+                  )),
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="stress-component-layout">
-            <div className="stress-matrix" aria-label={copy.aria}>
-              {sigma.map((r, i) =>
-                r.map((v, j) => (
-                  <button
-                    key={`${i}-${j}`}
-                    className={row === i && col === j ? 'stress-cell active' : 'stress-cell'}
-                    onClick={() => {
-                      setRow(i)
-                      setCol(j)
-                    }}
-                  >
-                    <span>σ<sub>{i + 1}{j + 1}</sub></span>
-                    <strong>{fmt(v)}</strong>
-                  </button>
-                )),
-              )}
+            <div className="stress-selection-explainer">
+              <div className="selection-chip">
+                <span>{copy.selected}</span>
+                <strong>{component}</strong>
+              </div>
+              <div className="selection-chip">
+                <span>{copy.normal}</span>
+                <strong>{normalLabel}</strong>
+              </div>
+              <div className="selection-chip">
+                <span>{copy.direction}</span>
+                <strong>{directionLabel}</strong>
+              </div>
+              <div className="selection-chip">
+                <span>{copy.value}</span>
+                <strong>{fmt(value)}</strong>
+              </div>
             </div>
 
             <svg className="component-scene" viewBox="0 0 100 72">
@@ -204,24 +245,7 @@ export function StressComponents({ notation, language, onBack }: Props) {
             </svg>
           </div>
 
-          <div className="component-summary">
-            <div>
-              <span>{copy.selected}</span>
-              <strong>{component}</strong>
-            </div>
-            <div>
-              <span>{copy.normal}</span>
-              <strong>{normalLabel}</strong>
-            </div>
-            <div>
-              <span>{copy.direction}</span>
-              <strong>{directionLabel}</strong>
-            </div>
-            <div>
-              <span>{copy.value}</span>
-              <strong>{fmt(value)}</strong>
-            </div>
-          </div>
+
 
           <div className="definition component-vector-card">
             <div className="definition-label">{copy.face} n = {normalLabel}</div>
