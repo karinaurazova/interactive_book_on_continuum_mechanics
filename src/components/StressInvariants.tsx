@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -33,6 +34,7 @@ const text = {
     conclusionText: 'Именно поэтому инварианты особенно полезны в формулировках критериев и конститутивных моделей.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Проверка инвариантов тензора напряжений при вращении базиса',
+    next: 'Перейти к сферической и девиаторной частям →',
   },
   en: {
     back: '← M09',
@@ -59,6 +61,7 @@ const text = {
     conclusionText: 'This is why invariants are so useful in criteria and constitutive models.',
     interactive: 'INTERACTIVE',
     aria: 'Verification of stress invariants under basis rotation',
+    next: 'Continue to spherical and deviatoric parts →',
   },
 } as const
 
@@ -109,7 +112,7 @@ function invariants(a: number[][]) {
   return [i1, i2, i3]
 }
 
-export function StressInvariants({ notation, language, onBack }: Props) {
+export function StressInvariants({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [thetaDeg, setThetaDeg] = useState(34)
   const theta = thetaDeg * Math.PI / 180
@@ -147,6 +150,8 @@ export function StressInvariants({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.meaning}</div>
           <p>{copy.meaningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
