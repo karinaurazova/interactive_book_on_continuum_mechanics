@@ -833,3 +833,120 @@ input[type="range"] {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+.stress-select-panel {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(244, 242, 236, 0.035);
+  border: 1px solid rgba(244, 242, 236, 0.07);
+  margin-bottom: 14px;
+}
+
+.stress-select-copy strong {
+  display: block;
+  font-size: 0.96rem;
+  margin-bottom: 4px;
+}
+
+.stress-select-copy p {
+  margin: 0;
+  color: rgba(244, 242, 236, 0.58);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.matrix-axis-label {
+  color: rgba(244, 242, 236, 0.45);
+  font-size: 0.67rem;
+  letter-spacing: 0.02em;
+}
+
+.matrix-axis-top {
+  margin: 12px 0 7px 84px;
+}
+
+.stress-matrix-wrap {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.matrix-axis-side {
+  line-height: 1.35;
+}
+
+.stress-cell {
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.stress-cell:hover {
+  transform: translateY(-1px);
+  border-color: rgba(169, 227, 210, 0.45);
+  background: rgba(169, 227, 210, 0.08);
+}
+
+.stress-cell.active {
+  outline: 2px solid rgba(169, 227, 210, 0.2);
+}
+
+.stress-selection-explainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-self: center;
+}
+
+.selection-chip {
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(244, 242, 236, 0.055);
+  border: 1px solid rgba(244, 242, 236, 0.08);
+  min-height: 72px;
+}
+
+.selection-chip span,
+.selection-chip strong {
+  display: block;
+}
+
+.selection-chip span {
+  color: rgba(244, 242, 236, 0.55);
+  font-size: 0.7rem;
+  margin-bottom: 8px;
+}
+
+.selection-chip strong {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 900px) {
+  .stress-matrix-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .matrix-axis-top {
+    margin-left: 0;
+  }
+
+  .matrix-axis-side {
+    margin-bottom: -2px;
+  }
+
+  .stress-selection-explainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .stress-selection-explainer {
+    grid-template-columns: 1fr;
+  }
+
+  .selection-chip {
+    min-height: auto;
+  }
+}
