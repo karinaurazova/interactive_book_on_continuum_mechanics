@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -35,6 +36,7 @@ const text = {
     conclusionText: 'В главном базисе матрица тензора становится диагональной.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Поиск главного направления по исчезновению касательной части вектора напряжения',
+    next: 'Перейти к инвариантам →',
   },
   en: {
     back: '← M08',
@@ -63,6 +65,7 @@ const text = {
     conclusionText: 'In the principal basis, the stress matrix is diagonal.',
     interactive: 'INTERACTIVE',
     aria: 'Searching for a principal direction by making the tangential traction vanish',
+    next: 'Continue to invariants →',
   },
 } as const
 
@@ -84,7 +87,7 @@ function eigenvalues2x2() {
   return [tr / 2 + disc, tr / 2 - disc]
 }
 
-export function PrincipalStresses({ notation, language, onBack }: Props) {
+export function PrincipalStresses({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [thetaDeg, setThetaDeg] = useState(20)
 
@@ -151,6 +154,8 @@ export function PrincipalStresses({ notation, language, onBack }: Props) {
           <div className="formula">det(σ − λI) = 0</div>
           <p>{copy.characteristicText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
