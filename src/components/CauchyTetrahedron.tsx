@@ -21,7 +21,7 @@ const text = {
     formulaLabel: 'Формула Коши',
     formulaText: 'В результате вектор напряжения на произвольной площадке линейно зависит от её нормали.',
     sceneKicker: 'ТЕТРАЭДР КОШИ',
-    sceneTitle: 'поверхностные и объёмные вклады при уменьшении h',
+    sceneTitle: 'изменяй размер и ориентацию наклонной грани',
     size: 'характерный размер h',
     angle: 'ориентация нормали',
     question: 'ВОПРОС ДЛЯ ПРОВЕРКИ',
@@ -35,14 +35,15 @@ const text = {
       volume: 'объём ~ h³',
       ratio: 'отношение h³/h²',
     },
-    labels: {
+    legend: {
       inclined: 'наклонная грань',
       coord: 'координатные грани',
-      body: 'объёмный вклад',
+      normal: 'нормаль n',
       surface: 'поверхностный вклад',
+      body: 'объёмный вклад',
     },
     interactive: 'ИНТЕРАКТИВНО',
-    aria: 'Тетраэдр Коши с визуализацией поверхностных и объёмных вкладов',
+    aria: 'Тетраэдр Коши с изменяемой наклонной гранью и нормалью',
   },
   en: {
     back: '← M03',
@@ -57,7 +58,7 @@ const text = {
     formulaLabel: 'Cauchy formula',
     formulaText: 'The traction on an arbitrary plane is therefore a linear function of its normal.',
     sceneKicker: 'CAUCHY TETRAHEDRON',
-    sceneTitle: 'surface and volume contributions as h decreases',
+    sceneTitle: 'change the size and orientation of the inclined face',
     size: 'characteristic size h',
     angle: 'normal orientation',
     question: 'CHECKPOINT',
@@ -71,14 +72,15 @@ const text = {
       volume: 'volume ~ h³',
       ratio: 'ratio h³/h²',
     },
-    labels: {
+    legend: {
       inclined: 'inclined face',
       coord: 'coordinate faces',
-      body: 'body-force term',
-      surface: 'surface term',
+      normal: 'normal n',
+      surface: 'surface contribution',
+      body: 'body-force contribution',
     },
     interactive: 'INTERACTIVE',
-    aria: 'Cauchy tetrahedron showing surface and volume contributions',
+    aria: 'Cauchy tetrahedron with a variable inclined face and normal',
   },
 } as const
 
@@ -92,18 +94,19 @@ export function CauchyTetrahedron({ notation, language, onBack }: Props) {
   const [theta, setTheta] = useState(35)
 
   const rad = (theta * Math.PI) / 180
+
   const n = useMemo<[number, number, number]>(() => {
-    const a = Math.max(0.15, Math.cos(rad))
-    const b = Math.max(0.12, Math.sin(rad) * 0.6)
-    const c = Math.sqrt(Math.max(0.05, 1 - a * a - b * b))
-    const norm = Math.sqrt(a * a + b * b + c * c)
-    return [a / norm, b / norm, c / norm]
+    const n1 = Math.cos(rad) * 0.78
+    const n2 = Math.sin(rad) * 0.78
+    const n3 = Math.sqrt(Math.max(0.08, 1 - n1 * n1 - n2 * n2))
+    const norm = Math.sqrt(n1 * n1 + n2 * n2 + n3 * n3)
+    return [n1 / norm, n2 / norm, n3 / norm]
   }, [rad])
 
   const area = h * h
   const volume = h * h * h
   const ratio = volume / area
-  const projected = [n[0] * area, n[1] * area, n[2] * area]
+  const projected = [Math.abs(n[0]) * area, Math.abs(n[1]) * area, Math.abs(n[2]) * area]
 
   const formulaLine =
     notation === 'Index' ? 'tᵢ = σᵢⱼnⱼ' :
@@ -111,17 +114,33 @@ export function CauchyTetrahedron({ notation, language, onBack }: Props) {
     notation === 'Python' ? 't = sigma @ n' :
     '𝐭(𝐧) = σ𝐧'
 
-  const cx = 55
-  const cy = 39
-  const s = 17 + 16 * h
+  const cx = 50
+  const cy = 38
+  const s = 14 + 15 * h
 
-  const p0 = { x: cx - s * 0.95, y: cy + s * 0.62 }
-  const p1 = { x: cx + s * 0.05, y: cy + s * 0.72 }
-  const p2 = { x: cx - s * 0.38, y: cy - s * 0.82 }
-  const p3 = { x: cx + s * 0.72, y: cy - s * 0.18 }
+  const baseA = { x: cx - s * 0.95, y: cy + s * 0.65 }
+  const baseB = { x: cx + s * 0.15, y: cy + s * 0.72 }
+  const apex = { x: cx - s * 0.35, y: cy - s * 0.82 }
 
-  const surfLen = 6 + 12 * h
-  const bodyLen = 3 + 6 * h * h
+  const lateralShift = (theta - 40) / 35
+  const moving = {
+    x: cx + s * (0.55 + 0.34 * lateralShift),
+    y: cy - s * (0.08 + 0.28 * lateralShift),
+  }
+
+  const faceCenter = {
+    x: (baseB.x + apex.x + moving.x) / 3,
+    y: (baseB.y + apex.y + moving.y) / 3,
+  }
+
+  const normalScale = 11 + 6 * h
+  const normalEnd = {
+    x: faceCenter.x + n[0] * normalScale,
+    y: faceCenter.y - n[1] * normalScale,
+  }
+
+  const surfaceScale = 7 + 10 * h
+  const bodyScale = 2.5 + 5 * h * h
 
   return (
     <section className="module-view">
@@ -166,21 +185,79 @@ export function CauchyTetrahedron({ notation, language, onBack }: Props) {
           <svg className="tetra-scene" viewBox="0 0 100 72" role="img" aria-label={copy.aria}>
             <rect x="5" y="6" width="90" height="60" rx="9" fill="#111318" />
 
-            <polygon points={`${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}`} fill="rgba(40,100,255,0.15)" stroke="#2864FF" strokeWidth="0.5" />
-            <polygon points={`${p0.x},${p0.y} ${p1.x},${p1.y} ${p3.x},${p3.y}`} fill="rgba(40,100,255,0.10)" stroke="#2864FF" strokeWidth="0.5" />
-            <polygon points={`${p0.x},${p0.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`} fill="rgba(40,100,255,0.08)" stroke="#2864FF" strokeWidth="0.5" />
-            <polygon points={`${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`} fill="rgba(169,227,210,0.28)" stroke="#A9E3D2" strokeWidth="0.9" />
+            <polygon
+              points={`${baseA.x},${baseA.y} ${baseB.x},${baseB.y} ${apex.x},${apex.y}`}
+              fill="rgba(40,100,255,0.16)"
+              stroke="#2864FF"
+              strokeWidth="0.55"
+            />
+            <polygon
+              points={`${baseA.x},${baseA.y} ${baseB.x},${baseB.y} ${moving.x},${moving.y}`}
+              fill="rgba(40,100,255,0.10)"
+              stroke="#2864FF"
+              strokeWidth="0.55"
+            />
+            <polygon
+              points={`${baseA.x},${baseA.y} ${apex.x},${apex.y} ${moving.x},${moving.y}`}
+              fill="rgba(40,100,255,0.07)"
+              stroke="#2864FF"
+              strokeWidth="0.55"
+            />
 
-            <text x={p2.x - 6} y={p2.y - 2} fill="#F4F2EC" fontSize="3.2">{copy.labels.inclined}</text>
-            <text x={p0.x - 7} y={p0.y + 7} fill="#F4F2EC" fontSize="3.1">{copy.labels.coord}</text>
+            <polygon
+              points={`${baseB.x},${baseB.y} ${apex.x},${apex.y} ${moving.x},${moving.y}`}
+              fill="rgba(169,227,210,0.30)"
+              stroke="#A9E3D2"
+              strokeWidth="1"
+            />
 
-            <line x1={p2.x} y1={p2.y} x2={p2.x + surfLen} y2={p2.y - surfLen * 0.45} stroke="#A9E3D2" strokeWidth="1.2" />
-            <line x1={p3.x} y1={p3.y} x2={p3.x + surfLen * 0.55} y2={p3.y - surfLen * 0.35} stroke="#A9E3D2" strokeWidth="1.2" />
-            <text x={p3.x + surfLen * 0.58} y={p3.y - surfLen * 0.38} fill="#F4F2EC" fontSize="3.1">{copy.labels.surface}</text>
+            <circle cx={faceCenter.x} cy={faceCenter.y} r="1.15" fill="#F4F2EC" />
 
-            <line x1={cx - 8} y1={cy} x2={cx - 8} y2={cy + bodyLen} stroke="#DD7A2B" strokeWidth="1.2" />
-            <text x={cx - 17} y={cy + bodyLen + 5} fill="#F4F2EC" fontSize="3.1">{copy.labels.body}</text>
+            <line
+              x1={faceCenter.x}
+              y1={faceCenter.y}
+              x2={normalEnd.x}
+              y2={normalEnd.y}
+              stroke="#2864FF"
+              strokeWidth="1.5"
+            />
+            <text x={normalEnd.x + 1.4} y={normalEnd.y - 1.2} fill="#F4F2EC" fontSize="3.8">n</text>
+
+            <line
+              x1={apex.x}
+              y1={apex.y}
+              x2={apex.x + surfaceScale}
+              y2={apex.y - surfaceScale * 0.38}
+              stroke="#A9E3D2"
+              strokeWidth="1.15"
+            />
+
+            <line
+              x1={moving.x}
+              y1={moving.y}
+              x2={moving.x + surfaceScale * 0.6}
+              y2={moving.y - surfaceScale * 0.28}
+              stroke="#A9E3D2"
+              strokeWidth="1.15"
+            />
+
+            <line
+              x1={cx - 7}
+              y1={cy + 1}
+              x2={cx - 7}
+              y2={cy + 1 + bodyScale}
+              stroke="#DD7A2B"
+              strokeWidth="1.2"
+            />
           </svg>
+
+          <div className="scene-legend">
+            <span><i className="legend-swatch inclined" />{copy.legend.inclined}</span>
+            <span><i className="legend-swatch coord" />{copy.legend.coord}</span>
+            <span><i className="legend-swatch normal" />{copy.legend.normal}</span>
+            <span><i className="legend-swatch surface" />{copy.legend.surface}</span>
+            <span><i className="legend-swatch body" />{copy.legend.body}</span>
+          </div>
 
           <div className="control-stack">
             <label>
@@ -189,7 +266,7 @@ export function CauchyTetrahedron({ notation, language, onBack }: Props) {
             </label>
             <label>
               <span>{copy.angle} <strong>{theta}°</strong></span>
-              <input type="range" min="10" max="70" step="1" value={theta} onChange={(e) => setTheta(Number(e.target.value))} />
+              <input type="range" min="5" max="75" step="1" value={theta} onChange={(e) => setTheta(Number(e.target.value))} />
             </label>
           </div>
 
