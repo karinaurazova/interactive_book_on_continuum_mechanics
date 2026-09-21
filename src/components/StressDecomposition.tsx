@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type ViewMode = 'full' | 'spherical' | 'deviatoric'
@@ -37,6 +38,7 @@ const text = {
     conclusionText: 'Это разложение особенно важно перед переходом к критериям текучести, энергии и инвариантам девиатора.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Сравнение полного тензора напряжений, сферической части и девиатора',
+    next: 'Перейти к кругу Мора →',
   },
   en: {
     back: '← M10',
@@ -65,6 +67,7 @@ const text = {
     conclusionText: 'This decomposition becomes especially important for yield criteria, energy measures, and deviatoric invariants.',
     interactive: 'INTERACTIVE',
     aria: 'Comparison of the full stress tensor, spherical part, and deviator',
+    next: 'Continue to Mohr circle →',
   },
 } as const
 
@@ -82,7 +85,7 @@ function trace(a: number[][]) {
   return a[0][0] + a[1][1] + a[2][2]
 }
 
-export function StressDecomposition({ notation, language, onBack }: Props) {
+export function StressDecomposition({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [mode, setMode] = useState<ViewMode>('full')
 
@@ -140,6 +143,8 @@ export function StressDecomposition({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.caution}</div>
           <p>{copy.cautionText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
