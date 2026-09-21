@@ -8,11 +8,12 @@ import { StressComponents } from './components/StressComponents'
 import { AngularMomentumBalance } from './components/AngularMomentumBalance'
 import { TractionDecomposition } from './components/TractionDecomposition'
 import { BasisTransform } from './components/BasisTransform'
+import { PrincipalStresses } from './components/PrincipalStresses'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07' | 'M08'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08', 'M09']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -77,10 +78,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>9 / 15</span>
+              <span>10 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '60%' }} />
+              <div className="progress-fill" style={{ width: '67%' }} />
             </div>
           </div>
         </aside>
@@ -162,6 +163,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M07')}
+              onNext={() => setActive('M09')}
+            />
+          )}
+
+          {active === 'M09' && (
+            <PrincipalStresses
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M08')}
             />
           )}
         </main>
