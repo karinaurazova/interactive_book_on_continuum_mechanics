@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -33,6 +34,7 @@ const text = {
     conclusionText: 'Это различие критично для дальнейшего понимания главных направлений и инвариантов.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Один и тот же тензор напряжений в двух повернутых базисах',
+    next: 'Перейти к главным напряжениям →',
   },
   en: {
     back: '← M07',
@@ -59,6 +61,7 @@ const text = {
     conclusionText: 'This distinction is essential for principal directions and invariants.',
     interactive: 'INTERACTIVE',
     aria: 'The same stress tensor represented in two rotated bases',
+    next: 'Continue to principal stresses →',
   },
 } as const
 
@@ -95,7 +98,7 @@ function transform(theta: number) {
   ]
 }
 
-export function BasisTransform({ notation, language, onBack }: Props) {
+export function BasisTransform({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [thetaDeg, setThetaDeg] = useState(28)
   const theta = thetaDeg * Math.PI / 180
@@ -141,6 +144,8 @@ export function BasisTransform({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.invariant}</div>
           <p>{copy.invariantText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
