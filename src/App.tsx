@@ -43,7 +43,7 @@ export default function App() {
                 className={notation === item ? 'notation active' : 'notation'}
                 onClick={() => setNotation(item)}
               >
-                {item}
+                {copy.notationNames[item]}
               </button>
             ))}
           </div>
