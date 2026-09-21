@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -37,6 +38,7 @@ const text = {
     interactive: 'ИНТЕРАКТИВНО',
     ariaPhysical: 'Площадка с вращающейся нормалью и вектором напряжения',
     ariaMohr: 'Круг Мора с движущейся точкой нормального и касательного напряжения',
+    next: 'Перейти в вычислительную лабораторию →',
   },
   en: {
     back: '← M11',
@@ -67,6 +69,7 @@ const text = {
     interactive: 'INTERACTIVE',
     ariaPhysical: 'Plane with rotating normal and traction vector',
     ariaMohr: 'Mohr circle with moving normal and shear stress point',
+    next: 'Continue to computational laboratory →',
   },
 } as const
 
@@ -78,7 +81,7 @@ function fmt(v: number) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(3)
 }
 
-export function MohrCircle({ notation, language, onBack }: Props) {
+export function MohrCircle({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [thetaDeg, setThetaDeg] = useState(20)
   const theta = thetaDeg * Math.PI / 180
@@ -157,6 +160,8 @@ export function MohrCircle({ notation, language, onBack }: Props) {
           <div className="formula">C = (σ₁₁+σ₂₂)/2,   R = √[((σ₁₁−σ₂₂)/2)²+σ₁₂²]</div>
           <p>{copy.geometryText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
