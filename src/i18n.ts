@@ -27,6 +27,7 @@ export const ui = {
       M08: { title: 'Смена базиса', subtitle: 'Компоненты в новой системе координат' },
       M09: { title: 'Главные напряжения', subtitle: 'Собственные значения и направления' },
       M10: { title: 'Инварианты', subtitle: 'I₁, I₂, I₃ вне зависимости от базиса' },
+      M11: { title: 'Сферическая и девиаторная части', subtitle: 'Разложение σ = σˢᵖʰ + s' },
     },
   },
   en: {
@@ -54,6 +55,7 @@ export const ui = {
       M08: { title: 'Change of basis', subtitle: 'Components in a rotated frame' },
       M09: { title: 'Principal stresses', subtitle: 'Eigenvalues and principal directions' },
       M10: { title: 'Invariants', subtitle: 'I₁, I₂, I₃ independent of basis' },
+      M11: { title: 'Spherical and deviatoric parts', subtitle: 'Decomposition σ = σˢᵖʰ + s' },
     },
   },
 } as const
