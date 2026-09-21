@@ -626,3 +626,24 @@ input[type="range"] {
     min-width: max-content;
   }
 }
+
+
+.orientation-scene,
+.tetra-scene {
+  display: block;
+  width: 100%;
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.metrics-secondary {
+  margin-top: 8px;
+}
+
+@media (max-width: 720px) {
+  .orientation-scene,
+  .tetra-scene {
+    min-height: 250px;
+  }
+}
