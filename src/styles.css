@@ -1018,3 +1018,17 @@ input[type="range"] {
     justify-self: start;
   }
 }
+
+
+.decomposition-scene {
+  width: 100%;
+  min-height: 340px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+@media (max-width: 720px) {
+  .decomposition-scene {
+    min-height: 250px;
+  }
+}
