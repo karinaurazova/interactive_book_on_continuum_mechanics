@@ -17,17 +17,17 @@ const text = {
     keyText: 'Через одну и ту же точку можно провести бесконечно много площадок.',
     local: 'Локальный объект',
     localText: 'Вектор локального взаимодействия зависит не только от точки, но и от ориентации площадки.',
-    next: 'Перейти в Traction Lab →',
+    next: 'Перейти к вектору напряжения →',
     scene: 'внутреннее взаимодействие',
-    traction: 'traction',
+    traction: 'векторы взаимодействия',
     position: 'положение разреза',
     orientation: 'ориентация',
-    prediction: 'PREDICTION',
+    prediction: 'ВОПРОС ДЛЯ ПРОВЕРКИ',
     predictionTitle: 'Если точка та же, а площадку повернуть — останется ли локальное взаимодействие прежним?',
     predictionText: 'Измени ориентацию разреза. Именно эта зависимость приведёт нас к тензору напряжений.',
-    note: 'ЗАМЕТКА МАТМОДЕЛЬЕРА',
-    noteTitle: 'Разрез — инструмент мышления.',
-    noteText: 'Мы не добавляем новую физику, а делаем скрытое внутреннее взаимодействие видимым.',
+    note: 'ФИЗИЧЕСКИЙ СМЫСЛ',
+    noteTitle: 'Разрез делает внутреннее взаимодействие наблюдаемым в модели.',
+    noteText: 'Мысленный разрез не создаёт новые силы: он позволяет записать действие одной части тела на другую через поверхность раздела.',
     aria: 'Мысленный разрез нагруженного тела',
   },
   en: {
@@ -46,9 +46,9 @@ const text = {
     prediction: 'PREDICTION',
     predictionTitle: 'If the point stays fixed but the plane rotates, does the local interaction remain the same?',
     predictionText: 'Change the cut orientation. This dependence is exactly what will lead us to the stress tensor.',
-    note: 'MATHMODELLER NOTE',
-    noteTitle: 'The cut is a thinking tool.',
-    noteText: 'We are not adding new physics; we are making hidden internal interaction visible.',
+    note: 'PHYSICAL MEANING',
+    noteTitle: 'The cut makes internal interaction observable in the model.',
+    noteText: 'An imaginary cut does not create new forces; it lets us represent the action of one part of the body on another across the separating surface.',
     aria: 'Imaginary cut through a loaded body',
   },
 } as const
@@ -96,7 +96,7 @@ export function CutTheBody({ notation, language, onBack, onNext }: Props) {
         <div className="scene-card">
           <div className="scene-head">
             <div>
-              <span className="scene-kicker">CUT THE BODY</span>
+              <span className="scene-kicker">{language === "ru" ? "МЫСЛЕННЫЙ РАЗРЕЗ" : "IMAGINARY CUT"}</span>
               <h2>{copy.scene}</h2>
             </div>
             <button className={showTraction ? 'toggle active' : 'toggle'} onClick={() => setShowTraction(!showTraction)}>
