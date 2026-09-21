@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -34,6 +35,7 @@ const text = {
     conclusionText: 'К этому условию мы вернёмся позже при поиске главных напряжений и направлений.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Разложение вектора напряжения на нормальную и касательную части',
+    next: 'Перейти к смене базиса →',
   },
   en: {
     back: '← M06',
@@ -61,6 +63,7 @@ const text = {
     conclusionText: 'We will return to this condition when introducing principal stresses and directions.',
     interactive: 'INTERACTIVE',
     aria: 'Decomposition of traction into normal and tangential parts',
+    next: 'Continue to change of basis →',
   },
 } as const
 
@@ -68,7 +71,7 @@ function fmt(v: number) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(2)
 }
 
-export function TractionDecomposition({ notation, language, onBack }: Props) {
+export function TractionDecomposition({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [theta, setTheta] = useState(26)
   const [showNormal, setShowNormal] = useState(true)
@@ -132,6 +135,8 @@ export function TractionDecomposition({ notation, language, onBack }: Props) {
           <div className="formula">{notationLine}</div>
           <p>{copy.shearText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
