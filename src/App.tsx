@@ -7,11 +7,12 @@ import { CauchyTetrahedron } from './components/CauchyTetrahedron'
 import { StressComponents } from './components/StressComponents'
 import { AngularMomentumBalance } from './components/AngularMomentumBalance'
 import { TractionDecomposition } from './components/TractionDecomposition'
+import { BasisTransform } from './components/BasisTransform'
 import { ui, type Language, type NotationMode } from './i18n'
 
-type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07'
+type ModuleId = 'M00' | 'M01' | 'M02' | 'M03' | 'M04' | 'M05' | 'M06' | 'M07' | 'M08'
 
-const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07']
+const moduleIds: ModuleId[] = ['M00', 'M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08']
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
@@ -76,10 +77,10 @@ export default function App() {
           <div className="progress-block">
             <div className="progress-head">
               <span>{copy.progress}</span>
-              <span>8 / 15</span>
+              <span>9 / 15</span>
             </div>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: '53%' }} />
+              <div className="progress-fill" style={{ width: '60%' }} />
             </div>
           </div>
         </aside>
@@ -152,6 +153,15 @@ export default function App() {
               notation={notation}
               language={language}
               onBack={() => setActive('M06')}
+              onNext={() => setActive('M08')}
+            />
+          )}
+
+          {active === 'M08' && (
+            <BasisTransform
+              notation={notation}
+              language={language}
+              onBack={() => setActive('M07')}
             />
           )}
         </main>
