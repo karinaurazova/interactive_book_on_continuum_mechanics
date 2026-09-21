@@ -23,6 +23,7 @@ export const ui = {
       M04: { title: 'Тетраэдр Коши', subtitle: 'Переход к формуле t(n)=σn' },
       M05: { title: 'Компоненты тензора', subtitle: 'Как читать σᵢⱼ' },
       M06: { title: 'Симметрия тензора', subtitle: 'Баланс момента импульса' },
+      M07: { title: 'Разложение вектора', subtitle: 'Нормальная и касательная части' },
     },
   },
   en: {
@@ -46,6 +47,7 @@ export const ui = {
       M04: { title: 'Cauchy tetrahedron', subtitle: 'Toward the formula t(n)=σn' },
       M05: { title: 'Stress components', subtitle: 'How to read σᵢⱼ' },
       M06: { title: 'Stress symmetry', subtitle: 'Angular-momentum balance' },
+      M07: { title: 'Traction decomposition', subtitle: 'Normal and tangential parts' },
     },
   },
 } as const
