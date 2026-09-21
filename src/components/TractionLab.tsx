@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -28,6 +29,7 @@ const text = {
     noteTitle: 'Геометрия, формула и численный результат описывают один и тот же объект.',
     noteText: 'При изменении ориентации площадки одновременно меняются её нормаль, вектор напряжения и его разложение на нормальную и касательную части.',
     aria: 'Вращаемая площадка, нормаль и вектор напряжения',
+    next: 'Перейти к множеству ориентаций →',
   },
   en: {
     back: '← M01',
@@ -49,6 +51,7 @@ const text = {
     noteTitle: 'Geometry, equations, and numerical values describe the same object.',
     noteText: 'Changing the plane orientation simultaneously changes its normal, the traction vector, and its decomposition into normal and tangential parts.',
     aria: 'Rotating plane, normal, and traction vector',
+    next: 'Continue to plane orientations →',
   },
 } as const
 
@@ -64,7 +67,7 @@ function matrixTimesVector(sigma: number[][], n: [number, number]) {
   ] as [number, number]
 }
 
-export function TractionLab({ notation, language, onBack }: Props) {
+export function TractionLab({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [theta, setTheta] = useState(28)
   const [showNormal, setShowNormal] = useState(true)
@@ -133,7 +136,7 @@ export function TractionLab({ notation, language, onBack }: Props) {
           <div className="formula">t = [{fmt(t[0])}; {fmt(t[1])}]</div>
           <div className="formula">σₙ = {fmt(sigmaN)}</div>
           <div className="formula">|τ| = {fmt(tauMag)}</div>
-        </div>
+                <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
