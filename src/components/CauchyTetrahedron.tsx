@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -44,6 +45,7 @@ const text = {
     },
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Тетраэдр Коши с изменяемой наклонной гранью и нормалью',
+    next: 'Перейти к компонентам тензора →',
   },
   en: {
     back: '← M03',
@@ -81,6 +83,7 @@ const text = {
     },
     interactive: 'INTERACTIVE',
     aria: 'Cauchy tetrahedron with a variable inclined face and normal',
+    next: 'Continue to stress components →',
   },
 } as const
 
@@ -88,7 +91,7 @@ function fmt(v: number) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(2)
 }
 
-export function CauchyTetrahedron({ notation, language, onBack }: Props) {
+export function CauchyTetrahedron({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [h, setH] = useState(0.58)
   const [theta, setTheta] = useState(35)
@@ -170,6 +173,8 @@ export function CauchyTetrahedron({ notation, language, onBack }: Props) {
           <div className="formula">{formulaLine}</div>
           <p>{copy.formulaText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
