@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -37,6 +38,7 @@ const text = {
     sceneTitle: 'выбери элемент матрицы и посмотри его геометрический смысл',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Матрица тензора напряжений и геометрическая интерпретация выбранной компоненты',
+    next: 'Перейти к симметрии тензора →',
   },
   en: {
     back: '← M04',
@@ -67,6 +69,7 @@ const text = {
     sceneTitle: 'select a matrix entry and inspect its geometric meaning',
     interactive: 'INTERACTIVE',
     aria: 'Stress tensor matrix with geometric interpretation of a selected component',
+    next: 'Continue to stress symmetry →',
   },
 } as const
 
@@ -80,7 +83,7 @@ function fmt(v: number) {
   return v.toFixed(2)
 }
 
-export function StressComponents({ notation, language, onBack }: Props) {
+export function StressComponents({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [row, setRow] = useState(1)
   const [col, setCol] = useState(2)
@@ -144,6 +147,8 @@ export function StressComponents({ notation, language, onBack }: Props) {
           <div className="formula">tᵢ = σᵢⱼ nⱼ</div>
           <p>{copy.conventionText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
