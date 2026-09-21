@@ -10,8 +10,8 @@ type Props = {
 const text = {
   ru: {
     back: '← M01',
-    title: 'Traction Lab',
-    lead: 'Здесь появляется первый по-настоящему живой объект главы: площадка с нормалью n, вектор напряжения t и его нормальная и касательная составляющие.',
+    title: 'Вектор напряжения на площадке',
+    lead: 'Рассмотрим площадку с единичной нормалью n. Для заданного напряжённого состояния вектор напряжения t зависит от ориентации этой площадки и может быть разложен на нормальную и касательную составляющие.',
     key: 'КЛЮЧЕВАЯ МЫСЛЬ',
     keyText: 'Одно и то же напряжённое состояние проявляется по-разному на площадках разной ориентации.',
     active: 'Активная запись',
@@ -21,12 +21,12 @@ const text = {
     orientation: 'ориентация площадки',
     normalPart: 'нормальная часть',
     tangentPart: 'касательная часть',
-    prediction: 'PREDICTION',
+    prediction: 'ВОПРОС ДЛЯ ПРОВЕРКИ',
     predictionTitle: 'Можно ли подобрать ориентацию, при которой касательная часть станет очень малой?',
     predictionText: 'Поворачивай площадку и наблюдай за |τ|. Это мост к главным направлениям напряжений.',
-    note: 'ЗАМЕТКА МАТМОДЕЛЬЕРА',
-    noteTitle: 'Вот здесь учебник начинает «дышать».',
-    noteText: 'Один и тот же объект одновременно существует как геометрия, формула и численный результат.',
+    note: 'СВЯЗЬ ПРЕДСТАВЛЕНИЙ',
+    noteTitle: 'Геометрия, формула и численный результат описывают один и тот же объект.',
+    noteText: 'При изменении ориентации площадки одновременно меняются её нормаль, вектор напряжения и его разложение на нормальную и касательную части.',
     aria: 'Вращаемая площадка, нормаль и вектор напряжения',
   },
   en: {
@@ -45,9 +45,9 @@ const text = {
     prediction: 'PREDICTION',
     predictionTitle: 'Can you find an orientation for which the tangential component becomes very small?',
     predictionText: 'Rotate the plane and watch |τ|. This is the bridge to principal stress directions.',
-    note: 'MATHMODELLER NOTE',
-    noteTitle: 'This is where the textbook starts to breathe.',
-    noteText: 'The same object now exists simultaneously as geometry, a formula, and a numerical result.',
+    note: 'LINK BETWEEN REPRESENTATIONS',
+    noteTitle: 'Geometry, equations, and numerical values describe the same object.',
+    noteText: 'Changing the plane orientation simultaneously changes its normal, the traction vector, and its decomposition into normal and tangential parts.',
     aria: 'Rotating plane, normal, and traction vector',
   },
 } as const
@@ -140,10 +140,10 @@ export function TractionLab({ notation, language, onBack }: Props) {
         <div className="scene-card">
           <div className="scene-head">
             <div>
-              <span className="scene-kicker">TRACTION LAB</span>
+              <span className="scene-kicker">{language === "ru" ? "ВЕКТОР НАПРЯЖЕНИЯ" : "TRACTION VECTOR"}</span>
               <h2>{copy.sceneTitle}</h2>
             </div>
-            <div className="live-badge">LIVE</div>
+            <div className="live-badge">{language === "ru" ? "ИНТЕРАКТИВНО" : "INTERACTIVE"}</div>
           </div>
 
           <svg className="cut-scene" viewBox="0 0 100 72" role="img" aria-label={copy.aria}>
