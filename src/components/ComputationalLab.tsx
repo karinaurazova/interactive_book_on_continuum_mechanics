@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Matrix3 = number[][]
@@ -51,6 +52,7 @@ const text = {
     conclusionTitle: 'Теперь глава работает как единая вычислительная система.',
     conclusionText: 'В следующем модуле подсказки исчезнут: останется только задача и твои инструменты.',
     aria: 'Вычислительная лаборатория для анализа тензора напряжений',
+    next: 'Перейти к финальному challenge →',
   },
   en: {
     back: '← M12',
@@ -93,6 +95,7 @@ const text = {
     conclusionTitle: 'The chapter now behaves as one computational system.',
     conclusionText: 'In the next module the hints disappear: only the problem and your tools remain.',
     aria: 'Computational laboratory for stress tensor analysis',
+    next: 'Continue to final challenge →',
   },
 } as const
 
@@ -188,7 +191,7 @@ function jacobiEigenvalues(input: Matrix3) {
   return [a[0][0], a[1][1], a[2][2]].sort((x, y) => y - x)
 }
 
-export function ComputationalLab({ notation, language, onBack }: Props) {
+export function ComputationalLab({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [sigma, setSigma] = useState<Matrix3>(presets.custom.map(r => [...r]))
   const [thetaDeg, setThetaDeg] = useState(40)
@@ -291,6 +294,8 @@ I3 = np.linalg.det(sigma)`
           <div className="formula">{notationLine}</div>
           <p>n = [{n.map(v => fmt(v)).join(', ')}]</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
