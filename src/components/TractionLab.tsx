@@ -136,7 +136,9 @@ export function TractionLab({ notation, language, onBack, onNext }: Props) {
           <div className="formula">t = [{fmt(t[0])}; {fmt(t[1])}]</div>
           <div className="formula">σₙ = {fmt(sigmaN)}</div>
           <div className="formula">|τ| = {fmt(tauMag)}</div>
-                <button className="primary-button" onClick={onNext}>{copy.next}</button>
+        </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
