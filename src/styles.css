@@ -950,3 +950,71 @@ input[type="range"] {
     min-height: auto;
   }
 }
+
+
+.moment-scene {
+  width: 100%;
+  min-height: 340px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+.moment-status {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.moment-status > div:first-child {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(244, 242, 236, 0.055);
+  border: 1px solid rgba(244, 242, 236, 0.07);
+}
+
+.moment-status span,
+.moment-status strong {
+  display: block;
+}
+
+.moment-status span {
+  color: rgba(244, 242, 236, 0.55);
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+
+.moment-status strong {
+  font-size: 1rem;
+}
+
+.moment-badge {
+  padding: 10px 13px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.moment-badge.balanced {
+  background: rgba(169, 227, 210, 0.18);
+  border: 1px solid rgba(169, 227, 210, 0.55);
+  color: var(--mint);
+}
+
+.moment-badge.unbalanced {
+  background: rgba(221, 122, 43, 0.14);
+  border: 1px solid rgba(221, 122, 43, 0.45);
+  color: #f0a261;
+}
+
+@media (max-width: 620px) {
+  .moment-status {
+    grid-template-columns: 1fr;
+  }
+
+  .moment-badge {
+    justify-self: start;
+  }
+}
