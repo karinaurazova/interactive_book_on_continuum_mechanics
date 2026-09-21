@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -33,6 +34,7 @@ const text = {
     conclusionText: 'Аналогично для остальных пар компонент: σᵢⱼ = σⱼᵢ.',
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Малый элемент с касательными напряжениями и остаточным моментом',
+    next: 'Перейти к разложению вектора напряжения →',
   },
   en: {
     back: '← M05',
@@ -59,6 +61,7 @@ const text = {
     conclusionText: 'Likewise for all paired components: σᵢⱼ = σⱼᵢ.',
     interactive: 'INTERACTIVE',
     aria: 'Small element with shear stresses and residual moment',
+    next: 'Continue to traction decomposition →',
   },
 } as const
 
@@ -66,7 +69,7 @@ function fmt(v: number) {
   return v.toFixed(2)
 }
 
-export function AngularMomentumBalance({ notation, language, onBack }: Props) {
+export function AngularMomentumBalance({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [s12, setS12] = useState(0.55)
   const [s21, setS21] = useState(0.35)
@@ -112,6 +115,8 @@ export function AngularMomentumBalance({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.assumptions}</div>
           <p>{copy.assumptionsText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
