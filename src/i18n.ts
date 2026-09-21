@@ -29,6 +29,7 @@ export const ui = {
       M10: { title: 'Инварианты', subtitle: 'I₁, I₂, I₃ вне зависимости от базиса' },
       M11: { title: 'Сферическая и девиаторная части', subtitle: 'Разложение σ = σˢᵖʰ + s' },
       M12: { title: 'Круг Мора', subtitle: 'Площадка ↔ точка (σₙ, τ)' },
+      M13: { title: 'Вычислительная лаборатория', subtitle: 'Stress Tensor Lab' },
     },
   },
   en: {
@@ -58,6 +59,7 @@ export const ui = {
       M10: { title: 'Invariants', subtitle: 'I₁, I₂, I₃ independent of basis' },
       M11: { title: 'Spherical and deviatoric parts', subtitle: 'Decomposition σ = σˢᵖʰ + s' },
       M12: { title: 'Mohr circle', subtitle: 'Plane ↔ point (σₙ, τ)' },
+      M13: { title: 'Computational laboratory', subtitle: 'Stress Tensor Lab' },
     },
   },
 } as const
