@@ -30,6 +30,7 @@ export const ui = {
       M11: { title: 'Сферическая и девиаторная части', subtitle: 'Разложение σ = σˢᵖʰ + s' },
       M12: { title: 'Круг Мора', subtitle: 'Площадка ↔ точка (σₙ, τ)' },
       M13: { title: 'Вычислительная лаборатория', subtitle: 'Stress Tensor Lab' },
+      M14: { title: 'Challenge', subtitle: 'Самопроверка по всей главе' },
     },
   },
   en: {
@@ -60,6 +61,7 @@ export const ui = {
       M11: { title: 'Spherical and deviatoric parts', subtitle: 'Decomposition σ = σˢᵖʰ + s' },
       M12: { title: 'Mohr circle', subtitle: 'Plane ↔ point (σₙ, τ)' },
       M13: { title: 'Computational laboratory', subtitle: 'Stress Tensor Lab' },
+      M14: { title: 'Challenge', subtitle: 'Chapter-wide self-check' },
     },
   },
 } as const
