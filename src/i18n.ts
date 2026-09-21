@@ -26,6 +26,7 @@ export const ui = {
       M07: { title: 'Разложение вектора', subtitle: 'Нормальная и касательная части' },
       M08: { title: 'Смена базиса', subtitle: 'Компоненты в новой системе координат' },
       M09: { title: 'Главные напряжения', subtitle: 'Собственные значения и направления' },
+      M10: { title: 'Инварианты', subtitle: 'I₁, I₂, I₃ вне зависимости от базиса' },
     },
   },
   en: {
@@ -52,6 +53,7 @@ export const ui = {
       M07: { title: 'Traction decomposition', subtitle: 'Normal and tangential parts' },
       M08: { title: 'Change of basis', subtitle: 'Components in a rotated frame' },
       M09: { title: 'Principal stresses', subtitle: 'Eigenvalues and principal directions' },
+      M10: { title: 'Invariants', subtitle: 'I₁, I₂, I₃ independent of basis' },
     },
   },
 } as const
