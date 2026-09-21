@@ -1195,3 +1195,102 @@ input[type="range"] {
     min-height: 250px;
   }
 }
+
+
+.invariant-matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.invariant-matrix-card {
+  padding: 14px;
+  border-radius: 13px;
+  background: rgba(244, 242, 236, 0.045);
+  border: 1px solid rgba(244, 242, 236, 0.08);
+}
+
+.invariant-matrix-card.active {
+  border-color: rgba(169, 227, 210, 0.55);
+  background: rgba(169, 227, 210, 0.08);
+}
+
+.invariant-matrix-card > span {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(244, 242, 236, 0.58);
+  font-size: 0.72rem;
+}
+
+.invariant-3x3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(52px, 1fr));
+  gap: 7px;
+}
+
+.invariant-3x3 strong {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  border-radius: 9px;
+  background: rgba(244, 242, 236, 0.055);
+  font-size: 0.88rem;
+}
+
+.invariant-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.invariant-card {
+  padding: 13px;
+  border-radius: 12px;
+  background: rgba(169, 227, 210, 0.09);
+  border: 1px solid rgba(169, 227, 210, 0.28);
+}
+
+.invariant-card > span,
+.invariant-card > strong,
+.invariant-card > small,
+.invariant-compare {
+  display: block;
+}
+
+.invariant-card > span {
+  color: var(--mint);
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.invariant-card > strong {
+  font-size: 1.08rem;
+}
+
+.invariant-card > small {
+  margin-top: 4px;
+  color: rgba(244, 242, 236, 0.55);
+  font-size: 0.68rem;
+}
+
+.invariant-compare {
+  margin-top: 8px;
+  color: rgba(244, 242, 236, 0.72);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 760px) {
+  .invariant-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .invariant-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .invariant-3x3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
