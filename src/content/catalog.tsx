@@ -54,6 +54,7 @@ import { ConstitutiveStateSpace } from '../components/ConstitutiveStateSpace'
 import { MaterialObjectivity } from '../components/MaterialObjectivity'
 import { MaterialSymmetry } from '../components/MaterialSymmetry'
 import { LinearElasticityTensor } from '../components/LinearElasticityTensor'
+import { StiffnessSymmetries } from '../components/StiffnessSymmetries'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -63,7 +64,7 @@ export type ModuleId =
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
-  | 'C00' | 'C01' | 'C02' | 'C03' | 'C04'
+  | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling'
 
@@ -129,7 +130,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'constitutive-modeling',
     title: { ru: 'Конститутивные соотношения и модели материала', en: 'Constitutive relations and material models' },
     shortTitle: { ru: 'Материалы', en: 'Materials' },
-    moduleIds: ['C00', 'C01', 'C02', 'C03', 'C04'],
+    moduleIds: ['C00', 'C01', 'C02', 'C03', 'C04', 'C05'],
   },
 ]
 
@@ -188,7 +189,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'C01', chapterId: 'constitutive-modeling', title: { ru: 'Что может входить в конститутивное соотношение?', en: 'What can enter a constitutive relation?' }, subtitle: { ru: 'состояние · история · температура · внутренние переменные', en: 'state · history · temperature · internal variables' }, render: ({notation,language,goTo}) => <ConstitutiveStateSpace notation={notation} language={language} onBack={() => goTo('C00')} onNext={() => goTo('C02')} /> },
   { id: 'C02', chapterId: 'constitutive-modeling', title: { ru: 'Материальная объективность', en: 'Material objectivity' }, subtitle: { ru: 'F* = QF, C* = C, σ* = QσQᵀ', en: 'F* = QF, C* = C, σ* = QσQᵀ' }, render: ({notation,language,goTo}) => <MaterialObjectivity notation={notation} language={language} onBack={() => goTo('C01')} onNext={() => goTo('C03')} /> },
   { id: 'C03', chapterId: 'constitutive-modeling', title: { ru: 'Изотропия и анизотропия', en: 'Isotropy and anisotropy' }, subtitle: { ru: 'поворот структуры ≠ поворот наблюдателя', en: 'rotating structure ≠ rotating observer' }, render: ({notation,language,goTo}) => <MaterialSymmetry notation={notation} language={language} onBack={() => goTo('C02')} onNext={() => goTo('C04')} /> },
-  { id: 'C04', chapterId: 'constitutive-modeling', title: { ru: 'Линейная упругость и тензор жёсткости четвёртого порядка', en: 'Linear elasticity and the fourth-order stiffness tensor' }, subtitle: { ru: 'σ = 𝓒:ε', en: 'σ = 𝓒:ε' }, render: ({notation,language,goTo}) => <LinearElasticityTensor notation={notation} language={language} onBack={() => goTo('C03')} /> },
+  { id: 'C04', chapterId: 'constitutive-modeling', title: { ru: 'Линейная упругость и тензор жёсткости четвёртого порядка', en: 'Linear elasticity and the fourth-order stiffness tensor' }, subtitle: { ru: 'σ = 𝓒:ε', en: 'σ = 𝓒:ε' }, render: ({notation,language,goTo}) => <LinearElasticityTensor notation={notation} language={language} onBack={() => goTo('C03')} onNext={() => goTo('C05')} /> },
+  { id: 'C05', chapterId: 'constitutive-modeling', title: { ru: 'Симметрии тензора жёсткости', en: 'Stiffness-tensor symmetries' }, subtitle: { ru: '81 → 36 → 21', en: '81 → 36 → 21' }, render: ({notation,language,goTo}) => <StiffnessSymmetries notation={notation} language={language} onBack={() => goTo('C04')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
