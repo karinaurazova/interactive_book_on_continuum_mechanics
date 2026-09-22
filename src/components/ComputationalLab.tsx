@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
+import { dot, matVec, norm, trace, type Matrix as Matrix3 } from '../math/linalg'
+import { deviator, jacobiEigenvaluesSymmetric3, meanStress, stressInvariants, symmetryError } from '../math/stress'
 
 type Props = {
   notation: NotationMode
@@ -7,8 +9,6 @@ type Props = {
   onBack: () => void
   onNext: () => void
 }
-
-type Matrix3 = number[][]
 
 const text = {
   ru: {
@@ -126,71 +126,6 @@ function fmt(v: number, d = 3) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(d)
 }
 
-function matVec(a: Matrix3, x: number[]) {
-  return a.map((row) => row.reduce((s, v, i) => s + v * x[i], 0))
-}
-
-function dot(a: number[], b: number[]) {
-  return a.reduce((s, v, i) => s + v * b[i], 0)
-}
-
-function norm(a: number[]) {
-  return Math.sqrt(dot(a, a))
-}
-
-function trace(a: Matrix3) {
-  return a[0][0] + a[1][1] + a[2][2]
-}
-
-function matMul(a: Matrix3, b: Matrix3) {
-  return a.map((row) => b[0].map((_, j) => row.reduce((s, v, k) => s + v * b[k][j], 0)))
-}
-
-function invariants(a: Matrix3) {
-  const i1 = trace(a)
-  const a2 = matMul(a, a)
-  const i2 = 0.5 * (i1 * i1 - trace(a2))
-  const i3 =
-    a[0][0] * (a[1][1] * a[2][2] - a[1][2] * a[2][1]) -
-    a[0][1] * (a[1][0] * a[2][2] - a[1][2] * a[2][0]) +
-    a[0][2] * (a[1][0] * a[2][1] - a[1][1] * a[2][0])
-  return [i1, i2, i3]
-}
-
-function jacobiEigenvalues(input: Matrix3) {
-  const a = input.map((r) => [...r])
-  for (let iter = 0; iter < 30; iter++) {
-    let p = 0
-    let q = 1
-    let max = Math.abs(a[0][1])
-    for (const [i, j] of [[0, 2], [1, 2]] as const) {
-      if (Math.abs(a[i][j]) > max) {
-        max = Math.abs(a[i][j])
-        p = i
-        q = j
-      }
-    }
-    if (max < 1e-12) break
-    const phi = 0.5 * Math.atan2(2 * a[p][q], a[q][q] - a[p][p])
-    const c = Math.cos(phi)
-    const s = Math.sin(phi)
-    const app = c * c * a[p][p] - 2 * s * c * a[p][q] + s * s * a[q][q]
-    const aqq = s * s * a[p][p] + 2 * s * c * a[p][q] + c * c * a[q][q]
-    for (let k = 0; k < 3; k++) {
-      if (k !== p && k !== q) {
-        const akp = c * a[k][p] - s * a[k][q]
-        const akq = s * a[k][p] + c * a[k][q]
-        a[k][p] = a[p][k] = akp
-        a[k][q] = a[q][k] = akq
-      }
-    }
-    a[p][p] = app
-    a[q][q] = aqq
-    a[p][q] = a[q][p] = 0
-  }
-  return [a[0][0], a[1][1], a[2][2]].sort((x, y) => y - x)
-}
-
 export function ComputationalLab({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [sigma, setSigma] = useState<Matrix3>(presets.custom.map(r => [...r]))
@@ -211,17 +146,13 @@ export function ComputationalLab({ notation, language, onBack, onNext }: Props) 
   const tauVec = t.map((v, i) => v - normalPart[i])
   const tauMag = norm(tauVec)
 
-  const inv = useMemo(() => invariants(sigma), [sigma])
-  const principal = useMemo(() => jacobiEigenvalues(sigma), [sigma])
-  const mean = trace(sigma) / 3
-  const deviator = sigma.map((row, i) => row.map((v, j) => v - (i === j ? mean : 0)))
-  const devTrace = trace(deviator)
+  const inv = useMemo(() => stressInvariants(sigma), [sigma])
+  const principal = useMemo(() => jacobiEigenvaluesSymmetric3(sigma), [sigma])
+  const mean = meanStress(sigma)
+  const deviatoric = deviator(sigma)
+  const devTrace = trace(deviatoric)
 
-  const symmetryError = Math.max(
-    Math.abs(sigma[0][1] - sigma[1][0]),
-    Math.abs(sigma[0][2] - sigma[2][0]),
-    Math.abs(sigma[1][2] - sigma[2][1]),
-  )
+  const sigmaSymmetryError = symmetryError(sigma)
   const orthError = Math.abs(dot(tauVec, n))
   const unitError = Math.abs(norm(n) - 1)
 
@@ -273,7 +204,7 @@ I3 = np.linalg.det(sigma)`
     [copy.checkUnit, unitError < 1e-10],
     [copy.checkOrth, orthError < 1e-10],
     [copy.checkDev, Math.abs(devTrace) < 1e-10],
-    [copy.checkSym, symmetryError < 1e-10],
+    [copy.checkSym, sigmaSymmetryError < 1e-10],
   ] as const
 
   return (
