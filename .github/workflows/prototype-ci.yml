@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - v0.1-foundation
+      - v0.2-platform
   pull_request:
     branches:
       - main
