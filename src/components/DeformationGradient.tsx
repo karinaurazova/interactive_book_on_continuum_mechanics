@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -35,6 +36,7 @@ const text = {
     conclusionTitle: 'F — локальная линейзация движения.',
     conclusionText: 'Она связывает геометрию движения с вычислением: dX → F dX → dx.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к типовым режимам F →',
   },
   en: {
     back: '← K02',
@@ -63,6 +65,7 @@ const text = {
     conclusionTitle: 'F is the local linearization of motion.',
     conclusionText: 'It links geometry and computation: dX → F dX → dx.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to typical F modes →',
   },
 } as const
 
@@ -70,7 +73,7 @@ function fmt(v:number) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(2)
 }
 
-export function DeformationGradient({ notation, language, onBack }: Props) {
+export function DeformationGradient({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [F11,setF11] = useState(1.20)
   const [F12,setF12] = useState(0.35)
@@ -145,6 +148,8 @@ export function DeformationGradient({ notation, language, onBack }: Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
