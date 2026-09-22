@@ -39,6 +39,7 @@ const text = {
     conclusionText: 'Через них удобно описывать анизотропию, большие деформации и далее строить конститутивные модели.',
     interactive: 'ИНТЕРАКТИВНО',
     next: 'Перейти к предельным случаям →',
+    degenerate: 'λ₁ ≈ λ₂: главное направление не единственно',
   },
   en: {
     back: '← K08',
@@ -70,6 +71,7 @@ const text = {
     conclusionText: 'They are especially useful for anisotropy, large deformation, and constitutive modeling.',
     interactive: 'INTERACTIVE',
     next: 'Continue to limiting cases →',
+    degenerate: 'λ₁ ≈ λ₂: principal direction is not unique',
   },
 } as const
 
@@ -104,6 +106,7 @@ export function PrincipalStretches({notation,language,onBack,onNext}:Props){
 
   const eig=useMemo(()=>eigSym2(u11,u12,u22),[u11,u12,u22])
   const {l1,l2,n1,n2}=eig
+  const degenerate=Math.abs(l1-l2)<1e-3
 
   const notationLine =
     notation==='Index' ? 'Uᵢⱼ Nⱼ = λ Nᵢ' :
@@ -200,10 +203,12 @@ export function PrincipalStretches({notation,language,onBack,onNext}:Props){
             <div className="principal-values-card">
               <div><span>{copy.lambda1}</span><strong>{fmt(l1)}</strong></div>
               <div><span>{copy.lambda2}</span><strong>{fmt(l2)}</strong></div>
-              <div><span>{copy.angle1}</span><strong>{fmt(n1a,1)}°</strong></div>
-              <div><span>{copy.angle2}</span><strong>{fmt(n2a,1)}°</strong></div>
+              <div><span>{copy.angle1}</span><strong>{degenerate ? '—' : `${fmt(n1a,1)}°`}</strong></div>
+              <div><span>{copy.angle2}</span><strong>{degenerate ? '—' : `${fmt(n2a,1)}°`}</strong></div>
             </div>
           </div>
+
+          {degenerate && <div className="kinematics-degenerate-note">{copy.degenerate}</div>}
 
           <div className="control-stack">
             <label><span>{copy.u11} <strong>{fmt(u11,2)}</strong></span><input type="range" min="0.55" max="1.75" step="0.01" value={u11} onChange={e=>setU11(Number(e.target.value))}/></label>
