@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -40,6 +41,8 @@ const text = {
     conclusionTitle:'Материальная производная превращает пространственное поле в скорость изменения, которую испытывает конкретная частица.',
     conclusionText:'Следующий шаг — градиент скорости L = ∇v, который описывает локальную структуру движения.',
     interactive:'ИНТЕРАКТИВНО',
+    particleLabel:'частица',
+    next:'Перейти к градиенту скорости →',
   },
   en: {
     back:'← T02',
@@ -73,6 +76,8 @@ const text = {
     conclusionTitle:'The material derivative converts a spatial field into the rate of change experienced by a particular particle.',
     conclusionText:'Next we introduce the velocity gradient L = ∇v, which describes the local structure of motion.',
     interactive:'INTERACTIVE',
+    particleLabel:'particle',
+    next:'Continue to the velocity gradient →',
   }
 } as const
 
@@ -80,7 +85,7 @@ function fmt(v:number,d=3){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function MaterialDerivative({notation,language,onBack}:Props){
+export function MaterialDerivative({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.22)
   const [X,setX]=useState(0.30)
@@ -165,6 +170,8 @@ export function MaterialDerivative({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
@@ -184,7 +191,7 @@ export function MaterialDerivative({notation,language,onBack}:Props){
             <circle cx={pp[0]} cy={pp[1]} r="2" fill="#A9E3D2"/>
             <line x1={pp[0]} y1="58" x2={pp[0]} y2={pp[1]+2} stroke="#A9E3D2" strokeDasharray="1.2 1.2" strokeWidth=".6"/>
             <text x="9" y="13" fill="#8E96A3" fontSize="2.7">φ(x,t)</text>
-            <text x={pp[0]+2} y={pp[1]-2} fill="#A9E3D2" fontSize="2.5">particle</text>
+            <text x={pp[0]+2} y={pp[1]-2} fill="#A9E3D2" fontSize="2.5">{copy.particleLabel}</text>
           </svg>
 
           <div className="control-stack">
