@@ -2677,3 +2677,15 @@ input[type="range"] {
 @media (max-width:520px){
   .kin-challenge-metrics{grid-template-columns:1fr;}
 }
+
+
+.kinematics-degenerate-note {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(221,122,43,.08);
+  border: 1px solid rgba(221,122,43,.22);
+  color: #b86424;
+  font-size: .78rem;
+  line-height: 1.45;
+}
