@@ -36,6 +36,7 @@ const text = {
     conclusionTitle: 'Материальное и пространственное описания дополняют друг друга.',
     conclusionText: 'Дальше производные по X приведут нас к градиенту деформации F, а производные по x — к пространственным мерам.',
     interactive: 'ИНТЕРАКТИВНО',
+    notationLabel: 'Форма записи',
   },
   en: {
     back: '← K00',
@@ -63,6 +64,7 @@ const text = {
     conclusionTitle: 'Material and spatial descriptions complement each other.',
     conclusionText: 'Later, derivatives with respect to X lead to the deformation gradient F, while derivatives with respect to x lead to spatial measures.',
     interactive: 'INTERACTIVE',
+    notationLabel: 'Notation',
   },
 } as const
 
@@ -147,7 +149,7 @@ export function MaterialSpatialCoordinates({ notation, language, onBack }: Props
         </div>
 
         <div className="definition">
-          <div className="definition-label">Notation</div>
+          <div className="definition-label">{copy.notationLabel}</div>
           <div className="formula">{notationLine}</div>
         </div>
       </div>
