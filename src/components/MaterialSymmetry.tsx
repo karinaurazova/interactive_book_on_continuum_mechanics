@@ -162,7 +162,7 @@ export function MaterialSymmetry({notation,language,onBack}:Props){
             <div className="live-badge">{copy.interactive}</div>
           </div>
 
-          <div className="constitutive-mode-switch">
+          <div className="constitutive-mode-switch constitutive-mode-switch-dark">
             <button className={mode==='isotropic'?'constitutive-mode-button active':'constitutive-mode-button'} onClick={()=>setMode('isotropic')}>{copy.isotropic}</button>
             <button className={mode==='anisotropic'?'constitutive-mode-button active':'constitutive-mode-button'} onClick={()=>setMode('anisotropic')}>{copy.anisotropic}</button>
           </div>
