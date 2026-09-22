@@ -2990,3 +2990,47 @@ input[type="range"] {
   background: var(--paper);
   color: var(--ink);
 }
+
+
+/* Cross-domain application map for universal continuum-mechanics architecture. */
+.application-links {
+  margin-top: 18px;
+  padding: 15px 16px;
+  border: 1px solid rgba(40,100,255,.15);
+  border-radius: 14px;
+  background: rgba(40,100,255,.035);
+}
+
+.application-links-head span {
+  display:block;
+  margin-bottom:5px;
+  color:var(--blue);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.application-links-head p {
+  margin:0;
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.45;
+}
+
+.application-links-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:11px;
+}
+
+.application-links-list span {
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(40,100,255,.14);
+  background:rgba(255,255,255,.48);
+  color:var(--ink);
+  font-size:.72rem;
+  font-weight:700;
+}
