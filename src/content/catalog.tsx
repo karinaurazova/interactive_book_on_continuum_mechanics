@@ -32,6 +32,8 @@ type RenderContext = {
 export type ModuleDefinition = {
   id: ModuleId
   chapterId: ChapterId
+  title: Record<Language, string>
+  subtitle: Record<Language, string>
   render: (ctx: RenderContext) => ReactNode
 }
 
@@ -64,21 +66,21 @@ export const chapters: ChapterDefinition[] = [
 ]
 
 export const modules: ModuleDefinition[] = [
-  { id: 'M00', chapterId: 'stress-state', render: ({notation,language,goTo}) => <ScaleExplorer notation={notation} language={language} onNext={() => goTo('M01')} /> },
-  { id: 'M01', chapterId: 'stress-state', render: ({notation,language,goTo}) => <CutTheBody notation={notation} language={language} onBack={() => goTo('M00')} onNext={() => goTo('M02')} /> },
-  { id: 'M02', chapterId: 'stress-state', render: ({notation,language,goTo}) => <TractionLab notation={notation} language={language} onBack={() => goTo('M01')} onNext={() => goTo('M03')} /> },
-  { id: 'M03', chapterId: 'stress-state', render: ({notation,language,goTo}) => <OrientationMap notation={notation} language={language} onBack={() => goTo('M02')} onNext={() => goTo('M04')} /> },
-  { id: 'M04', chapterId: 'stress-state', render: ({notation,language,goTo}) => <CauchyTetrahedron notation={notation} language={language} onBack={() => goTo('M03')} onNext={() => goTo('M05')} /> },
-  { id: 'M05', chapterId: 'stress-state', render: ({notation,language,goTo}) => <StressComponents notation={notation} language={language} onBack={() => goTo('M04')} onNext={() => goTo('M06')} /> },
-  { id: 'M06', chapterId: 'stress-state', render: ({notation,language,goTo}) => <AngularMomentumBalance notation={notation} language={language} onBack={() => goTo('M05')} onNext={() => goTo('M07')} /> },
-  { id: 'M07', chapterId: 'stress-state', render: ({notation,language,goTo}) => <TractionDecomposition notation={notation} language={language} onBack={() => goTo('M06')} onNext={() => goTo('M08')} /> },
-  { id: 'M08', chapterId: 'stress-state', render: ({notation,language,goTo}) => <BasisTransform notation={notation} language={language} onBack={() => goTo('M07')} onNext={() => goTo('M09')} /> },
-  { id: 'M09', chapterId: 'stress-state', render: ({notation,language,goTo}) => <PrincipalStresses notation={notation} language={language} onBack={() => goTo('M08')} onNext={() => goTo('M10')} /> },
-  { id: 'M10', chapterId: 'stress-state', render: ({notation,language,goTo}) => <StressInvariants notation={notation} language={language} onBack={() => goTo('M09')} onNext={() => goTo('M11')} /> },
-  { id: 'M11', chapterId: 'stress-state', render: ({notation,language,goTo}) => <StressDecomposition notation={notation} language={language} onBack={() => goTo('M10')} onNext={() => goTo('M12')} /> },
-  { id: 'M12', chapterId: 'stress-state', render: ({notation,language,goTo}) => <MohrCircle notation={notation} language={language} onBack={() => goTo('M11')} onNext={() => goTo('M13')} /> },
-  { id: 'M13', chapterId: 'stress-state', render: ({notation,language,goTo}) => <ComputationalLab notation={notation} language={language} onBack={() => goTo('M12')} onNext={() => goTo('M14')} /> },
-  { id: 'M14', chapterId: 'stress-state', render: ({notation,language,goTo}) => <FinalChallenge notation={notation} language={language} onBack={() => goTo('M13')} /> },
+  { id: 'M00', chapterId: 'stress-state', title: { ru: 'Континуум', en: 'Continuum' }, subtitle: { ru: 'От микроструктуры к полю', en: 'From microstructure to field' }, render: ({notation,language,goTo}) => <ScaleExplorer notation={notation} language={language} onNext={() => goTo('M01')} /> },
+  { id: 'M01', chapterId: 'stress-state', title: { ru: 'Мысленный разрез', en: 'Imaginary cut' }, subtitle: { ru: 'Как увидеть внутреннее взаимодействие', en: 'Making internal interaction visible' }, render: ({notation,language,goTo}) => <CutTheBody notation={notation} language={language} onBack={() => goTo('M00')} onNext={() => goTo('M02')} /> },
+  { id: 'M02', chapterId: 'stress-state', title: { ru: 'Вектор напряжения', en: 'Traction vector' }, subtitle: { ru: 'Нормальная и касательная составляющие', en: 'Normal and tangential components' }, render: ({notation,language,goTo}) => <TractionLab notation={notation} language={language} onBack={() => goTo('M01')} onNext={() => goTo('M03')} /> },
+  { id: 'M03', chapterId: 'stress-state', title: { ru: 'Ориентация площадки', en: 'Plane orientation' }, subtitle: { ru: 'Отображение n ↦ t(n)', en: 'Mapping n ↦ t(n)' }, render: ({notation,language,goTo}) => <OrientationMap notation={notation} language={language} onBack={() => goTo('M02')} onNext={() => goTo('M04')} /> },
+  { id: 'M04', chapterId: 'stress-state', title: { ru: 'Тетраэдр Коши', en: 'Cauchy tetrahedron' }, subtitle: { ru: 'Переход к формуле t(n)=σn', en: 'Toward the formula t(n)=σn' }, render: ({notation,language,goTo}) => <CauchyTetrahedron notation={notation} language={language} onBack={() => goTo('M03')} onNext={() => goTo('M05')} /> },
+  { id: 'M05', chapterId: 'stress-state', title: { ru: 'Компоненты тензора', en: 'Stress components' }, subtitle: { ru: 'Как читать σᵢⱼ', en: 'How to read σᵢⱼ' }, render: ({notation,language,goTo}) => <StressComponents notation={notation} language={language} onBack={() => goTo('M04')} onNext={() => goTo('M06')} /> },
+  { id: 'M06', chapterId: 'stress-state', title: { ru: 'Симметрия тензора', en: 'Stress symmetry' }, subtitle: { ru: 'Баланс момента импульса', en: 'Angular-momentum balance' }, render: ({notation,language,goTo}) => <AngularMomentumBalance notation={notation} language={language} onBack={() => goTo('M05')} onNext={() => goTo('M07')} /> },
+  { id: 'M07', chapterId: 'stress-state', title: { ru: 'Разложение вектора', en: 'Traction decomposition' }, subtitle: { ru: 'Нормальная и касательная части', en: 'Normal and tangential parts' }, render: ({notation,language,goTo}) => <TractionDecomposition notation={notation} language={language} onBack={() => goTo('M06')} onNext={() => goTo('M08')} /> },
+  { id: 'M08', chapterId: 'stress-state', title: { ru: 'Смена базиса', en: 'Change of basis' }, subtitle: { ru: 'Компоненты в новой системе координат', en: 'Components in a rotated frame' }, render: ({notation,language,goTo}) => <BasisTransform notation={notation} language={language} onBack={() => goTo('M07')} onNext={() => goTo('M09')} /> },
+  { id: 'M09', chapterId: 'stress-state', title: { ru: 'Главные напряжения', en: 'Principal stresses' }, subtitle: { ru: 'Собственные значения и направления', en: 'Eigenvalues and principal directions' }, render: ({notation,language,goTo}) => <PrincipalStresses notation={notation} language={language} onBack={() => goTo('M08')} onNext={() => goTo('M10')} /> },
+  { id: 'M10', chapterId: 'stress-state', title: { ru: 'Инварианты', en: 'Invariants' }, subtitle: { ru: 'I₁, I₂, I₃ вне зависимости от базиса', en: 'I₁, I₂, I₃ independent of basis' }, render: ({notation,language,goTo}) => <StressInvariants notation={notation} language={language} onBack={() => goTo('M09')} onNext={() => goTo('M11')} /> },
+  { id: 'M11', chapterId: 'stress-state', title: { ru: 'Сферическая и девиаторная части', en: 'Spherical and deviatoric parts' }, subtitle: { ru: 'Разложение σ = σˢᵖʰ + s', en: 'Decomposition σ = σˢᵖʰ + s' }, render: ({notation,language,goTo}) => <StressDecomposition notation={notation} language={language} onBack={() => goTo('M10')} onNext={() => goTo('M12')} /> },
+  { id: 'M12', chapterId: 'stress-state', title: { ru: 'Круг Мора', en: 'Mohr circle' }, subtitle: { ru: 'Площадка ↔ точка (σₙ, τ)', en: 'Plane ↔ point (σₙ, τ)' }, render: ({notation,language,goTo}) => <MohrCircle notation={notation} language={language} onBack={() => goTo('M11')} onNext={() => goTo('M13')} /> },
+  { id: 'M13', chapterId: 'stress-state', title: { ru: 'Вычислительная лаборатория', en: 'Computational laboratory' }, subtitle: { ru: 'Stress Tensor Lab', en: 'Stress Tensor Lab' }, render: ({notation,language,goTo}) => <ComputationalLab notation={notation} language={language} onBack={() => goTo('M12')} onNext={() => goTo('M14')} /> },
+  { id: 'M14', chapterId: 'stress-state', title: { ru: 'Итоговая самопроверка', en: 'Challenge' }, subtitle: { ru: 'Самостоятельное исследование по всей главе', en: 'Chapter-wide self-check' }, render: ({notation,language,goTo}) => <FinalChallenge notation={notation} language={language} onBack={() => goTo('M13')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
