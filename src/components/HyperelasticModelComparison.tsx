@@ -7,6 +7,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack?: () => void
+  onNext?: () => void
 }
 
 type Protocol = 'uniaxial' | 'biaxial'
@@ -48,6 +49,7 @@ const text = {
     warningTitle:'Больше параметров не означает автоматически лучшую физическую модель.',
     warningText:'Дополнительный параметр полезен только тогда, когда данные способны его идентифицировать и модель проходит проверку вне калибровочного режима.',
     back:'← D03',
+    next:'D05 → Ogden',
     interactive:'ИНТЕРАКТИВНО',
   },
   en: {
@@ -86,6 +88,7 @@ const text = {
     warningTitle:'More parameters do not automatically mean a better physical model.',
     warningText:'An extra parameter is useful only when the data can identify it and the model survives validation outside the calibration regime.',
     back:'← D03',
+    next:'D05 → Ogden',
     interactive:'INTERACTIVE',
   }
 } as const
@@ -120,7 +123,7 @@ function nominal(lambda:number, protocol:Protocol, mu:number, alpha:number, mode
   return (energy(b,protocol,mu,alpha,model)-energy(a,protocol,mu,alpha,model))/(b-a)
 }
 
-export function HyperelasticModelComparison({notation,language,onBack}:Props){
+export function HyperelasticModelComparison({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [protocol,setProtocol]=useState<Protocol>('uniaxial')
   const [lambda,setLambda]=useState(1.35)
@@ -196,7 +199,7 @@ export function HyperelasticModelComparison({notation,language,onBack}:Props){
           {ru:'Планирование эксперимента',en:'Experimental design'},
         ]}/>
 
-        {onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}
+        <div className="mini-toggle-row" style={{marginTop:20}}>{onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext && <button className="primary-button" onClick={onNext}>{copy.next}</button>}</div>
       </div>
 
       <div className="scene-column">
