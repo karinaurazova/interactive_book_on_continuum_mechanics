@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.3-kinematics
+      - v0.3.1-hardening
   workflow_dispatch:
 
 permissions:
@@ -23,6 +23,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Kinematics sanity checks
+        run: npm run test:kinematics
 
       - name: Build
         run: npm run build
