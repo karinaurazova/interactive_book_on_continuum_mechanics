@@ -1863,55 +1863,6 @@ input[type="range"] {
 
 
 
-/* M13–M14 need more horizontal room than ordinary lesson modules.
-   On common laptop/desktop widths, stack copy above the interactive scene
-   instead of allowing the title column to collide with the visualization. */
-.module-view-wide-title .lesson-copy {
-  min-width: 0;
-}
-
-.module-view-wide-title h1 {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-@media (min-width: 1450px) {
-  .module-view-wide-title {
-    grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.48fr);
-    gap: clamp(30px, 4vw, 60px);
-  }
-
-  .module-view-wide-title h1 {
-    font-size: clamp(2.5rem, 3.6vw, 4.35rem);
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-  }
-}
-
-@media (min-width: 821px) and (max-width: 1449px) {
-  .module-view-wide-title {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-
-  .module-view-wide-title .lesson-copy {
-    position: static;
-    top: auto;
-    max-width: 900px;
-  }
-
-  .module-view-wide-title h1 {
-    font-size: clamp(2.35rem, 5vw, 4.4rem);
-    line-height: 0.98;
-  }
-
-  .module-view-wide-title .scene-column {
-    width: 100%;
-    min-width: 0;
-  }
-}
-
 
 .chapter-switcher {
   display: grid;
@@ -1948,5 +1899,38 @@ input[type="range"] {
 @media (max-width: 720px) {
   .kinematics-scene {
     min-height: 250px;
+  }
+}
+
+
+/* Long-title modules always use a vertical lesson layout.
+   This prevents headings and copy from competing with interactive scenes. */
+.module-view-stacked {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+}
+
+.module-view-stacked .lesson-copy {
+  position: static;
+  top: auto;
+  max-width: 980px;
+  min-width: 0;
+}
+
+.module-view-stacked h1 {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 0.98;
+}
+
+.module-view-stacked .scene-column {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1051px) {
+  .module-view-stacked h1 {
+    font-size: clamp(2.7rem, 4.2vw, 4.8rem);
   }
 }
