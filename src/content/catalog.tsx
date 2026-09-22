@@ -24,13 +24,14 @@ import { CauchyGreenTensors } from '../components/CauchyGreenTensors'
 import { StrainMeasures } from '../components/StrainMeasures'
 import { PolarDecomposition } from '../components/PolarDecomposition'
 import { PrincipalStretches } from '../components/PrincipalStretches'
+import { KinematicsLimitCases } from '../components/KinematicsLimitCases'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
   | 'M00' | 'M01' | 'M02' | 'M03' | 'M04'
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
-  | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09'
+  | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10'
 
 export type ChapterId = 'stress-state' | 'kinematics'
 
@@ -78,7 +79,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'kinematics',
     title: { ru: 'Кинематика движения и деформации', en: 'Kinematics of motion and deformation' },
     shortTitle: { ru: 'Кинематика', en: 'Kinematics' },
-    moduleIds: ['K00', 'K01', 'K02', 'K03', 'K04', 'K05', 'K06', 'K07', 'K08', 'K09'],
+    moduleIds: ['K00', 'K01', 'K02', 'K03', 'K04', 'K05', 'K06', 'K07', 'K08', 'K09', 'K10'],
   },
 ]
 
@@ -107,7 +108,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'K06', chapterId: 'kinematics', title: { ru: 'Тензоры Коши–Грина', en: 'Cauchy–Green tensors' }, subtitle: { ru: 'C = FᵀF и B = FFᵀ', en: 'C = FᵀF and B = FFᵀ' }, render: ({notation,language,goTo}) => <CauchyGreenTensors notation={notation} language={language} onBack={() => goTo('K05')} onNext={() => goTo('K07')} /> },
   { id: 'K07', chapterId: 'kinematics', title: { ru: 'Меры деформации Грина–Лагранжа и Эйлера–Альманси', en: 'Green–Lagrange and Euler–Almansi strain measures' }, subtitle: { ru: 'E = 1/2(C − I), e = 1/2(I − B⁻¹)', en: 'E = 1/2(C − I), e = 1/2(I − B⁻¹)' }, render: ({notation,language,goTo}) => <StrainMeasures notation={notation} language={language} onBack={() => goTo('K06')} onNext={() => goTo('K08')} /> },
   { id: 'K08', chapterId: 'kinematics', title: { ru: 'Полярное разложение', en: 'Polar decomposition' }, subtitle: { ru: 'F = RU = VR', en: 'F = RU = VR' }, render: ({notation,language,goTo}) => <PolarDecomposition notation={notation} language={language} onBack={() => goTo('K07')} onNext={() => goTo('K09')} /> },
-  { id: 'K09', chapterId: 'kinematics', title: { ru: 'Главные растяжения и главные направления', en: 'Principal stretches and principal directions' }, subtitle: { ru: 'Собственные значения и векторы U', en: 'Eigenvalues and eigenvectors of U' }, render: ({notation,language,goTo}) => <PrincipalStretches notation={notation} language={language} onBack={() => goTo('K08')} /> },
+  { id: 'K09', chapterId: 'kinematics', title: { ru: 'Главные растяжения и главные направления', en: 'Principal stretches and principal directions' }, subtitle: { ru: 'Собственные значения и векторы U', en: 'Eigenvalues and eigenvectors of U' }, render: ({notation,language,goTo}) => <PrincipalStretches notation={notation} language={language} onBack={() => goTo('K08')} onNext={() => goTo('K10')} /> },
+  { id: 'K10', chapterId: 'kinematics', title: { ru: 'Предельные случаи и жёсткое движение', en: 'Limiting cases and rigid motion' }, subtitle: { ru: 'Эталонные проверки F, J, C, E и λᵢ', en: 'Benchmark checks for F, J, C, E, and λᵢ' }, render: ({notation,language,goTo}) => <KinematicsLimitCases notation={notation} language={language} onBack={() => goTo('K09')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
