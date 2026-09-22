@@ -186,3 +186,48 @@ J=\det\mathbf F>0.
 \]
 
 State separately that local positivity of \(J\) does not by itself guarantee global injectivity of the motion.
+
+
+## Time-dependent kinematics and transport / Временная кинематика и транспорт
+
+Preferred Russian terms and notation:
+
+- material velocity — материальная скорость, \(\mathbf V(\mathbf X,t)=\partial\boldsymbol\chi/\partial t|_{\mathbf X}\);
+- spatial velocity field — пространственное поле скорости, \(\mathbf v(\mathbf x,t)\);
+- material acceleration — материальное ускорение, \(\mathbf A(\mathbf X,t)\);
+- spatial acceleration — пространственное ускорение, \(\mathbf a(\mathbf x,t)\);
+- material derivative — материальная производная, \(D/Dt\);
+- convective term — конвективный вклад;
+- velocity gradient — градиент скорости, \(\mathbf L=\nabla\mathbf v=\dot{\mathbf F}\mathbf F^{-1}\);
+- rate-of-deformation tensor — тензор скорости деформации, \(\mathbf D=(\mathbf L+\mathbf L^T)/2\);
+- spin tensor — тензор спина, \(\mathbf W=(\mathbf L-\mathbf L^T)/2\);
+- velocity divergence — дивергенция скорости, \(\nabla\cdot\mathbf v\);
+- material region — материальная область;
+- control volume — контрольный объём;
+- boundary velocity — скорость границы, \(\mathbf w\);
+- relative boundary velocity — относительная скорость \(\mathbf v-\mathbf w\);
+- Reynolds transport theorem — транспортная теорема Рейнольдса.
+
+### Velocity notation rule
+
+Use uppercase \(\mathbf V(\mathbf X,t)\) for the material representation of velocity and lowercase \(\mathbf v(\mathbf x,t)\) for the spatial representation when both appear in the same chapter.
+
+They represent the same physical velocity evaluated with different arguments:
+
+\[
+\mathbf v(\mathbf x,t)
+=
+\mathbf V(\boldsymbol\chi^{-1}(\mathbf x,t),t).
+\]
+
+### Transport rule
+
+For a moving control boundary with velocity \(\mathbf w\), transport through the boundary is governed by the relative normal velocity
+
+\[
+(\mathbf v-\mathbf w)\cdot\mathbf n.
+\]
+
+The material-boundary limit is \(\mathbf w=\mathbf v\), for which the relative flux vanishes.
+
+When using a moving control volume, the derivative of the integral over that moving region must include the motion of the boundary itself; it is not generally equal to the fixed-volume partial-time accumulation term.
