@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
+import { DepthNote } from './DepthNote'
 
 type Props = {
   notation: NotationMode
@@ -42,6 +43,10 @@ const text = {
     conclusionText: 'После этого естественно перейти к главным растяжениям — собственным значениям U и V.',
     interactive: 'ИНТЕРАКТИВНО',
     next: 'Перейти к главным растяжениям →',
+    deepen: 'Строгий вывод',
+    deepenText: 'Для невырожденной F тензор C = FᵀF симметричен и положительно определён, поэтому существует единственный положительно определённый квадратный корень U = C¹ᐟ². После этого R = F U⁻¹, причём RᵀR = I. При J > 0 имеем det R = +1.',
+    research: 'Исследовательское замечание',
+    researchText: 'Полярное разложение уникально для невырожденной F при выборе положительно определённых U и V. В численных алгоритмах важно устойчиво вычислять квадратный корень C и контролировать J: при J < 0 ортогональный фактор включает отражение, а не собственно поворот.',
   },
   en: {
     back: '← K07',
@@ -76,6 +81,10 @@ const text = {
     conclusionText: 'This naturally leads to principal stretches — the eigenvalues of U and V.',
     interactive: 'INTERACTIVE',
     next: 'Continue to principal stretches →',
+    deepen: 'Strict derivation',
+    deepenText: 'For nonsingular F, C = FᵀF is symmetric positive definite, so it has a unique positive-definite square root U = C¹ᐟ². Then R = F U⁻¹ and RᵀR = I. If J > 0, det R = +1.',
+    research: 'Research note',
+    researchText: 'Polar decomposition is unique for nonsingular F when U and V are chosen positive definite. Numerically, the square root of C must be computed robustly and J monitored: when J < 0, the orthogonal factor contains a reflection rather than a proper rotation.',
   },
 } as const
 
@@ -166,6 +175,13 @@ export function PolarDecomposition({notation,language,onBack,onNext}:Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <DepthNote label={copy.deepen}>
+          <p>{copy.deepenText}</p>
+        </DepthNote>
+        <DepthNote label={copy.research} variant="research">
+          <p>{copy.researchText}</p>
+        </DepthNote>
 
         <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
