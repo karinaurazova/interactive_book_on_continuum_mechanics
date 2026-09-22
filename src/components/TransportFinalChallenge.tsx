@@ -99,7 +99,7 @@ export function TransportFinalChallenge({notation,language,onBack}:Props){
   const data=useMemo(()=>{
     const convective=v*g
 
-    const D:[[number,number],[number,number]]=[[s,q],[q,-s]]
+    const D:[[number,number],[number,number]]=[[s,q],[q,0.4*s]]
     const W:[[number,number],[number,number]]=[[0,-omega],[omega,0]]
     const norm=(A:number[][])=>Math.sqrt(A.flat().reduce((acc,x)=>acc+x*x,0))
     const normD=norm(D)
