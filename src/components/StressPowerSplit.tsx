@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -43,6 +44,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В мягких тканях и других анизотропных материалах энергетический отклик определяется ориентацией волокон, структурными тензорами и выбранной свободной энергией. Поэтому девиаторная/сферическая декомпозиция полезна, но не должна подменять анизотропную конститутивную структуру.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти ко второму закону →',
   },
   en: {
     back:'← B04',
@@ -78,6 +80,7 @@ const text = {
     research:'Research note',
     researchText:'In soft tissues and other anisotropic materials, energetic response depends on fiber orientation, structural tensors, and the chosen free-energy function. The spherical/deviatoric split is useful but should not replace anisotropic constitutive structure.',
     interactive:'INTERACTIVE',
+    next:'Continue to the second law →',
   }
 } as const
 
@@ -85,7 +88,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function StressPowerSplit({notation,language,onBack}:Props){
+export function StressPowerSplit({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [meanStress,setMeanStress]=useState(.45)
   const [devStress,setDevStress]=useState(.35)
@@ -142,6 +145,8 @@ export function StressPowerSplit({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
