@@ -3,7 +3,7 @@ import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
 import { ApplicationLinks } from './ApplicationLinks'
 
-type Props={notation:NotationMode;language:Language;onBack?:()=>void}
+type Props={notation:NotationMode;language:Language;onBack?:()=>void;onNext?:()=>void}
 
 const text={
 ru:{
@@ -23,7 +23,7 @@ ru:{
  research:'Исследовательское замечание',researchText:'Для тонких оболочек и других сильно чувствительных систем экспериментальная несущая способность может существенно зависеть от формы и амплитуды исходных геометрических отклонений, поэтому один расчёт идеальной геометрии недостаточен.',
  warning:'ВАЖНО',warningTitle:'Несовершенство — это не обязательно «ошибка модели».',
  warningText:'Оно может быть реальной частью физической постановки: начальная кривизна, эксцентриситет нагрузки, неоднородность толщины, остаточные напряжения или вариация свойств материала.',
- back:'← D11',interactive:'ИНТЕРАКТИВНО'
+ back:'← D11',next:'D13 →',interactive:'ИНТЕРАКТИВНО'
 },
 en:{
  title:'Imperfection sensitivity and real instability',
@@ -42,7 +42,7 @@ en:{
  research:'Research note',researchText:'For thin shells and other highly sensitive systems, experimental load capacity may depend strongly on the shape and amplitude of initial geometric deviations, so a single perfect-geometry simulation is insufficient.',
  warning:'IMPORTANT',warningTitle:'An imperfection is not necessarily a modeling error.',
  warningText:'It may be a real part of the physical problem: initial curvature, load eccentricity, thickness variation, residual stress, or spatial variation of material properties.',
- back:'← D11',interactive:'INTERACTIVE'
+ back:'← D11',next:'D13 →',interactive:'INTERACTIVE'
 }} as const
 
 function roots(mu:number,eps:number){
@@ -75,7 +75,7 @@ function map(q:number,lambda:number){
  return {x,y}
 }
 
-export function ImperfectionSensitivity({notation,language,onBack}:Props){
+export function ImperfectionSensitivity({notation,language,onBack,onNext}:Props){
  const copy=text[language]
  const [eps,setEps]=useState(.035)
  const [beta,setBeta]=useState(1)
@@ -127,7 +127,7 @@ export function ImperfectionSensitivity({notation,language,onBack}:Props){
   <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
   <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
   <ApplicationLinks language={language} items={[{ru:'Тонкостенные оболочки',en:'Thin shells'},{ru:'Колонны и стержни',en:'Columns and rods'},{ru:'Посткритический анализ',en:'Post-buckling analysis'},{ru:'Анализ чувствительности',en:'Sensitivity analysis'}]}/>
-  {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
+  <div className="lesson-nav">{onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext&&<button className="text-button" onClick={onNext}>{copy.next}</button>}</div>
  </div><div className="scene-column">
   <div className="scene-card">
    <div className="scene-head"><div><span className="scene-kicker">{copy.sceneKicker}</span><h2>{copy.sceneTitle}</h2></div><div className="live-badge">{copy.interactive}</div></div>
