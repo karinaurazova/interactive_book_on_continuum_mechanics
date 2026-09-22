@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -42,6 +43,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для роста, ремоделирования, повреждения и активных биоматериалов в диссипации появляются дополнительные сопряжённые пары: термодинамические силы и скорости внутренних переменных. Именно через второй закон удобно проверять, что предложенная эволюционная модель не создаёт нефизическую отрицательную диссипацию.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к конститутивным моделям →',
   },
   en: {
     back:'← B05',
@@ -76,6 +78,7 @@ const text = {
     research:'Research note',
     researchText:'Growth, remodeling, damage, and active biomaterials introduce additional conjugate pairs in the dissipation: thermodynamic forces and rates of internal variables. The second law is a natural tool for checking that an evolution law does not generate unphysical negative dissipation.',
     interactive:'INTERACTIVE',
+    next:'Continue to constitutive models →',
   }
 } as const
 
@@ -83,7 +86,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function ClausiusDuhem({notation,language,onBack}:Props){
+export function ClausiusDuhem({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [stressPower,setStressPower]=useState(.55)
   const [freeRate,setFreeRate]=useState(.30)
@@ -139,6 +142,8 @@ export function ClausiusDuhem({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
