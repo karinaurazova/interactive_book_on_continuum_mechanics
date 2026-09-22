@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type M2 = [[number,number],[number,number]]
@@ -43,6 +44,7 @@ const text = {
     conclusionTitle:'L — мгновенный локальный аналог того, чем F является для конечной деформации.',
     conclusionText:'Следующим шагом разложим L на симметричную и кососимметричную части: D и W.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к D и W →',
   },
   en: {
     back:'← T03',
@@ -77,6 +79,7 @@ const text = {
     conclusionTitle:'L is the instantaneous local counterpart of what F describes for finite deformation.',
     conclusionText:'Next we decompose L into its symmetric and skew-symmetric parts: D and W.',
     interactive:'INTERACTIVE',
+    next:'Continue to D and W →',
   }
 } as const
 
@@ -102,7 +105,7 @@ function matVec(A:M2,x:[number,number]):[number,number]{
   return [A[0][0]*x[0]+A[0][1]*x[1],A[1][0]*x[0]+A[1][1]*x[1]]
 }
 
-export function VelocityGradient({notation,language,onBack}:Props){
+export function VelocityGradient({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.20)
   const [angle,setAngle]=useState(28)
@@ -183,6 +186,8 @@ export function VelocityGradient({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
