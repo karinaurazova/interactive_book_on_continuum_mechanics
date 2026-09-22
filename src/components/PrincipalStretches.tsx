@@ -183,11 +183,12 @@ export function PrincipalStretches({notation,language,onBack,onNext}:Props){
             <polyline points={linePts([...circle,circle[0]],mapRef)} fill="none" stroke="#69717C" strokeWidth=".7"/>
             <polyline points={linePts([...ellipse,ellipse[0]],mapCur)} fill="none" stroke="#2864FF" strokeWidth=".95"/>
 
-            <line x1={mapRef([0,0])[0]} y1={mapRef([0,0])[1]} x2={mapRef(n1)[0]} y2={mapRef(n1)[1]} stroke="#2864FF" strokeWidth="1.2"/>
-            <line x1={mapRef([0,0])[0]} y1={mapRef([0,0])[1]} x2={mapRef(n2)[0]} y2={mapRef(n2)[1]} stroke="#A9E3D2" strokeWidth="1.2"/>
-
-            <line x1={mapCur([0,0])[0]} y1={mapCur([0,0])[1]} x2={mapCur([l1*n1[0],l1*n1[1]])[0]} y2={mapCur([l1*n1[0],l1*n1[1]])[1]} stroke="#2864FF" strokeWidth="1.4"/>
-            <line x1={mapCur([0,0])[0]} y1={mapCur([0,0])[1]} x2={mapCur([l2*n2[0],l2*n2[1]])[0]} y2={mapCur([l2*n2[0],l2*n2[1]])[1]} stroke="#A9E3D2" strokeWidth="1.4"/>
+            {!degenerate && <>
+              <line x1={mapRef([0,0])[0]} y1={mapRef([0,0])[1]} x2={mapRef(n1)[0]} y2={mapRef(n1)[1]} stroke="#2864FF" strokeWidth="1.2"/>
+              <line x1={mapRef([0,0])[0]} y1={mapRef([0,0])[1]} x2={mapRef(n2)[0]} y2={mapRef(n2)[1]} stroke="#A9E3D2" strokeWidth="1.2"/>
+              <line x1={mapCur([0,0])[0]} y1={mapCur([0,0])[1]} x2={mapCur([l1*n1[0],l1*n1[1]])[0]} y2={mapCur([l1*n1[0],l1*n1[1]])[1]} stroke="#2864FF" strokeWidth="1.4"/>
+              <line x1={mapCur([0,0])[0]} y1={mapCur([0,0])[1]} x2={mapCur([l2*n2[0],l2*n2[1]])[0]} y2={mapCur([l2*n2[0],l2*n2[1]])[1]} stroke="#A9E3D2" strokeWidth="1.4"/>
+            </>}
 
             <text x="76" y="20" fill="#2864FF" fontSize="2.7">λ₁</text>
             <text x="76" y="24" fill="#A9E3D2" fontSize="2.7">λ₂</text>
