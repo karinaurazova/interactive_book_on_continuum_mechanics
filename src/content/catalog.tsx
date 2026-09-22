@@ -47,6 +47,7 @@ import { StressPowerSplit } from '../components/StressPowerSplit'
 import { ClausiusDuhem } from '../components/ClausiusDuhem'
 import { ConstitutiveAdmissibility } from '../components/ConstitutiveAdmissibility'
 import { InitialBoundaryProblem } from '../components/InitialBoundaryProblem'
+import { WeakFormBridge } from '../components/WeakFormBridge'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -55,7 +56,7 @@ export type ModuleId =
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
-  | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08'
+  | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws'
 
@@ -115,7 +116,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'balance-laws',
     title: { ru: 'Законы баланса', en: 'Balance laws' },
     shortTitle: { ru: 'Балансы', en: 'Balances' },
-    moduleIds: ['B00', 'B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08'],
+    moduleIds: ['B00', 'B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08', 'B09'],
   },
 ]
 
@@ -167,7 +168,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'B05', chapterId: 'balance-laws', title: { ru: 'Мощность напряжений: сферическая и девиаторная части', en: 'Stress power: spherical and deviatoric parts' }, subtitle: { ru: 'σ:D = (trσ/3)(trD) + s:D_dev', en: 'σ:D = (trσ/3)(trD) + s:D_dev' }, render: ({notation,language,goTo}) => <StressPowerSplit notation={notation} language={language} onBack={() => goTo('B04')} onNext={() => goTo('B06')} /> },
   { id: 'B06', chapterId: 'balance-laws', title: { ru: 'Второй закон термодинамики и неравенство Клаузиуса–Дюгема', en: 'Second law and the Clausius–Duhem inequality' }, subtitle: { ru: '𝒟 ≥ 0', en: '𝒟 ≥ 0' }, render: ({notation,language,goTo}) => <ClausiusDuhem notation={notation} language={language} onBack={() => goTo('B05')} onNext={() => goTo('B07')} /> },
   { id: 'B07', chapterId: 'balance-laws', title: { ru: 'Термодинамические ограничения на простые конститутивные модели', en: 'Thermodynamic constraints on simple constitutive models' }, subtitle: { ru: 'упругость ↔ вязкость ↔ 𝒟', en: 'elasticity ↔ viscosity ↔ 𝒟' }, render: ({notation,language,goTo}) => <ConstitutiveAdmissibility notation={notation} language={language} onBack={() => goTo('B06')} onNext={() => goTo('B08')} /> },
-  { id: 'B08', chapterId: 'balance-laws', title: { ru: 'Начально-краевая постановка задачи МСС', en: 'Initial-boundary-value problem in continuum mechanics' }, subtitle: { ru: 'уравнения + материал + условия', en: 'equations + material + conditions' }, render: ({notation,language,goTo}) => <InitialBoundaryProblem notation={notation} language={language} onBack={() => goTo('B07')} /> },
+  { id: 'B08', chapterId: 'balance-laws', title: { ru: 'Начально-краевая постановка задачи МСС', en: 'Initial-boundary-value problem in continuum mechanics' }, subtitle: { ru: 'уравнения + материал + условия', en: 'equations + material + conditions' }, render: ({notation,language,goTo}) => <InitialBoundaryProblem notation={notation} language={language} onBack={() => goTo('B07')} onNext={() => goTo('B09')} /> },
+  { id: 'B09', chapterId: 'balance-laws', title: { ru: 'Слабая форма и мост к методу конечных элементов', en: 'Weak form and bridge to the finite-element method' }, subtitle: { ru: 'сильная форма → вариационная форма', en: 'strong form → variational form' }, render: ({notation,language,goTo}) => <WeakFormBridge notation={notation} language={language} onBack={() => goTo('B08')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
