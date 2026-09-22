@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.5-balance-laws
+      - v0.5.1-hardening
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,9 @@ jobs:
 
       - name: Transport sanity checks
         run: npm run test:transport
+
+      - name: Balance-law sanity checks
+        run: npm run test:balance
 
       - name: Build
         run: npm run build
