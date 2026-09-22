@@ -62,8 +62,8 @@ export default function App() {
             >
               <span className="module-code">{id}</span>
               <span>
-                <strong>{copy.modules[id].title}</strong>
-                <small>{copy.modules[id].subtitle}</small>
+                <strong>{moduleById[id].title[language]}</strong>
+                <small>{moduleById[id].subtitle[language]}</small>
               </span>
             </button>
           ))}
