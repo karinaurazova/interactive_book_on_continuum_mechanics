@@ -2899,3 +2899,13 @@ input[type="range"] {
     padding-left: 0;
   }
 }
+
+
+.balance-scene {
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  border-radius:14px;
+  background:#111318;
+}
