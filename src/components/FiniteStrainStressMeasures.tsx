@@ -22,7 +22,7 @@ const text = {
     reference:'Начальная конфигурация',
     conjugacy:'Энергетическая сопряжённость',
     conjugacyText:'В гиперупругости особенно важно, какая пара даёт корректную мощность: P:Ḟ, S:Ė и τ:D.',
-    sceneKicker:'STRESS-MEASURE EXPLORER',
+    sceneKicker:'ИССЛЕДОВАНИЕ МЕР НАПРЯЖЕНИЙ',
     sceneTitle:'выбери меру и меняй растяжения — связи обновляются автоматически',
     l1:'λ₁', l2:'λ₂', J:'J = det F',
     selected:'выбранная мера', relation:'связь', config:'конфигурация',
@@ -45,7 +45,7 @@ const text = {
     deepen:'Углубиться',
     deepenText:'Преобразование Пиолы задаёт P = JσF⁻ᵀ, а S = F⁻¹P = JF⁻¹σF⁻ᵀ. Эти формулы обеспечивают эквивалентность мощности в разных конфигурациях.',
     research:'Исследовательское замечание',
-    researchText:'В нелинейной FEM выбор меры напряжений связан с тем, в какой конфигурации формулируется слабая форма: total Lagrangian, updated Lagrangian или пространственная постановка.',
+    researchText:'В нелинейном МКЭ выбор меры напряжений связан с конфигурацией слабой формы: полная лагранжева постановка (total Lagrangian), обновлённая лагранжева постановка (updated Lagrangian) или пространственная постановка.',
     interactive:'ИНТЕРАКТИВНО',
     back:'← D00',
     next:'D02 → гиперупругость через Ψ',
@@ -59,7 +59,7 @@ const text = {
     reference:'Reference configuration',
     conjugacy:'Energetic conjugacy',
     conjugacyText:'In hyperelasticity the power-conjugate pair matters: P:Ḟ, S:Ė, and τ:D.',
-    sceneKicker:'STRESS-MEASURE EXPLORER',
+    sceneKicker:'ИССЛЕДОВАНИЕ МЕР НАПРЯЖЕНИЙ',
     sceneTitle:'choose a measure and vary stretches — the transformations update automatically',
     l1:'λ₁', l2:'λ₂', J:'J = det F',
     selected:'selected measure', relation:'relation', config:'configuration',
@@ -166,7 +166,7 @@ export function FiniteStrainStressMeasures({notation,language,onBack,onNext}:Pro
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
 
         <ApplicationLinks language={language} items={[
-          {ru:'Нелинейный FEM',en:'Nonlinear FEM'},
+          {ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},
           {ru:'Гиперупругие материалы',en:'Hyperelastic materials'},
           {ru:'Мягкие ткани',en:'Soft tissues'},
           {ru:'Эластомеры и полимеры',en:'Elastomers and polymers'},
