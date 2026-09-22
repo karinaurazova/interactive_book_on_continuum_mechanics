@@ -7,6 +7,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack?: () => void
+  onNext?: () => void
 }
 
 type EnergyModel = 'stvk' | 'neo'
@@ -46,6 +47,8 @@ const text = {
     warningTitle:'Гиперупругость не означает линейность и не означает несжимаемость.',
     warningText:'Модель может быть сильно нелинейной и сжимаемой; несжимаемость вводится отдельно как ограничение или объёмный штраф.',
     back:'← D01',
+    next:'D03 → deformation invariants',
+    next:'D03 → инварианты деформации',
     interactive:'ИНТЕРАКТИВНО',
   },
   en: {
@@ -88,7 +91,7 @@ const text = {
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function HyperelasticEnergy({notation,language,onBack}:Props){
+export function HyperelasticEnergy({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [model,setModel]=useState<EnergyModel>('neo')
   const [lambda,setLambda]=useState(1.20)
@@ -183,7 +186,7 @@ export function HyperelasticEnergy({notation,language,onBack}:Props){
           {ru:'Механика полимеров',en:'Polymer mechanics'},
         ]}/>
 
-        {onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}
+        <div className="mini-toggle-row" style={{marginTop:20}}>{onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext && <button className="primary-button" onClick={onNext}>{copy.next}</button>}</div>
       </div>
 
       <div className="scene-column">
