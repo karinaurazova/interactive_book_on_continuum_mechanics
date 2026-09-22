@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
+import { ApplicationLinks } from './ApplicationLinks'
 
 type Props = {
   notation: NotationMode
