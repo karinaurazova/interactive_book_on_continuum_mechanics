@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -13,7 +14,7 @@ const text = {
     title: 'Меры деформации: Грина–Лагранжа и Эйлера–Альманси',
     lead: 'Тензоры C и B уже избавили нас от прямого влияния жёсткого поворота. Теперь из них можно построить меры деформации, которые количественно описывают изменение метрики относительно выбранной конфигурации.',
     key: 'КЛЮЧЕВАЯ МЫСЛЬ',
-    keyText: 'Green–Lagrange E относится к материальной конфигурации, а Euler–Almansi e — к текущей. Обе меры обнуляются при чистом жёстком движении.',
+    keyText: 'Тензор Грина–Лагранжа E относится к материальной конфигурации, а тензор Эйлера–Альманси e — к текущей. Обе меры обнуляются при чистом жёстком движении.',
     green: 'Тензор деформации Грина–Лагранжа',
     greenText: 'E = 1/2(C − I). Эта мера естественно работает с материальными направлениями dX.',
     almansi: 'Тензор деформации Эйлера–Альманси',
@@ -40,6 +41,7 @@ const text = {
     conclusionTitle: 'Мера деформации — это не просто «ещё один тензор».',
     conclusionText: 'Она всегда связана с тем, относительно какой конфигурации мы измеряем изменение геометрии.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к полярному разложению →',
   },
   en: {
     back: '← K06',
@@ -73,6 +75,7 @@ const text = {
     conclusionTitle: 'A strain measure is not just another tensor.',
     conclusionText: 'It is always tied to the configuration relative to which geometric change is measured.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to polar decomposition →',
   },
 } as const
 
@@ -100,7 +103,7 @@ function frob(a:number[][]) {
   return Math.sqrt(a.flat().reduce((s,v)=>s+v*v,0))
 }
 
-export function StrainMeasures({ notation, language, onBack }: Props) {
+export function StrainMeasures({ notation, language, onBack, onNext }: Props) {
   const copy=text[language]
   const [rotationDeg,setRotationDeg]=useState(30)
   const [stretchX,setStretchX]=useState(1.25)
@@ -170,6 +173,8 @@ export function StrainMeasures({ notation, language, onBack }: Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
