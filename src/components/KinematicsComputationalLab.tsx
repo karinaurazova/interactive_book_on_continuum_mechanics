@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type M2 = [[number,number],[number,number]]
@@ -128,7 +129,7 @@ function matrixCode(a:M2){
   return `np.array([[${a[0][0].toFixed(4)}, ${a[0][1].toFixed(4)}],\n          [${a[1][0].toFixed(4)}, ${a[1][1].toFixed(4)}]])`
 }
 
-export function KinematicsComputationalLab({notation,language,onBack}:Props){
+export function KinematicsComputationalLab({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [F,setF]=useState<M2>([[1.20,0.32],[0.10,0.88]])
 
@@ -221,6 +222,7 @@ print("principal stretches =", lam)`
         <div className="concept-card"><span>{copy.key}</span><strong>{copy.keyText}</strong></div>
         <div className="definition"><div className="definition-label">{copy.outputs}</div><div className="formula">{notationLine}</div></div>
         <div className="warning-card kinematics-warning"><span>{copy.warning}</span><strong>{copy.warningTitle}</strong><p>{copy.warningText}</p></div>
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
