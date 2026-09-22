@@ -15,13 +15,14 @@ import { MohrCircle } from '../components/MohrCircle'
 import { ComputationalLab } from '../components/ComputationalLab'
 import { FinalChallenge } from '../components/FinalChallenge'
 import { MotionConfigurations } from '../components/MotionConfigurations'
+import { MaterialSpatialCoordinates } from '../components/MaterialSpatialCoordinates'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
   | 'M00' | 'M01' | 'M02' | 'M03' | 'M04'
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
-  | 'K00'
+  | 'K00' | 'K01'
 
 export type ChapterId = 'stress-state' | 'kinematics'
 
@@ -69,7 +70,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'kinematics',
     title: { ru: 'Кинематика движения и деформации', en: 'Kinematics of motion and deformation' },
     shortTitle: { ru: 'Кинематика', en: 'Kinematics' },
-    moduleIds: ['K00'],
+    moduleIds: ['K00', 'K01'],
   },
 ]
 
@@ -89,7 +90,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'M12', chapterId: 'stress-state', title: { ru: 'Круг Мора', en: 'Mohr circle' }, subtitle: { ru: 'Площадка ↔ точка (σₙ, τ)', en: 'Plane ↔ point (σₙ, τ)' }, render: ({notation,language,goTo}) => <MohrCircle notation={notation} language={language} onBack={() => goTo('M11')} onNext={() => goTo('M13')} /> },
   { id: 'M13', chapterId: 'stress-state', title: { ru: 'Вычислительная лаборатория', en: 'Computational laboratory' }, subtitle: { ru: 'Stress Tensor Lab', en: 'Stress Tensor Lab' }, render: ({notation,language,goTo}) => <ComputationalLab notation={notation} language={language} onBack={() => goTo('M12')} onNext={() => goTo('M14')} /> },
   { id: 'M14', chapterId: 'stress-state', title: { ru: 'Итоговая самопроверка', en: 'Challenge' }, subtitle: { ru: 'Самостоятельное исследование по всей главе', en: 'Chapter-wide self-check' }, render: ({notation,language,goTo}) => <FinalChallenge notation={notation} language={language} onBack={() => goTo('M13')} /> },
-  { id: 'K00', chapterId: 'kinematics', title: { ru: 'Движение и конфигурации', en: 'Motion and configurations' }, subtitle: { ru: 'Материальная точка: X → x', en: 'Material point: X → x' }, render: ({notation,language}) => <MotionConfigurations notation={notation} language={language} /> },
+  { id: 'K00', chapterId: 'kinematics', title: { ru: 'Движение и конфигурации', en: 'Motion and configurations' }, subtitle: { ru: 'Материальная точка: X → x', en: 'Material point: X → x' }, render: ({notation,language,goTo}) => <MotionConfigurations notation={notation} language={language} onNext={() => goTo('K01')} /> },
+  { id: 'K01', chapterId: 'kinematics', title: { ru: 'Материальные и пространственные координаты', en: 'Material and spatial coordinates' }, subtitle: { ru: 'Два описания одного движения', en: 'Two descriptions of one motion' }, render: ({notation,language,goTo}) => <MaterialSpatialCoordinates notation={notation} language={language} onBack={() => goTo('K00')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
