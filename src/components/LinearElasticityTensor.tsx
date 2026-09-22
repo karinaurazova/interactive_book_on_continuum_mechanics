@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -44,6 +45,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В экспериментальной механике мягких тканей линейный закон обычно применим только в малом диапазоне деформаций. Но структура тензора жёсткости полезна и как локальная касательная жёсткость нелинейной модели.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к симметриям тензора жёсткости →',
   },
   en: {
     back:'← C03',
@@ -80,12 +82,13 @@ const text = {
     research:'Research note',
     researchText:'In soft-tissue experiments, a linear law is usually valid only over a small strain range. Still, the stiffness-tensor structure remains useful as the local tangent stiffness of a nonlinear model.',
     interactive:'INTERACTIVE',
+    next:'Continue to stiffness symmetries →',
   }
 } as const
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function LinearElasticityTensor({notation,language,onBack}:Props){
+export function LinearElasticityTensor({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [e11,setE11]=useState(.20)
   const [e22,setE22]=useState(-.05)
@@ -141,6 +144,8 @@ export function LinearElasticityTensor({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
