@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.6-constitutive-modeling
+      - v0.6.1-hardening
   workflow_dispatch:
 
 permissions:
@@ -32,6 +32,9 @@ jobs:
 
       - name: Balance-law sanity checks
         run: npm run test:balance
+
+      - name: Constitutive sanity checks
+        run: npm run test:constitutive
 
       - name: Build
         run: npm run build
