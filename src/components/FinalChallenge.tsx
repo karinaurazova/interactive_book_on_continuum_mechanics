@@ -163,7 +163,7 @@ export function FinalChallenge({ notation, language, onBack }: Props) {
   ] as const
 
   return (
-    <section className="module-view module-view-wide-title">
+    <section className="module-view module-view-stacked">
       <div className="lesson-copy">
         <button className="text-button" onClick={onBack}>{copy.back}</button>
         <div className="lesson-index">M14 / 15</div>
