@@ -5,6 +5,7 @@ import { DepthNote } from './DepthNote'
 type Props = {
   notation: NotationMode
   language: Language
+  onNext: () => void
 }
 
 const text = {
@@ -42,6 +43,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В механике сплошных сред одна и та же физика может быть записана в материальной, пространственной или контрольной форме. Эквивалентность форм требует корректного применения транспортной теоремы и теоремы Гаусса.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к балансу массы →',
   },
   en: {
     title:'What does a balance law mean?',
@@ -77,6 +79,7 @@ const text = {
     research:'Research note',
     researchText:'In continuum mechanics, the same physics may be written in material, spatial, or control-volume form. Equivalence requires consistent use of the transport theorem and Gauss theorem.',
     interactive:'INTERACTIVE',
+    next:'Continue to mass balance →',
   }
 } as const
 
@@ -84,7 +87,7 @@ function fmt(v:number,d=2){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function BalanceStructure({notation,language}:Props){
+export function BalanceStructure({notation,language,onNext}:Props){
   const copy=text[language]
   const [inflow,setInflow]=useState(0.70)
   const [outflow,setOutflow]=useState(0.45)
@@ -148,6 +151,8 @@ export function BalanceStructure({notation,language}:Props){
         <DepthNote label={copy.research} variant="research">
           <p>{copy.researchText}</p>
         </DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
