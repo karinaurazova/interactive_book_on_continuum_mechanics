@@ -18,7 +18,7 @@ const text = {
     key:'ОТНОСИТЕЛЬНАЯ СКОРОСТЬ ЧЕРЕЗ ГРАНИЦУ',
     keyText:'Для движущегося контрольного объёма V(t) поверхностный поток определяется величиной φ(v−w)·n.',
     general:'Общая форма',
-    generalText:'Транспортный баланс для материала складывается из скорости изменения интеграла внутри движущегося контрольного объёма и относительного потока через его границу.',
+    generalText:'Скорость изменения соответствующей интегральной величины для материала равна сумме производной интеграла по движущемуся контрольному объёму и относительного потока через его границу.',
     limits:'Два важных предельных случая',
     limitsText:'Если w = 0, получаем фиксированный контрольный объём. Если w = v на границе, относительный поток исчезает и область становится материальной.',
     fixed:'фиксированный объём',
@@ -30,9 +30,9 @@ const text = {
     boundarySpeed:'скорость границы w',
     relativeSpeed:'относительная скорость v−w',
     fieldLevel:'градиент поля c',
-    accumulation:'накопление внутри',
+    accumulation:'d/dt ∫V(t) φ dv',
     relativeFlux:'относительный поток',
-    total:'итоговая скорость изменения',
+    total:'скорость изменения для материала',
     warning:'ВАЖНО',
     warningTitle:'Материальная область — это не «ещё один контрольный объём», а специальный выбор скорости границы.',
     warningText:'На материальной границе w = v, поэтому ни одна материальная частица не пересекает поверхность и относительный поток через неё равен нулю.',
@@ -52,7 +52,7 @@ const text = {
     key:'RELATIVE VELOCITY THROUGH THE BOUNDARY',
     keyText:'For a moving control volume V(t), the surface transport term is governed by φ(v−w)·n.',
     general:'General form',
-    generalText:'The material transport balance combines the rate of change inside the moving control volume with relative transport through its boundary.',
+    generalText:'The rate of the corresponding integral quantity for the material equals the derivative over the moving control volume plus the relative flux through its boundary.',
     limits:'Two important limiting cases',
     limitsText:'If w = 0, the control volume is fixed. If w = v at the boundary, relative flux vanishes and the region is material.',
     fixed:'fixed volume',
@@ -64,9 +64,9 @@ const text = {
     boundarySpeed:'boundary speed w',
     relativeSpeed:'relative speed v−w',
     fieldLevel:'field gradient c',
-    accumulation:'accumulation inside',
+    accumulation:'d/dt ∫V(t) φ dv',
     relativeFlux:'relative flux',
-    total:'total rate',
+    total:'material-system rate',
     warning:'IMPORTANT',
     warningTitle:'A material region is not just another control volume; it is a special choice of boundary velocity.',
     warningText:'On a material boundary w = v, so no material particle crosses the surface and relative flux vanishes.',
@@ -99,14 +99,15 @@ export function GeneralReynoldsTransport({notation,language,onBack,onNext}:Props
     // 1D moving control interval with constant length L=1 translated by w
     // uniform phi with explicit local growth q
     const q=0.20
-    const accumulation=q
-    // equal-length interval: net relative surface flux cancels for uniform phi.
-    // To visualize a nonzero net term, use phi(x)=phi + c x with c fixed.
+    // Let phi(x,t)=phi_base + q t + c x over a unit interval translated with speed w.
+    // d/dt of the integral over the moving control interval includes q + w c.
     const c=phi
+    const accumulation=q+boundarySpeed*c
     const netRelativeFlux=relative*c
+    // The material-system rate must be independent of the arbitrary control-boundary speed.
     const total=accumulation+netRelativeFlux
     return {q,c,accumulation,netRelativeFlux,total}
-  },[relative,phi])
+  },[relative,phi,boundarySpeed])
 
   const notationLine =
     notation==='Index'
