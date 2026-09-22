@@ -7,6 +7,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack?: () => void
+  onNext?: () => void
 }
 
 type StressMode = 'cauchy' | 'kirchhoff' | 'pk1' | 'pk2'
@@ -47,6 +48,8 @@ const text = {
     researchText:'В нелинейной FEM выбор меры напряжений связан с тем, в какой конфигурации формулируется слабая форма: total Lagrangian, updated Lagrangian или пространственная постановка.',
     interactive:'ИНТЕРАКТИВНО',
     back:'← D00',
+    next:'D02 → hyperelasticity via Ψ',
+    next:'D02 → гиперупругость через Ψ',
   },
   en: {
     title:'Stress measures at finite strain',
@@ -88,7 +91,7 @@ const text = {
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function FiniteStrainStressMeasures({notation,language,onBack}:Props){
+export function FiniteStrainStressMeasures({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<StressMode>('cauchy')
   const [l1,setL1]=useState(1.25)
@@ -169,7 +172,7 @@ export function FiniteStrainStressMeasures({notation,language,onBack}:Props){
           {ru:'Эластомеры и полимеры',en:'Elastomers and polymers'},
         ]}/>
 
-        {onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}
+        <div className="mini-toggle-row" style={{marginTop:20}}>{onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext && <button className="primary-button" onClick={onNext}>{copy.next}</button>}</div>
       </div>
 
       <div className="scene-column">
