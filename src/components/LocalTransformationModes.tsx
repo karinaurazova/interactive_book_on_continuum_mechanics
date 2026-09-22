@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'stretch' | 'shear' | 'rotation' | 'combined'
@@ -41,6 +42,7 @@ const text = {
     conclusionTitle: 'Не каждое изменение ориентации означает деформацию.',
     conclusionText: 'Чтобы измерять именно изменение длин и углов независимо от жёсткого поворота, нужны специальные меры деформации.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к якобиану J →',
   },
   en: {
     back: '← K03',
@@ -73,6 +75,7 @@ const text = {
     conclusionTitle: 'A change of orientation does not necessarily mean deformation.',
     conclusionText: 'To measure changes of lengths and angles independently of rigid rotation, we need dedicated strain measures.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to the Jacobian J →',
   },
 } as const
 
@@ -88,7 +91,7 @@ function angleBetween(a:[number,number], b:[number,number]) {
   return Math.acos(c)*180/Math.PI
 }
 
-export function LocalTransformationModes({ notation, language, onBack }: Props) {
+export function LocalTransformationModes({ notation, language, onBack, onNext }: Props) {
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('stretch')
   const [parameter,setParameter]=useState(0.35)
@@ -175,6 +178,8 @@ export function LocalTransformationModes({ notation, language, onBack }: Props) 
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
