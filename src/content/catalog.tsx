@@ -59,6 +59,8 @@ import { IsotropicElasticConstants } from '../components/IsotropicElasticConstan
 import { VolumetricDeviatoricElasticity } from '../components/VolumetricDeviatoricElasticity'
 import { IncompressibilityModes } from '../components/IncompressibilityModes'
 import { BeyondLinearElasticity } from '../components/BeyondLinearElasticity'
+import { ConstitutiveLab } from '../components/ConstitutiveLab'
+import { ConstitutiveFinalChallenge } from '../components/ConstitutiveFinalChallenge'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -68,7 +70,7 @@ export type ModuleId =
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
-  | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09'
+  | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling'
 
@@ -134,7 +136,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'constitutive-modeling',
     title: { ru: 'Конститутивные соотношения и модели материала', en: 'Constitutive relations and material models' },
     shortTitle: { ru: 'Материалы', en: 'Materials' },
-    moduleIds: ['C00', 'C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09'],
+    moduleIds: ['C00', 'C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C11'],
   },
 ]
 
@@ -198,7 +200,9 @@ export const modules: ModuleDefinition[] = [
   { id: 'C06', chapterId: 'constitutive-modeling', title: { ru: 'Изотропная линейная упругость: E, ν, λ, μ, K и G', en: 'Isotropic linear elasticity: E, ν, λ, μ, K, and G' }, subtitle: { ru: 'два независимых параметра', en: 'two independent parameters' }, render: ({notation,language,goTo}) => <IsotropicElasticConstants notation={notation} language={language} onBack={() => goTo('C05')} onNext={() => goTo('C07')} /> },
   { id: 'C07', chapterId: 'constitutive-modeling', title: { ru: 'Объёмный и девиаторный отклик через K и G', en: 'Volumetric and deviatoric response through K and G' }, subtitle: { ru: 'объём ↔ форма', en: 'volume ↔ shape' }, render: ({notation,language,goTo}) => <VolumetricDeviatoricElasticity notation={notation} language={language} onBack={() => goTo('C06')} onNext={() => goTo('C08')} /> },
   { id: 'C08', chapterId: 'constitutive-modeling', title: { ru: 'Несжимаемость и почти несжимаемые материалы', en: 'Incompressibility and nearly incompressible materials' }, subtitle: { ru: 'J = 1 · давление · большой K', en: 'J = 1 · pressure · large K' }, render: ({notation,language,goTo}) => <IncompressibilityModes notation={notation} language={language} onBack={() => goTo('C07')} onNext={() => goTo('C09')} /> },
-  { id: 'C09', chapterId: 'constitutive-modeling', title: { ru: 'Что ломается за пределами линейной упругости?', en: 'What breaks down beyond linear elasticity?' }, subtitle: { ru: 'большие деформации · память · повреждение · анизотропия', en: 'large strain · memory · damage · anisotropy' }, render: ({notation,language,goTo}) => <BeyondLinearElasticity notation={notation} language={language} onBack={() => goTo('C08')} /> },
+  { id: 'C09', chapterId: 'constitutive-modeling', title: { ru: 'Что ломается за пределами линейной упругости?', en: 'What breaks down beyond linear elasticity?' }, subtitle: { ru: 'большие деформации · память · повреждение · анизотропия', en: 'large strain · memory · damage · anisotropy' }, render: ({notation,language,goTo}) => <BeyondLinearElasticity notation={notation} language={language} onBack={() => goTo('C08')} onNext={() => goTo('C10')} /> },
+  { id: 'C10', chapterId: 'constitutive-modeling', title: { ru: 'Конститутивная лаборатория', en: 'Constitutive laboratory' }, subtitle: { ru: 'сравнение редуцированных моделей', en: 'compare reduced models' }, render: ({notation,language,goTo}) => <ConstitutiveLab notation={notation} language={language} onBack={() => goTo('C09')} onNext={() => goTo('C11')} /> },
+  { id: 'C11', chapterId: 'constitutive-modeling', title: { ru: 'Итоговая самопроверка по конститутивному моделированию', en: 'Final self-check on constitutive modeling' }, subtitle: { ru: 'параметры · несжимаемость · диссипация · анизотропия', en: 'parameters · incompressibility · dissipation · anisotropy' }, render: ({notation,language,goTo}) => <ConstitutiveFinalChallenge notation={notation} language={language} onBack={() => goTo('C10')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
