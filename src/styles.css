@@ -1911,3 +1911,42 @@ input[type="range"] {
     min-width: 0;
   }
 }
+
+
+.chapter-switcher {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.chapter-button {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.35);
+  color: var(--muted);
+  padding: 9px 11px;
+  border-radius: 10px;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.chapter-button.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.kinematics-scene {
+  width: 100%;
+  min-height: 360px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+@media (max-width: 720px) {
+  .kinematics-scene {
+    min-height: 250px;
+  }
+}
