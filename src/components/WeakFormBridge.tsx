@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Step = 'strong' | 'test' | 'parts' | 'weak'
@@ -51,6 +52,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В нелинейной FEM слабая форма приводит к невязке R(u)=0. Для метода Ньютона нужна согласованная линеаризация δR, то есть касательный оператор. Именно качество этой линеаризации часто определяет устойчивость и скорость сходимости нелинейного решателя.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к итоговой самопроверке →',
   },
   en: {
     back:'← B08',
@@ -92,10 +94,11 @@ const text = {
     research:'Research note',
     researchText:'In nonlinear FEM the weak form defines a residual R(u)=0. Newton iterations require a consistent linearization δR, i.e. the tangent operator. Its quality often controls robustness and convergence speed.',
     interactive:'INTERACTIVE',
+    next:'Continue to final self-check →',
   }
 } as const
 
-export function WeakFormBridge({notation,language,onBack}:Props){
+export function WeakFormBridge({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [step,setStep]=useState<Step>('strong')
 
@@ -138,6 +141,8 @@ export function WeakFormBridge({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
