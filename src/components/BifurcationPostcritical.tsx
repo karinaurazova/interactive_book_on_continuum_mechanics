@@ -3,7 +3,7 @@ import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
 import { ApplicationLinks } from './ApplicationLinks'
 
-type Props={notation:NotationMode;language:Language;onBack?:()=>void}
+type Props={notation:NotationMode;language:Language;onBack?:()=>void;onNext?:()=>void}
 type Mode='pitchfork'|'limit'|'energy'
 
 const text={
@@ -26,7 +26,7 @@ ru:{
  research:'Исследовательское замечание',researchText:'В вычислительной механике геометрические несовершенства часто снимают идеальную симметрию: математически идеальная вилообразная бифуркация превращается в асимметричный путь, более похожий на эксперимент.',
  warning:'ВАЖНО',warningTitle:'Предельная точка и бифуркационная точка — не одно и то же.',
  warningText:'В предельной точке ветвь разворачивается по параметру нагрузки. В бифуркационной точке пересекаются или рождаются разные ветви равновесия.',
- back:'← D09',interactive:'ИНТЕРАКТИВНО'
+ back:'← D09',next:'D11 →',interactive:'ИНТЕРАКТИВНО'
 },
 en:{
  title:'Bifurcations and post-critical behavior',
@@ -47,7 +47,7 @@ en:{
  research:'Research note',researchText:'In computational mechanics geometric imperfections often break perfect symmetry: an ideal pitchfork bifurcation unfolds into an asymmetric path that more closely resembles experiments.',
  warning:'IMPORTANT',warningTitle:'A limit point and a bifurcation point are not the same.',
  warningText:'At a limit point the branch turns with respect to the load parameter. At a bifurcation point distinct equilibrium branches intersect or emerge.',
- back:'← D09',interactive:'INTERACTIVE'
+ back:'← D09',next:'D11 →',interactive:'INTERACTIVE'
 }} as const
 
 function path(points:{x:number;y:number}[],x0=8,y0=52,w=84,h=40){
@@ -56,7 +56,7 @@ function path(points:{x:number;y:number}[],x0=8,y0=52,w=84,h=40){
  return points.map((p,i)=>{const x=x0+(p.x-xmin)/(xmax-xmin||1)*w;const y=y0-(p.y-ymin)/(ymax-ymin||1)*h;return `${i?'L':'M'} ${x.toFixed(2)} ${y.toFixed(2)}`}).join(' ')
 }
 
-export function BifurcationPostcritical({notation,language,onBack}:Props){
+export function BifurcationPostcritical({notation,language,onBack,onNext}:Props){
  const copy=text[language]
  const [mode,setMode]=useState<Mode>('pitchfork')
  const [lambda,setLambda]=useState(.85)
@@ -104,7 +104,7 @@ export function BifurcationPostcritical({notation,language,onBack}:Props){
    <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
    <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
    <ApplicationLinks language={language} items={[{ru:'Потеря устойчивости оболочек',en:'Shell buckling'},{ru:'Скачкообразная потеря устойчивости конструкций',en:'Structural snap-through'},{ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},{ru:'Продолжение ветвей и метод длины дуги',en:'Continuation / arc-length'}]}/>
-   {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
+   <div className="lesson-nav">{onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext&&<button className="text-button" onClick={onNext}>{copy.next}</button>}</div>
  </div><div className="scene-column">
    <div className="scene-card">
     <div className="scene-head"><div><span className="scene-kicker">{copy.sceneKicker}</span><h2>{copy.sceneTitle}</h2></div><div className="live-badge">{copy.interactive}</div></div>
