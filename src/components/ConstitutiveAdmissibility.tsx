@@ -48,6 +48,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Современные модели мягких тканей часто комбинируют гиперупругость, вязкость, повреждение, активное напряжение, рост и ремоделирование. Удобно строить их модульно: обратимая часть из свободной энергии, необратимые механизмы — через отдельные диссипативные потенциалы или эволюционные законы.',
     interactive:'ИНТЕРАКТИВНО',
+    powerLabel:'мощность',
   },
   en: {
     back:'← B06',
@@ -86,6 +87,7 @@ const text = {
     research:'Research note',
     researchText:'Modern soft-tissue models often combine hyperelasticity, viscosity, damage, active stress, growth, and remodeling. A modular construction is useful: reversible response from free energy, irreversible mechanisms from dissipative potentials or evolution laws.',
     interactive:'INTERACTIVE',
+    powerLabel:'power',
   }
 } as const
 
@@ -182,7 +184,7 @@ export function ConstitutiveAdmissibility({notation,language,onBack}:Props){
             <rect x="45" y={49-bar(data.freeRate)} width="14" height={bar(data.freeRate)} rx="2" fill="rgba(244,242,236,.14)"/>
             <rect x="65" y={49-bar(data.dissipation)} width="14" height={bar(data.dissipation)} rx="2" fill={statusColor}/>
 
-            <text x="24" y="59" fill="#2864FF" fontSize="2.25">power</text>
+            <text x="24" y="59" fill="#2864FF" fontSize="2.25">{copy.powerLabel}</text>
             <text x="45" y="59" fill="#F4F2EC" fontSize="2.25">ψ̇</text>
             <text x="68" y="59" fill={statusColor} fontSize="2.25">𝒟</text>
             <text x="39" y="15" fill={statusColor} fontSize="2.6">{status}</text>
