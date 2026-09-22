@@ -1,13 +1,14 @@
 {
   "name": "interactive-book-on-continuum-mechanics",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test:kinematics": "node scripts/kinematics-sanity.mjs"
+    "test:kinematics": "node scripts/kinematics-sanity.mjs",
+    "test:transport": "node scripts/transport-sanity.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
