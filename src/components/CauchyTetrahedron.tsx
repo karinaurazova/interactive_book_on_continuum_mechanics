@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
+import { DepthNote } from './DepthNote'
 
 type Props = {
   notation: NotationMode
@@ -46,6 +47,10 @@ const text = {
     interactive: 'ИНТЕРАКТИВНО',
     aria: 'Тетраэдр Коши с изменяемой наклонной гранью и нормалью',
     next: 'Перейти к компонентам тензора →',
+    deepen: 'Углубиться',
+    deepenText: 'Если записать баланс сил для тетраэдра и разделить его на площадь наклонной грани A, координатные поверхностные силы входят с коэффициентами n₁, n₂, n₃. Объёмные и инерционные члены содержат дополнительный множитель h и исчезают при h → 0. Так получается линейность t(n) по n.',
+    research: 'Исследовательское замечание',
+    researchText: 'Вывод Коши опирается на локальность и существование конечного предела поверхностной силы на единицу площади. В более общих теориях континуума — например, с моментными напряжениями или дополнительными микроструктурными степенями свободы — структура контактных взаимодействий может быть богаче.',
   },
   en: {
     back: '← M03',
@@ -84,6 +89,10 @@ const text = {
     interactive: 'INTERACTIVE',
     aria: 'Cauchy tetrahedron with a variable inclined face and normal',
     next: 'Continue to stress components →',
+    deepen: 'Go deeper',
+    deepenText: 'Writing force balance for the tetrahedron and dividing by the inclined-face area A leaves the coordinate-face tractions weighted by n₁, n₂, n₃. Body-force and inertia terms carry one extra factor of h and vanish as h → 0. This yields linearity of t(n) in n.',
+    research: 'Research note',
+    researchText: 'Cauchy’s construction assumes a local continuum description and a finite traction limit per unit area. In generalized continua with couple stresses or additional microstructural degrees of freedom, contact interactions may require a richer description.',
   },
 } as const
 
@@ -173,6 +182,13 @@ export function CauchyTetrahedron({ notation, language, onBack, onNext }: Props)
           <div className="formula">{formulaLine}</div>
           <p>{copy.formulaText}</p>
         </div>
+
+        <DepthNote label={copy.deepen}>
+          <p>{copy.deepenText}</p>
+        </DepthNote>
+        <DepthNote label={copy.research} variant="research">
+          <p>{copy.researchText}</p>
+        </DepthNote>
 
         <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
