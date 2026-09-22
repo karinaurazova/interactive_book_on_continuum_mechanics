@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import { chapterById, moduleById, type ModuleId } from './content/catalog'
+import { chapterById, chapters, moduleById, type ChapterId, type ModuleId } from './content/catalog'
 import { ui, type Language, type NotationMode } from './i18n'
 
 export default function App() {
   const [active, setActive] = useState<ModuleId>('M00')
+  const [activeChapter, setActiveChapter] = useState<ChapterId>('stress-state')
   const [notation, setNotation] = useState<NotationMode>('Tensor')
   const [language, setLanguage] = useState<Language>('ru')
 
   const copy = ui[language]
   const activeModule = moduleById[active]
-  const chapter = chapterById[activeModule.chapterId]
+  const chapter = chapterById[activeChapter]
   const moduleIndex = chapter.moduleIds.indexOf(active)
   const completedCount = moduleIndex + 1
   const progress = Math.round((completedCount / chapter.moduleIds.length) * 100)
@@ -46,12 +47,27 @@ export default function App() {
               </button>
             ))}
           </div>
-          <div className="version">v0.2</div>
+          <div className="version">v0.3</div>
         </div>
       </header>
 
       <div className="workspace">
         <aside className="module-nav">
+          <div className="chapter-switcher">
+            {chapters.map((item) => (
+              <button
+                key={item.id}
+                className={activeChapter === item.id ? 'chapter-button active' : 'chapter-button'}
+                onClick={() => {
+                  setActiveChapter(item.id)
+                  setActive(item.moduleIds[0])
+                }}
+              >
+                {item.shortTitle[language]}
+              </button>
+            ))}
+          </div>
+
           <div className="nav-label">{chapter.title[language]}</div>
 
           {chapter.moduleIds.map((id) => (
