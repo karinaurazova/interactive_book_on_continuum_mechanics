@@ -40,6 +40,7 @@ import { GeneralReynoldsTransport } from '../components/GeneralReynoldsTransport
 import { TransportFinalChallenge } from '../components/TransportFinalChallenge'
 import { BalanceStructure } from '../components/BalanceStructure'
 import { MassBalance } from '../components/MassBalance'
+import { LinearMomentumBalance } from '../components/LinearMomentumBalance'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -48,7 +49,7 @@ export type ModuleId =
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
-  | 'B00' | 'B01'
+  | 'B00' | 'B01' | 'B02'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws'
 
@@ -108,7 +109,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'balance-laws',
     title: { ru: 'Законы баланса', en: 'Balance laws' },
     shortTitle: { ru: 'Балансы', en: 'Balances' },
-    moduleIds: ['B00', 'B01'],
+    moduleIds: ['B00', 'B01', 'B02'],
   },
 ]
 
@@ -153,7 +154,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'T09', chapterId: 'transport', title: { ru: 'Общая теорема Рейнольдса', en: 'General Reynolds transport theorem' }, subtitle: { ru: 'относительная скорость v−w', en: 'relative velocity v−w' }, render: ({notation,language,goTo}) => <GeneralReynoldsTransport notation={notation} language={language} onBack={() => goTo('T08')} onNext={() => goTo('T10')} /> },
   { id: 'T10', chapterId: 'transport', title: { ru: 'Итоговая самопроверка по времени и транспорту', en: 'Final self-check on time and transport' }, subtitle: { ru: 'самостоятельные кинематические эксперименты', en: 'independent kinematic experiments' }, render: ({notation,language,goTo}) => <TransportFinalChallenge notation={notation} language={language} onBack={() => goTo('T09')} /> },
   { id: 'B00', chapterId: 'balance-laws', title: { ru: 'Что означает закон баланса?', en: 'What does a balance law mean?' }, subtitle: { ru: 'накопление + отток = источники', en: 'accumulation + outflux = sources' }, render: ({notation,language,goTo}) => <BalanceStructure notation={notation} language={language} onNext={() => goTo('B01')} /> },
-  { id: 'B01', chapterId: 'balance-laws', title: { ru: 'Баланс массы и уравнение неразрывности', en: 'Mass balance and continuity equation' }, subtitle: { ru: 'Dρ/Dt + ρ∇·v = 0', en: 'Dρ/Dt + ρ∇·v = 0' }, render: ({notation,language,goTo}) => <MassBalance notation={notation} language={language} onBack={() => goTo('B00')} /> },
+  { id: 'B01', chapterId: 'balance-laws', title: { ru: 'Баланс массы и уравнение неразрывности', en: 'Mass balance and continuity equation' }, subtitle: { ru: 'Dρ/Dt + ρ∇·v = 0', en: 'Dρ/Dt + ρ∇·v = 0' }, render: ({notation,language,goTo}) => <MassBalance notation={notation} language={language} onBack={() => goTo('B00')} onNext={() => goTo('B02')} /> },
+  { id: 'B02', chapterId: 'balance-laws', title: { ru: 'Баланс линейного импульса и уравнение Коши', en: 'Linear momentum balance and Cauchy equation' }, subtitle: { ru: 'ρa = ∇·σ + ρb', en: 'ρa = ∇·σ + ρb' }, render: ({notation,language,goTo}) => <LinearMomentumBalance notation={notation} language={language} onBack={() => goTo('B01')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
