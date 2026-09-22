@@ -4,7 +4,7 @@
 
 The project combines rigorous mechanics, live 3D geometry, multiple mathematical notations, and browser-based computational experiments.
 
-> **v0.1 focus:** *Stress state at a point — from an imaginary cut to the Cauchy stress tensor.*
+> **Current release candidate: v0.3.1.** The project now contains two complete interactive learning lines: stress state at a point and finite-deformation kinematics.
 
 ## Why this project
 
@@ -93,9 +93,9 @@ The aim is not to reproduce any one textbook, but to build a coherent modern lea
 
 ## Status
 
-**v0.1 foundation in active development.**
+**v0.3.1 release candidate.**
 
-The current milestone is to complete one polished vertical slice covering M00–M04 before expanding the book.
+The current milestone is scientific and UX hardening of the completed stress and kinematics chapters before starting v0.4: kinematics in time and transport.
 
 ## License
 
