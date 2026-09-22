@@ -10,6 +10,7 @@ on:
       - v0.4-transport
       - v0.4.1-hardening
       - v0.4.2-progressive-depth
+      - v0.5-balance-laws
   pull_request:
     branches:
       - main
