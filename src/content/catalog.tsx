@@ -42,6 +42,7 @@ import { BalanceStructure } from '../components/BalanceStructure'
 import { MassBalance } from '../components/MassBalance'
 import { LinearMomentumBalance } from '../components/LinearMomentumBalance'
 import { AngularMomentumLaw } from '../components/AngularMomentumLaw'
+import { EnergyBalance } from '../components/EnergyBalance'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -50,7 +51,7 @@ export type ModuleId =
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
-  | 'B00' | 'B01' | 'B02' | 'B03'
+  | 'B00' | 'B01' | 'B02' | 'B03' | 'B04'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws'
 
@@ -110,7 +111,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'balance-laws',
     title: { ru: 'Законы баланса', en: 'Balance laws' },
     shortTitle: { ru: 'Балансы', en: 'Balances' },
-    moduleIds: ['B00', 'B01', 'B02', 'B03'],
+    moduleIds: ['B00', 'B01', 'B02', 'B03', 'B04'],
   },
 ]
 
@@ -157,7 +158,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'B00', chapterId: 'balance-laws', title: { ru: 'Что означает закон баланса?', en: 'What does a balance law mean?' }, subtitle: { ru: 'накопление + отток = источники', en: 'accumulation + outflux = sources' }, render: ({notation,language,goTo}) => <BalanceStructure notation={notation} language={language} onNext={() => goTo('B01')} /> },
   { id: 'B01', chapterId: 'balance-laws', title: { ru: 'Баланс массы и уравнение неразрывности', en: 'Mass balance and continuity equation' }, subtitle: { ru: 'Dρ/Dt + ρ∇·v = 0', en: 'Dρ/Dt + ρ∇·v = 0' }, render: ({notation,language,goTo}) => <MassBalance notation={notation} language={language} onBack={() => goTo('B00')} onNext={() => goTo('B02')} /> },
   { id: 'B02', chapterId: 'balance-laws', title: { ru: 'Баланс линейного импульса и уравнение Коши', en: 'Linear momentum balance and Cauchy equation' }, subtitle: { ru: 'ρa = ∇·σ + ρb', en: 'ρa = ∇·σ + ρb' }, render: ({notation,language,goTo}) => <LinearMomentumBalance notation={notation} language={language} onBack={() => goTo('B01')} onNext={() => goTo('B03')} /> },
-  { id: 'B03', chapterId: 'balance-laws', title: { ru: 'Баланс момента импульса и симметрия напряжений', en: 'Angular momentum balance and stress symmetry' }, subtitle: { ru: 'σ = σᵀ', en: 'σ = σᵀ' }, render: ({notation,language,goTo}) => <AngularMomentumLaw notation={notation} language={language} onBack={() => goTo('B02')} /> },
+  { id: 'B03', chapterId: 'balance-laws', title: { ru: 'Баланс момента импульса и симметрия напряжений', en: 'Angular momentum balance and stress symmetry' }, subtitle: { ru: 'σ = σᵀ', en: 'σ = σᵀ' }, render: ({notation,language,goTo}) => <AngularMomentumLaw notation={notation} language={language} onBack={() => goTo('B02')} onNext={() => goTo('B04')} /> },
+  { id: 'B04', chapterId: 'balance-laws', title: { ru: 'Баланс энергии и первый закон термодинамики', en: 'Energy balance and the first law of thermodynamics' }, subtitle: { ru: 'ρ De/Dt = σ:D − ∇·q + ρr', en: 'ρ De/Dt = σ:D − ∇·q + ρr' }, render: ({notation,language,goTo}) => <EnergyBalance notation={notation} language={language} onBack={() => goTo('B03')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
