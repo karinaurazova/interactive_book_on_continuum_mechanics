@@ -6,6 +6,7 @@ import { ApplicationLinks } from './ApplicationLinks'
 type Props = {
   notation: NotationMode
   language: Language
+  onNext?: () => void
 }
 
 const text = {
@@ -39,6 +40,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В нелинейной FEM геометрическая нелинейность возникает уже на уровне кинематики и слабой формы, даже если сам материал остаётся гиперупругим и без внутренних переменных.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'D01 → меры напряжений',
   },
   en: {
     title:'Why do we need finite-strain mechanics?',
@@ -70,13 +72,14 @@ const text = {
     research:'Research note',
     researchText:'In nonlinear FEM, geometric nonlinearity enters through kinematics and the weak form even when the material itself remains hyperelastic and has no internal variables.',
     interactive:'INTERACTIVE',
+    next:'D01 → stress measures',
   }
 } as const
 
 function norm2(A:number[][]){ return Math.sqrt(A.flat().reduce((s,x)=>s+x*x,0)) }
 function fmt(v:number,d=4){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function WhyFiniteStrain({notation,language}:Props){
+export function WhyFiniteStrain({notation,language,onNext}:Props){
   const copy=text[language]
   const [angle,setAngle]=useState(35)
   const [stretch,setStretch]=useState(1.15)
@@ -148,6 +151,7 @@ export function WhyFiniteStrain({notation,language}:Props){
           {ru:'Мягкие ткани',en:'Soft tissues'},
           {ru:'Большие перемещения конструкций',en:'Large-displacement structures'},
         ]}/>
+        {onNext && <button className="primary-button" onClick={onNext}>{copy.next}</button>}
       </div>
 
       <div className="scene-column">
