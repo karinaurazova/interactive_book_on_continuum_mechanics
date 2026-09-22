@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type ViewMode = 'material' | 'spatial'
@@ -37,6 +38,7 @@ const text = {
     conclusionText: 'Дальше производные по X приведут нас к градиенту деформации F, а производные по x — к пространственным мерам.',
     interactive: 'ИНТЕРАКТИВНО',
     notationLabel: 'Форма записи',
+    next: 'Перейти к локальной окрестности →',
   },
   en: {
     back: '← K00',
@@ -65,6 +67,7 @@ const text = {
     conclusionText: 'Later, derivatives with respect to X lead to the deformation gradient F, while derivatives with respect to x lead to spatial measures.',
     interactive: 'INTERACTIVE',
     notationLabel: 'Notation',
+    next: 'Continue to the local neighborhood →',
   },
 } as const
 
@@ -72,7 +75,7 @@ function fmt(v: number) {
   return v.toFixed(2)
 }
 
-export function MaterialSpatialCoordinates({ notation, language, onBack }: Props) {
+export function MaterialSpatialCoordinates({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [mode, setMode] = useState<ViewMode>('material')
   const [time, setTime] = useState(0.7)
@@ -152,6 +155,8 @@ export function MaterialSpatialCoordinates({ notation, language, onBack }: Props
           <div className="definition-label">{copy.notationLabel}</div>
           <div className="formula">{notationLine}</div>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
