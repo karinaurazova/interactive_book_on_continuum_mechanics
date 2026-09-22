@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'identity' | 'translation' | 'rotation' | 'stretch' | 'shear'
@@ -51,6 +52,7 @@ const text = {
     conclusionTitle: 'Эталонные случаи — это обязательная проверка любой модели конечной деформации.',
     conclusionText: 'Если код не проходит эти тесты, переходить к сложным нагрузкам и конститутивным моделям рано.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к вычислительной лаборатории →',
   },
   en: {
     back: '← K09',
@@ -93,6 +95,7 @@ const text = {
     conclusionTitle: 'Benchmark cases are mandatory checks for any finite-deformation model.',
     conclusionText: 'If the code fails these tests, it is too early to move on to complex loading or constitutive models.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to the computational lab →',
   },
 } as const
 
@@ -118,7 +121,7 @@ function frob(a:number[][]){
   return Math.sqrt(a.flat().reduce((s,v)=>s+v*v,0))
 }
 
-export function KinematicsLimitCases({notation,language,onBack}:Props){
+export function KinematicsLimitCases({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('identity')
   const [parameter,setParameter]=useState(0.35)
@@ -217,6 +220,8 @@ export function KinematicsLimitCases({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
