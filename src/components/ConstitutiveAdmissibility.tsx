@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'elastic' | 'viscous'
@@ -49,6 +50,7 @@ const text = {
     researchText:'Современные модели мягких тканей часто комбинируют гиперупругость, вязкость, повреждение, активное напряжение, рост и ремоделирование. Удобно строить их модульно: обратимая часть из свободной энергии, необратимые механизмы — через отдельные диссипативные потенциалы или эволюционные законы.',
     interactive:'ИНТЕРАКТИВНО',
     powerLabel:'мощность',
+    next:'Перейти к постановке задачи →',
   },
   en: {
     back:'← B06',
@@ -88,6 +90,7 @@ const text = {
     researchText:'Modern soft-tissue models often combine hyperelasticity, viscosity, damage, active stress, growth, and remodeling. A modular construction is useful: reversible response from free energy, irreversible mechanisms from dissipative potentials or evolution laws.',
     interactive:'INTERACTIVE',
     powerLabel:'power',
+    next:'Continue to problem formulation →',
   }
 } as const
 
@@ -95,7 +98,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function ConstitutiveAdmissibility({notation,language,onBack}:Props){
+export function ConstitutiveAdmissibility({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('elastic')
   const [strain,setStrain]=useState(.35)
@@ -164,6 +167,8 @@ export function ConstitutiveAdmissibility({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
