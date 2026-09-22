@@ -9,6 +9,7 @@ on:
       - v0.3.1-hardening
       - v0.4-transport
       - v0.4.1-hardening
+      - v0.4.2-progressive-depth
   pull_request:
     branches:
       - main
