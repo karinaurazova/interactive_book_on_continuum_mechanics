@@ -21,9 +21,9 @@ ru:{
  checkpoint:'ПРОВЕРЬ ИНТУИЦИЮ',checkpointTitle:'Почему λ_min(K_T)=0 недостаточно для понимания дальнейшего поведения?',
  checkpointText:'Потому что нулевое собственное значение сообщает о потере локальной жёсткости, но не говорит, какие ветви существуют дальше, устойчивы ли они и можно ли пройти критическую область обычным управлением нагрузкой.',
  conclusion:'ВЫВОД',conclusionTitle:'После критической точки нужно исследовать не одно решение, а структуру ветвей.',
- conclusionText:'Именно поэтому анализ устойчивости естественно переходит в continuation-методы, arc-length и исследование посткритического пути.',
+ conclusionText:'Именно поэтому анализ устойчивости естественно переходит к методам продолжения ветвей, методу длины дуги и исследованию посткритического пути.',
  deepen:'Углубиться',deepenText:'Для симметричной нормальной формы Π(q)=¼q⁴−½μq² минимум q=0 устойчив при μ<0. При μ>0 центральное состояние становится неустойчивым, а устойчивые минимумы появляются при q=±√μ.',
- research:'Исследовательское замечание',researchText:'В вычислительной механике геометрические несовершенства часто снимают идеальную симметрию: математически идеальная pitchfork-бифуркация превращается в асимметричный путь, более похожий на эксперимент.',
+ research:'Исследовательское замечание',researchText:'В вычислительной механике геометрические несовершенства часто снимают идеальную симметрию: математически идеальная вилообразная бифуркация превращается в асимметричный путь, более похожий на эксперимент.',
  warning:'ВАЖНО',warningTitle:'Предельная точка и бифуркационная точка — не одно и то же.',
  warningText:'В предельной точке ветвь разворачивается по параметру нагрузки. В бифуркационной точке пересекаются или рождаются разные ветви равновесия.',
  back:'← D09',interactive:'ИНТЕРАКТИВНО'
@@ -103,7 +103,7 @@ export function BifurcationPostcritical({notation,language,onBack}:Props){
    <div className="warning-card kinematics-warning"><span>{copy.warning}</span><strong>{copy.warningTitle}</strong><p>{copy.warningText}</p></div>
    <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
    <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
-   <ApplicationLinks language={language} items={[{ru:'Потеря устойчивости оболочек',en:'Shell buckling'},{ru:'Snap-through конструкций',en:'Structural snap-through'},{ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},{ru:'Continuation / arc-length',en:'Continuation / arc-length'}]}/>
+   <ApplicationLinks language={language} items={[{ru:'Потеря устойчивости оболочек',en:'Shell buckling'},{ru:'Скачкообразная потеря устойчивости конструкций',en:'Structural snap-through'},{ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},{ru:'Продолжение ветвей и метод длины дуги',en:'Continuation / arc-length'}]}/>
    {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
  </div><div className="scene-column">
    <div className="scene-card">
