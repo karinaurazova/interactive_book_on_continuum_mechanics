@@ -68,6 +68,7 @@ import { DeformationInvariants } from '../components/DeformationInvariants'
 import { HyperelasticModelComparison } from '../components/HyperelasticModelComparison'
 import { OgdenModel } from '../components/OgdenModel'
 import { IsochoricVolumetricSplit } from '../components/IsochoricVolumetricSplit'
+import { NearIncompressibility } from '../components/NearIncompressibility'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -78,7 +79,7 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
-  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06'
+  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
@@ -150,7 +151,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'finite-strain-hyperelasticity',
     title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
     shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
-    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06'],
+    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07'],
   },
 ]
 
@@ -223,7 +224,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'D03', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Инварианты деформации и объективная гиперупругость', en: 'Deformation invariants and objective hyperelasticity' }, subtitle: { ru: 'I₁ · I₂ · I₃ · J и проверка поворота', en: 'I₁ · I₂ · I₃ · J and rotation check' }, render: ({notation,language,goTo}) => <DeformationInvariants notation={notation} language={language} onBack={() => goTo('D02')} onNext={() => goTo('D04')} /> },
   { id: 'D04', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Нео–Гук и Муни–Ривлин', en: 'Neo-Hookean and Mooney–Rivlin' }, subtitle: { ru: 'что меняет зависимость от I₂', en: 'what changes when I₂ enters the energy' }, render: ({notation,language,goTo}) => <HyperelasticModelComparison notation={notation} language={language} onBack={() => goTo('D03')} onNext={() => goTo('D05')} /> },
   { id: 'D05', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Модель Огдена: гиперупругость через главные растяжения', en: 'Ogden: hyperelasticity through principal stretches' }, subtitle: { ru: 'роль α и сильная нелинейность', en: 'role of α and strong nonlinearity' }, render: ({notation,language,goTo}) => <OgdenModel notation={notation} language={language} onBack={() => goTo('D04')} onNext={() => goTo('D06')} /> },
-  { id: 'D06', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Изохорно-объёмное разложение', en: 'Isochoric–volumetric split' }, subtitle: { ru: 'форма · объём · почти несжимаемость', en: 'shape · volume · near incompressibility' }, render: ({notation,language,goTo}) => <IsochoricVolumetricSplit notation={notation} language={language} onBack={() => goTo('D05')} /> },
+  { id: 'D06', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Изохорно-объёмное разложение', en: 'Isochoric–volumetric split' }, subtitle: { ru: 'форма · объём · почти несжимаемость', en: 'shape · volume · near incompressibility' }, render: ({notation,language,goTo}) => <IsochoricVolumetricSplit notation={notation} language={language} onBack={() => goTo('D05')} onNext={() => goTo('D07')} /> },
+  { id: 'D07', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Почти несжимаемость: давление и смешанная u–p постановка', en: 'Near incompressibility: pressure and mixed u–p formulation' }, subtitle: { ru: 'штрафной метод · давление · объёмная блокировка', en: 'penalty method · pressure · volumetric locking' }, render: ({notation,language,goTo}) => <NearIncompressibility notation={notation} language={language} onBack={() => goTo('D06')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
