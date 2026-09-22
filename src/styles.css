@@ -2970,3 +2970,23 @@ input[type="range"] {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* Constitutive modules: mode switch inside dark scene cards. */
+.constitutive-mode-switch-dark {
+  background: rgba(244,242,236,.045);
+  border-color: rgba(244,242,236,.10);
+}
+
+.constitutive-mode-switch-dark .constitutive-mode-button {
+  color: rgba(244,242,236,.78);
+}
+
+.constitutive-mode-switch-dark .constitutive-mode-button:hover {
+  background: rgba(244,242,236,.08);
+}
+
+.constitutive-mode-switch-dark .constitutive-mode-button.active {
+  background: var(--paper);
+  color: var(--ink);
+}
