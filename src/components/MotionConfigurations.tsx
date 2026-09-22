@@ -117,7 +117,7 @@ export function MotionConfigurations({ notation, language, onNext }: Props) {
   const curSvg = (p: [number,number]) => [72 + p[0]*20, 38 - p[1]*20]
 
   return (
-    <section className="module-view">
+    <section className="module-view module-view-stacked">
       <div className="lesson-copy">
         <div className="lesson-index">K00 / 13</div>
         <h1>{copy.title}</h1>
