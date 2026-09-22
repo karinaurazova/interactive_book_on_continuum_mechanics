@@ -44,6 +44,8 @@ const text = {
     conclusionTitle: 'Материальное описание отвечает «что делает эта частица?», пространственное — «что происходит здесь?».',
     conclusionText: 'Следующий шаг — ускорение и материальная производная, где различие этих двух взглядов становится особенно важным.',
     interactive: 'ИНТЕРАКТИВНО',
+    reference: 'референсная конфигурация',
+    current: 'текущая конфигурация',
   },
   en: {
     back: '← T00',
@@ -79,6 +81,8 @@ const text = {
     conclusionTitle: 'Material description asks “what is this particle doing?”, spatial description asks “what is happening here?”.',
     conclusionText: 'Next we move to acceleration and the material derivative, where this distinction becomes essential.',
     interactive: 'INTERACTIVE',
+    reference: 'reference configuration',
+    current: 'current configuration',
   },
 } as const
 
@@ -137,7 +141,7 @@ export function MaterialSpatialVelocity({notation,language,onBack}:Props){
         <div className="definition">
           <div className="definition-label">{mode==='material'?copy.material:copy.spatial}</div>
           <div className="formula">
-            {mode==='material' ? '𝐕(𝐗,t) = ∂χ(𝐗,t)/∂t |𝐗' : notationLine}
+            {mode==='material' ? '𝐕(𝐗,t) = (∂χ(𝐗,t)/∂t)_X' : notationLine}
           </div>
           <p>{mode==='material'?copy.materialText:copy.spatialText}</p>
         </div>
@@ -174,8 +178,8 @@ export function MaterialSpatialVelocity({notation,language,onBack}:Props){
             <rect x="5" y="6" width="90" height="52" rx="9" fill="#111318"/>
             <line x1="12" y1="22" x2="88" y2="22" stroke="#5E6774" strokeWidth=".7"/>
             <line x1="12" y1="43" x2="88" y2="43" stroke="#5E6774" strokeWidth=".7"/>
-            <text x="8" y="17" fill="#8E96A3" fontSize="2.7">reference</text>
-            <text x="8" y="38" fill="#8E96A3" fontSize="2.7">current</text>
+            <text x="8" y="17" fill="#8E96A3" fontSize="2.7">{copy.reference}</text>
+            <text x="8" y="38" fill="#8E96A3" fontSize="2.7">{copy.current}</text>
 
             <circle cx={pRef} cy="22" r="1.8" fill="#A9E3D2"/>
             <circle cx={pCur} cy="43" r="2.0" fill={mode==='material'?'#2864FF':'#DD7A2B'}/>
