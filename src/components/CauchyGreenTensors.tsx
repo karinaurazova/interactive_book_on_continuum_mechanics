@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -39,6 +40,7 @@ const text = {
     conclusionTitle: 'C и B позволяют говорить об изменении длин и углов, не принимая жёсткий поворот за деформацию.',
     conclusionText: 'Следующий шаг — перейти от этих метрических тензоров к конкретным мерам деформации.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к мерам деформации →',
   },
   en: {
     back: '← K05',
@@ -71,6 +73,7 @@ const text = {
     conclusionTitle: 'C and B describe changes of lengths and angles without mistaking rigid rotation for deformation.',
     conclusionText: 'The next step is to build explicit strain measures from these metric tensors.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to strain measures →',
   },
 } as const
 
@@ -90,7 +93,7 @@ function matVec(a:number[][],x:[number,number]) {
   return [a[0][0]*x[0]+a[0][1]*x[1],a[1][0]*x[0]+a[1][1]*x[1]] as [number,number]
 }
 
-export function CauchyGreenTensors({ notation, language, onBack }: Props) {
+export function CauchyGreenTensors({ notation, language, onBack, onNext }: Props) {
   const copy=text[language]
   const [rotationDeg,setRotationDeg]=useState(28)
   const [stretchX,setStretchX]=useState(1.30)
@@ -159,6 +162,8 @@ export function CauchyGreenTensors({ notation, language, onBack }: Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
