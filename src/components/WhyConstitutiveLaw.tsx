@@ -5,6 +5,7 @@ import { DepthNote } from './DepthNote'
 type Props = {
   notation: NotationMode
   language: Language
+  onNext: () => void
 }
 
 const text = {
@@ -40,6 +41,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для мягких тканей конститутивный закон часто должен учитывать волоконную архитектуру, почти несжимаемое поведение, вязкоупругость, активность, рост и ремоделирование. Поэтому выбор модели материала становится отдельной научной задачей.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к расширенному состоянию материала →',
   },
   en: {
     title:'Why do we need a constitutive law?',
@@ -73,6 +75,7 @@ const text = {
     research:'Research note',
     researchText:'Soft-tissue constitutive laws often need fiber architecture, near-incompressibility, viscoelasticity, active response, growth, and remodeling. Choosing the material model is therefore a scientific problem in its own right.',
     interactive:'INTERACTIVE',
+    next:'Continue to the extended material state →',
   }
 } as const
 
@@ -80,7 +83,7 @@ function fmt(v:number,d=3){
   return v.toFixed(d)
 }
 
-export function WhyConstitutiveLaw({notation,language}:Props){
+export function WhyConstitutiveLaw({notation,language,onNext}:Props){
   const copy=text[language]
   const [strain,setStrain]=useState(.25)
   const [E1,setE1]=useState(.8)
@@ -131,6 +134,8 @@ export function WhyConstitutiveLaw({notation,language}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
