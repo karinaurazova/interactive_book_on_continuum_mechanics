@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -39,6 +40,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для касательной жёсткости нелинейной гиперупругой модели большая симметрия обычно сохраняется при корректной энергетической формулировке. В неассоциативных, активных или неравновесных моделях структура касательной может быть более сложной.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к изотропной линейной упругости →',
   },
   en: {
     back:'← C04',
@@ -70,10 +72,11 @@ const text = {
     research:'Research note',
     researchText:'For the tangent stiffness of a nonlinear hyperelastic model, major symmetry is typically retained under a consistent energy-based formulation. Non-associative, active, or nonequilibrium models may have more complicated tangent structure.',
     interactive:'INTERACTIVE',
+    next:'Continue to isotropic linear elasticity →',
   }
 } as const
 
-export function StiffnessSymmetries({notation,language,onBack}:Props){
+export function StiffnessSymmetries({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [minor,setMinor]=useState(true)
   const [major,setMajor]=useState(true)
@@ -127,6 +130,8 @@ export function StiffnessSymmetries({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
