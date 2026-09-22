@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
 
-type Props={notation:NotationMode;language:Language;onBack?:()=>void;onNext?:()=>void}
+type Props={notation:NotationMode;language:Language;onBack?:()=>void}
 type Mode='hyper'|'tangent'|'branch'|'imperfection'
 
 const text={
@@ -21,7 +21,7 @@ ru:{
  conclusion:'ВЫВОД',conclusionTitle:'Конечные деформации и устойчивость нельзя изучать по одной кривой.',
  conclusionText:'Нужно одновременно видеть конститутивный отклик, касательную жёсткость, геометрию ветвей и чувствительность к малым возмущениям.',
  deepen:'Углубиться',deepenText:'В реальной задаче эти уровни связаны через нелинейную краевую постановку: материал определяет внутренние силы, текущая геометрия влияет на касательную жёсткость, а алгоритм продолжения определяет, какую часть равновесного пути удаётся вычислить.',
- back:'← D12',next:'D14 →',interactive:'ИНТЕРАКТИВНО'
+ back:'← D12',interactive:'ИНТЕРАКТИВНО'
 },
 en:{
  title:'Computational laboratory for finite strain and stability',
@@ -38,12 +38,12 @@ en:{
  conclusion:'CONCLUSION',conclusionTitle:'Finite strain and stability cannot be understood from a single curve.',
  conclusionText:'Constitutive response, tangent stiffness, branch geometry, and sensitivity to small perturbations must be considered together.',
  deepen:'Go deeper',deepenText:'In a full problem these levels are coupled through a nonlinear boundary-value problem: material response determines internal forces, current geometry affects tangent stiffness, and the continuation algorithm determines which part of the equilibrium path can be computed.',
- back:'← D12',next:'D14 →',interactive:'INTERACTIVE'
+ back:'← D12',interactive:'INTERACTIVE'
 }} as const
 
 function fmt(v:number,d=3){return (Math.abs(v)<1e-12?0:v).toFixed(d)}
 
-export function FiniteStrainComputationalLab({notation,language,onBack,onNext}:Props){
+export function FiniteStrainComputationalLab({notation,language,onBack}:Props){
  const copy=text[language]
  const [mode,setMode]=useState<Mode>('hyper')
  const [stretch,setStretch]=useState(1.25)
@@ -83,7 +83,7 @@ export function FiniteStrainComputationalLab({notation,language,onBack,onNext}:P
   <div className="concept-card"><span>{copy.key}</span><strong>{copy.keyText}</strong></div>
   <div className="definition"><div className="formula">{formula}</div><p>{copy.keyText}</p></div>
   <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
-  <div className="lesson-nav">{onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext&&<button className="text-button" onClick={onNext}>{copy.next}</button>}</div>
+  {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
  </div><div className="scene-column">
   <div className="scene-card">
    <div className="scene-head"><div><span className="scene-kicker">{copy.sceneKicker}</span><h2>{copy.sceneTitle}</h2></div><div className="live-badge">{copy.interactive}</div></div>
