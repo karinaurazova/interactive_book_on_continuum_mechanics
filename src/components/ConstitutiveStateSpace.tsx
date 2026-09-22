@@ -34,8 +34,11 @@ const text = {
     alpha:'внутренняя переменная α',
     angle:'угол структуры θ',
     base:'базовый упругий вклад',
+    baseShort:'база',
     extra:'дополнительный вклад',
+    extraShort:'добавка',
     stress:'итоговое напряжение σ',
+    stressShort:'итог',
     active:'учитывается',
     inactive:'не учитывается',
     warning:'ВАЖНО',
@@ -76,8 +79,11 @@ const text = {
     alpha:'internal variable α',
     angle:'structure angle θ',
     base:'baseline elastic contribution',
+    baseShort:'base',
     extra:'additional contribution',
+    extraShort:'extra',
     stress:'total stress σ',
+    stressShort:'total',
     active:'included',
     inactive:'not included',
     warning:'IMPORTANT',
@@ -203,9 +209,9 @@ export function ConstitutiveStateSpace({notation,language,onBack,onNext}:Props){
             <rect x="20" y={51-Math.max(2,Math.min(28,12+10*data.base))} width="16" height={Math.max(2,Math.min(28,12+10*data.base))} rx="2" fill="rgba(40,100,255,.48)"/>
             <rect x="43" y={51-Math.max(2,Math.min(28,12+10*data.extra))} width="16" height={Math.max(2,Math.min(28,12+10*data.extra))} rx="2" fill="rgba(221,122,43,.42)"/>
             <rect x="66" y={51-Math.max(2,Math.min(32,12+10*data.stress))} width="16" height={Math.max(2,Math.min(32,12+10*data.stress))} rx="2" fill="rgba(169,227,210,.52)"/>
-            <text x="19" y="60" fill="#2864FF" fontSize="2.2">{copy.base}</text>
-            <text x="41" y="60" fill="#DD7A2B" fontSize="2.2">{copy.extra}</text>
-            <text x="65" y="60" fill="#A9E3D2" fontSize="2.2">{copy.stress}</text>
+            <text x="23" y="60" textAnchor="middle" fill="#2864FF" fontSize="2.2">{copy.baseShort}</text>
+            <text x="51" y="60" textAnchor="middle" fill="#DD7A2B" fontSize="2.2">{copy.extraShort}</text>
+            <text x="74" y="60" textAnchor="middle" fill="#A9E3D2" fontSize="2.2">{copy.stressShort}</text>
           </svg>
 
           <div className="control-stack">
