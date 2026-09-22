@@ -8,6 +8,7 @@ on:
       - v0.3-kinematics
       - v0.3.1-hardening
       - v0.4-transport
+      - v0.4.1-hardening
   pull_request:
     branches:
       - main
@@ -29,6 +30,9 @@ jobs:
 
       - name: Kinematics sanity checks
         run: npm run test:kinematics
+
+      - name: Transport sanity checks
+        run: npm run test:transport
 
       - name: Build
         run: npm run build
