@@ -20,13 +20,14 @@ import { LocalNeighborhood } from '../components/LocalNeighborhood'
 import { DeformationGradient } from '../components/DeformationGradient'
 import { LocalTransformationModes } from '../components/LocalTransformationModes'
 import { JacobianVolumeChange } from '../components/JacobianVolumeChange'
+import { CauchyGreenTensors } from '../components/CauchyGreenTensors'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
   | 'M00' | 'M01' | 'M02' | 'M03' | 'M04'
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
-  | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05'
+  | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06'
 
 export type ChapterId = 'stress-state' | 'kinematics'
 
@@ -74,7 +75,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'kinematics',
     title: { ru: 'Кинематика движения и деформации', en: 'Kinematics of motion and deformation' },
     shortTitle: { ru: 'Кинематика', en: 'Kinematics' },
-    moduleIds: ['K00', 'K01', 'K02', 'K03', 'K04', 'K05'],
+    moduleIds: ['K00', 'K01', 'K02', 'K03', 'K04', 'K05', 'K06'],
   },
 ]
 
@@ -99,7 +100,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'K02', chapterId: 'kinematics', title: { ru: 'Локальная окрестность материальной точки', en: 'Local neighborhood of a material point' }, subtitle: { ru: 'Как меняются малые направления рядом с X', en: 'How small directions near X change' }, render: ({notation,language,goTo}) => <LocalNeighborhood notation={notation} language={language} onBack={() => goTo('K01')} onNext={() => goTo('K03')} /> },
   { id: 'K03', chapterId: 'kinematics', title: { ru: 'Градиент деформации', en: 'Deformation gradient' }, subtitle: { ru: 'F = ∂x/∂X и отображение dX → dx', en: 'F = ∂x/∂X and the map dX → dx' }, render: ({notation,language,goTo}) => <DeformationGradient notation={notation} language={language} onBack={() => goTo('K02')} onNext={() => goTo('K04')} /> },
   { id: 'K04', chapterId: 'kinematics', title: { ru: 'Растяжение, сдвиг и поворот', en: 'Stretch, shear, and rotation' }, subtitle: { ru: 'Типовые геометрические эффекты внутри F', en: 'Typical geometric effects inside F' }, render: ({notation,language,goTo}) => <LocalTransformationModes notation={notation} language={language} onBack={() => goTo('K03')} onNext={() => goTo('K05')} /> },
-  { id: 'K05', chapterId: 'kinematics', title: { ru: 'Якобиан движения', en: 'Jacobian of motion' }, subtitle: { ru: 'J = det F и локальное изменение площади/объёма', en: 'J = det F and local area/volume change' }, render: ({notation,language,goTo}) => <JacobianVolumeChange notation={notation} language={language} onBack={() => goTo('K04')} /> },
+  { id: 'K05', chapterId: 'kinematics', title: { ru: 'Якобиан движения', en: 'Jacobian of motion' }, subtitle: { ru: 'J = det F и локальное изменение площади/объёма', en: 'J = det F and local area/volume change' }, render: ({notation,language,goTo}) => <JacobianVolumeChange notation={notation} language={language} onBack={() => goTo('K04')} onNext={() => goTo('K06')} /> },
+  { id: 'K06', chapterId: 'kinematics', title: { ru: 'Тензоры Коши–Грина', en: 'Cauchy–Green tensors' }, subtitle: { ru: 'C = FᵀF и B = FFᵀ', en: 'C = FᵀF and B = FFᵀ' }, render: ({notation,language,goTo}) => <CauchyGreenTensors notation={notation} language={language} onBack={() => goTo('K05')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
