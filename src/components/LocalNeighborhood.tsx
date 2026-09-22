@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -34,6 +35,7 @@ const text = {
     sceneKicker: 'ЛОКАЛЬНАЯ ДЕФОРМАЦИЯ',
     sceneTitle: 'наблюдай, как меняется малая окрестность точки',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к градиенту деформации →',
   },
   en: {
     back: '← K01',
@@ -61,6 +63,7 @@ const text = {
     sceneKicker: 'LOCAL DEFORMATION',
     sceneTitle: 'observe how a small neighborhood changes',
     interactive: 'INTERACTIVE',
+    next: 'Continue to the deformation gradient →',
   },
 } as const
 
@@ -68,7 +71,7 @@ function fmt(v: number) {
   return v.toFixed(2)
 }
 
-export function LocalNeighborhood({ notation, language, onBack }: Props) {
+export function LocalNeighborhood({ notation, language, onBack, onNext }: Props) {
   const copy = text[language]
   const [stretchX, setStretchX] = useState(1.25)
   const [stretchY, setStretchY] = useState(0.90)
@@ -150,6 +153,8 @@ export function LocalNeighborhood({ notation, language, onBack }: Props) {
           <div className="definition-label">{copy.preview}</div>
           <p>{copy.previewText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
