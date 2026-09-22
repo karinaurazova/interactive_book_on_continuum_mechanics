@@ -12,9 +12,9 @@ const text = {
   ru: {
     back: '← K05',
     title: 'Тензоры Коши–Грина',
-    lead: 'Градиент деформации F содержит и собственно изменение длин и углов, и жёсткий поворот. Тензоры Коши–Грина позволяют перейти к величинам, которые описывают изменение метрических свойств без прямой зависимости от жёсткого вращения.',
+    lead: 'Градиент деформации F содержит изменение длин и углов вместе с ориентацией. Тензоры Коши–Грина кодируют метрическое изменение: C в материальном описании, B — в пространственном.',
     key: 'КЛЮЧЕВАЯ МЫСЛЬ',
-    keyText: 'Правый тензор Коши–Грина C = FᵀF действует в материальном описании, а левый B = FFᵀ — в текущем. Они имеют одинаковые положительные собственные значения λᵢ².',
+    keyText: 'Правый тензор Коши–Грина C = FᵀF относится к материальному описанию, а левый B = FFᵀ — к текущему. Для невырожденной F они положительно определены и имеют одинаковые собственные значения λᵢ².',
     right: 'Правый тензор Коши–Грина',
     rightText: 'C измеряет изменение квадратов длин материальных направлений: |dx|² = dX · C dX.',
     left: 'Левый тензор Коши–Грина',
@@ -45,9 +45,9 @@ const text = {
   en: {
     back: '← K05',
     title: 'Cauchy–Green tensors',
-    lead: 'The deformation gradient F contains both changes of lengths and angles and rigid rotation. The Cauchy–Green tensors provide measures of metric change without direct dependence on rigid-body rotation.',
+    lead: 'The deformation gradient F combines changes of lengths and angles with orientation. The Cauchy–Green tensors encode metric change: C in the material description and B in the spatial description.',
     key: 'KEY IDEA',
-    keyText: 'The right Cauchy–Green tensor C = FᵀF acts in the material description, while the left tensor B = FFᵀ acts in the current description. They share the same positive eigenvalues λᵢ².',
+    keyText: 'The right Cauchy–Green tensor C = FᵀF belongs to the material description, while B = FFᵀ belongs to the current description. For nonsingular F they are positive definite and share the eigenvalues λᵢ².',
     right: 'Right Cauchy–Green tensor',
     rightText: 'C measures changes of squared lengths of material directions: |dx|² = dX · C dX.',
     left: 'Left Cauchy–Green tensor',
@@ -204,7 +204,7 @@ export function CauchyGreenTensors({ notation, language, onBack, onNext }: Props
             <label><span>{copy.rotation} <strong>{rotationDeg}°</strong></span><input type="range" min="-90" max="90" step="1" value={rotationDeg} onChange={e=>setRotationDeg(Number(e.target.value))}/></label>
             <label><span>{copy.stretchX} <strong>{fmt(stretchX)}</strong></span><input type="range" min="0.55" max="1.65" step="0.01" value={stretchX} onChange={e=>setStretchX(Number(e.target.value))}/></label>
             <label><span>{copy.stretchY} <strong>{fmt(stretchY)}</strong></span><input type="range" min="0.55" max="1.65" step="0.01" value={stretchY} onChange={e=>setStretchY(Number(e.target.value))}/></label>
-            <label><span>{copy.shear} <strong>{fmt(shear)}</strong></span><input type="range" min="-0.55" max="0.55" step="0.01" value={shear} onChange={e=>setShear(Number(e.target.value))}/></label>
+            <label><span>{copy.shear} <strong>{fmt(shear)}</strong></span><input type="range" min="-0.45" max="0.45" step="0.01" value={shear} onChange={e=>setShear(Number(e.target.value))}/></label>
             <label><span>{copy.direction} <strong>{directionDeg}°</strong></span><input type="range" min="-180" max="180" step="1" value={directionDeg} onChange={e=>setDirectionDeg(Number(e.target.value))}/></label>
           </div>
 
