@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -42,6 +43,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В микрополярных и Cosserat-средах существуют дополнительные rotational degrees of freedom и couple stresses. Тогда баланс момента содержит дополнительные члены, а силовой тензор напряжений не обязан быть симметричным.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к балансу энергии →',
   },
   en: {
     back:'← B02',
@@ -76,6 +78,7 @@ const text = {
     research:'Research note',
     researchText:'Micropolar and Cosserat media introduce rotational degrees of freedom and couple stresses. Angular momentum balance then contains additional terms, and the force-stress tensor need not be symmetric.',
     interactive:'INTERACTIVE',
+    next:'Continue to energy balance →',
   }
 } as const
 
@@ -83,7 +86,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function AngularMomentumLaw({notation,language,onBack}:Props){
+export function AngularMomentumLaw({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [s12,setS12]=useState(.55)
   const [s21,setS21]=useState(.35)
@@ -148,6 +151,8 @@ export function AngularMomentumLaw({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
