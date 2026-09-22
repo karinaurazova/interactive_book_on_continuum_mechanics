@@ -125,8 +125,7 @@ export function PolarDecomposition({notation,language,onBack}:Props) {
     A[1][0]*p[0]+A[1][1]*p[1],
   ] as [number,number]
 
-  const mapRU=(p:[number,number],col:number)=>[col+12*p[0],50-12*p[1]]
-  const mapVR=(p:[number,number],col:number)=>[col+12*p[0],50-12*p[1]]
+  const mapStage=(p:[number,number],col:number,baseY:number)=>[col+10*p[0],baseY-10*p[1]]
   const poly=(pts:[number,number][],mapper:(p:[number,number])=>number[])=>pts.map(p=>mapper(p).join(',')).join(' ')
 
   const sqU=square.map(p=>apply(U,p))
@@ -176,25 +175,27 @@ export function PolarDecomposition({notation,language,onBack}:Props) {
             <div className="live-badge">{copy.interactive}</div>
           </div>
 
-          <svg className="polar-scene" viewBox="0 0 100 78" role="img">
-            <rect x="4" y="5" width="92" height="68" rx="9" fill="#111318"/>
-            <text x="7" y="13" fill="#8E96A3" fontSize="2.8">{copy.pathRU}</text>
-            <text x="7" y="43" fill="#8E96A3" fontSize="2.8">{copy.pathVR}</text>
+          <svg className="polar-scene" viewBox="0 0 100 94" role="img">
+            <rect x="4" y="4" width="92" height="86" rx="9" fill="#111318"/>
 
-            <polygon points={poly(square,p=>mapRU(p,12))} fill="rgba(244,242,236,.04)" stroke="#69717C" strokeWidth=".65"/>
-            <polygon points={poly(sqU,p=>mapRU(p,40))} fill="rgba(169,227,210,.08)" stroke="#A9E3D2" strokeWidth=".8"/>
-            <polygon points={poly(sqF,p=>mapRU(p,71))} fill="rgba(40,100,255,.10)" stroke="#2864FF" strokeWidth=".9"/>
+            <text x="7" y="11" fill="#8E96A3" fontSize="2.8">{copy.pathRU}</text>
+            <text x="7" y="52" fill="#8E96A3" fontSize="2.8">{copy.pathVR}</text>
 
-            <polygon points={poly(square,p=>mapVR(p,12))} fill="rgba(244,242,236,.04)" stroke="#69717C" strokeWidth=".65" transform="translate(0 25)"/>
-            <polygon points={poly(sqR,p=>mapVR(p,40))} fill="rgba(221,122,43,.08)" stroke="#DD7A2B" strokeWidth=".8" transform="translate(0 25)"/>
-            <polygon points={poly(sqVAfterR,p=>mapVR(p,71))} fill="rgba(40,100,255,.10)" stroke="#2864FF" strokeWidth=".9" transform="translate(0 25)"/>
+            <text x="16" y="18" fill="#F4F2EC" fontSize="2.4">I</text>
+            <text x="45" y="18" fill="#A9E3D2" fontSize="2.4">U</text>
+            <text x="75" y="18" fill="#2864FF" fontSize="2.4">RU</text>
 
-            <text x="18" y="19" fill="#F4F2EC" fontSize="2.4">I</text>
-            <text x="46" y="19" fill="#A9E3D2" fontSize="2.4">U</text>
-            <text x="77" y="19" fill="#2864FF" fontSize="2.4">RU</text>
-            <text x="18" y="49" fill="#F4F2EC" fontSize="2.4">I</text>
-            <text x="46" y="49" fill="#DD7A2B" fontSize="2.4">R</text>
-            <text x="77" y="49" fill="#2864FF" fontSize="2.4">VR</text>
+            <polygon points={poly(square,p=>mapStage(p,12,39))} fill="rgba(244,242,236,.04)" stroke="#69717C" strokeWidth=".65"/>
+            <polygon points={poly(sqU,p=>mapStage(p,41,39))} fill="rgba(169,227,210,.08)" stroke="#A9E3D2" strokeWidth=".8"/>
+            <polygon points={poly(sqF,p=>mapStage(p,71,39))} fill="rgba(40,100,255,.10)" stroke="#2864FF" strokeWidth=".9"/>
+
+            <text x="16" y="59" fill="#F4F2EC" fontSize="2.4">I</text>
+            <text x="45" y="59" fill="#DD7A2B" fontSize="2.4">R</text>
+            <text x="75" y="59" fill="#2864FF" fontSize="2.4">VR</text>
+
+            <polygon points={poly(square,p=>mapStage(p,12,82))} fill="rgba(244,242,236,.04)" stroke="#69717C" strokeWidth=".65"/>
+            <polygon points={poly(sqR,p=>mapStage(p,41,82))} fill="rgba(221,122,43,.08)" stroke="#DD7A2B" strokeWidth=".8"/>
+            <polygon points={poly(sqVAfterR,p=>mapStage(p,71,82))} fill="rgba(40,100,255,.10)" stroke="#2864FF" strokeWidth=".9"/>
           </svg>
 
           <div className="polar-matrix-grid">
