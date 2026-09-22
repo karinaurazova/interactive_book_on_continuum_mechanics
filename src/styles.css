@@ -1861,23 +1861,53 @@ input[type="range"] {
   }
 }
 
-/* Long-title modules: keep desktop headings inside the copy column. */
-@media (min-width: 1051px) {
-  .module-view-wide-title {
-    grid-template-columns: minmax(360px, 0.95fr) minmax(520px, 1.45fr);
-    gap: clamp(28px, 3.6vw, 54px);
-  }
 
-  .module-view-wide-title .lesson-copy {
-    min-width: 0;
+
+/* M13–M14 need more horizontal room than ordinary lesson modules.
+   On common laptop/desktop widths, stack copy above the interactive scene
+   instead of allowing the title column to collide with the visualization. */
+.module-view-wide-title .lesson-copy {
+  min-width: 0;
+}
+
+.module-view-wide-title h1 {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (min-width: 1450px) {
+  .module-view-wide-title {
+    grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.48fr);
+    gap: clamp(30px, 4vw, 60px);
   }
 
   .module-view-wide-title h1 {
-    font-size: clamp(2.35rem, 3.45vw, 4.15rem);
+    font-size: clamp(2.5rem, 3.6vw, 4.35rem);
     line-height: 0.98;
     letter-spacing: -0.045em;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    hyphens: auto;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1449px) {
+  .module-view-wide-title {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .module-view-wide-title .lesson-copy {
+    position: static;
+    top: auto;
+    max-width: 900px;
+  }
+
+  .module-view-wide-title h1 {
+    font-size: clamp(2.35rem, 5vw, 4.4rem);
+    line-height: 0.98;
+  }
+
+  .module-view-wide-title .scene-column {
+    width: 100%;
+    min-width: 0;
   }
 }
