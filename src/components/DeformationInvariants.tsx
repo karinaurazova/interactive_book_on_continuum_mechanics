@@ -19,8 +19,8 @@ const text = {
     invariants:'Три главных инварианта C',
     invariantsText:'Для трёхмерной задачи I₁ = tr C, I₂ = 1/2[(tr C)² − tr(C²)], I₃ = det C = J².',
     isotropic:'Изотропная гиперупругость',
-    isotropicText:'Объективную изотропную энергию можно записать как Ψ = Ψ(I₁, I₂, J). Это фундамент для Neo-Hookean, Mooney–Rivlin и многих других моделей.',
-    sceneKicker:'OBJECTIVITY CHECK',
+    isotropicText:'Объективную изотропную энергию можно записать как Ψ = Ψ(I₁, I₂, J). Это фундамент для модели Нео–Гука (Neo-Hookean), Муни–Ривлина (Mooney–Rivlin) и многих других моделей.',
+    sceneKicker:'ПРОВЕРКА ОБЪЕКТИВНОСТИ',
     sceneTitle:'меняй растяжения и жёсткий поворот — инварианты должны сохраняться',
     l1:'λ₁',
     l2:'λ₂',
@@ -35,7 +35,7 @@ const text = {
     checkpointText:'Если Ψ построена из объективных инвариантов C, то нет: жёсткий поворот меняет F, но не меняет C и его инварианты.',
     conclusion:'ВЫВОД',
     conclusionTitle:'Изотропную гиперупругость естественно строить на инвариантах.',
-    conclusionText:'Следующий шаг — разобрать конкретные модели: Neo-Hookean и Mooney–Rivlin и увидеть, что именно добавляет зависимость от I₂.',
+    conclusionText:'Следующий шаг — разобрать конкретные модели: Нео–Гука и Муни–Ривлина и увидеть, что именно добавляет зависимость от I₂.',
     deepen:'Углубиться',
     deepenText:'Для спектрального разложения C собственные значения равны λ₁², λ₂², λ₃², поэтому I₁, I₂ и I₃ можно выражать напрямую через главные растяжения.',
     research:'Исследовательское замечание',
@@ -44,7 +44,7 @@ const text = {
     warningTitle:'Объективность и изотропия — не одно и то же.',
     warningText:'Объективность относится к смене наблюдателя, а изотропия — к симметрии самого материала. Анизотропная модель тоже обязана быть объективной.',
     back:'← D02',
-    next:'D04 → Neo-Hookean vs Mooney–Rivlin',
+    next:'D04 → Нео–Гук и Муни–Ривлин',
     interactive:'ИНТЕРАКТИВНО',
   },
   en: {
@@ -56,7 +56,7 @@ const text = {
     invariantsText:'In three dimensions, I₁ = tr C, I₂ = 1/2[(tr C)² − tr(C²)], and I₃ = det C = J².',
     isotropic:'Isotropic hyperelasticity',
     isotropicText:'An objective isotropic energy can be written as Ψ = Ψ(I₁, I₂, J). This is the basis of Neo-Hookean, Mooney–Rivlin, and many other models.',
-    sceneKicker:'OBJECTIVITY CHECK',
+    sceneKicker:'ПРОВЕРКА ОБЪЕКТИВНОСТИ',
     sceneTitle:'vary stretches and rigid rotation — the invariants should stay unchanged',
     l1:'λ₁',
     l2:'λ₂',
@@ -80,7 +80,7 @@ const text = {
     warningTitle:'Objectivity and isotropy are not the same thing.',
     warningText:'Objectivity concerns observer changes; isotropy concerns material symmetry. An anisotropic constitutive law must still be objective.',
     back:'← D02',
-    next:'D04 → Neo-Hookean vs Mooney–Rivlin',
+    next:'D04 → Нео–Гук и Муни–Ривлин',
     interactive:'INTERACTIVE',
   }
 } as const
@@ -169,7 +169,7 @@ export function DeformationInvariants({notation,language,onBack,onNext}:Props){
 
         <ApplicationLinks language={language} items={[
           {ru:'Изотропные эластомеры',en:'Isotropic elastomers'},
-          {ru:'Нелинейный FEM',en:'Nonlinear FEM'},
+          {ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},
           {ru:'Мягкие ткани',en:'Soft tissues'},
           {ru:'Армированные композиты',en:'Fiber-reinforced composites'},
         ]}/>
@@ -213,7 +213,7 @@ export function DeformationInvariants({notation,language,onBack,onNext}:Props){
           <div className="transport-metrics metrics-secondary">
             <div><span>{copy.delta}</span><strong>{data.delta.toExponential(2)}</strong></div>
             <div><span>{copy.psi}</span><strong>{fmt(data.psi)}</strong></div>
-            <div><span>C₁₂ after Q</span><strong>{fmt(data.rotated.C[0][1])}</strong></div>
+            <div><span>{language==='ru'?'C₁₂ после Q':'C₁₂ after Q'}</span><strong>{fmt(data.rotated.C[0][1])}</strong></div>
           </div>
         </div>
 
