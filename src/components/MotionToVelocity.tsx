@@ -104,7 +104,7 @@ export function MotionToVelocity({notation,language}:Props){
   const pathPoints=path.map(q=>map(q).join(',')).join(' ')
 
   const notationLine =
-    notation==='Index' ? 'vᵢ(X,t) = ∂χᵢ(X,t)/∂t |ₓ' :
+    notation==='Index' ? 'vᵢ(X,t) = (∂χᵢ/∂t) at fixed X' :
     notation==='Matrix' ? 'v(X,t) = ∂x(X,t)/∂t' :
     notation==='Python' ? 'v = dchi_dt(X, t)' :
     '𝐯(𝐗,t) = ∂χ(𝐗,t)/∂t |𝐗'
