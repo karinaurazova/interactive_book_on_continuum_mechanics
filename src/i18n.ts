@@ -3,10 +3,10 @@ export type NotationMode = 'Tensor' | 'Index' | 'Matrix' | 'Python'
 
 export const ui = {
   ru: {
-    eyebrow: 'МЕХАНИКА СПЛОШНЫХ СРЕД / v0.1',
+    eyebrow: 'МЕХАНИКА СПЛОШНЫХ СРЕД / v0.2',
     brand: 'Интерактивный учебник',
     pilot: 'ПИЛОТНАЯ ГЛАВА',
-    progress: 'Прогресс v0.1',
+    progress: 'Прогресс главы',
     language: 'Язык',
     notationLabel: 'Форма записи',
     notationNames: {
@@ -34,10 +34,10 @@ export const ui = {
     },
   },
   en: {
-    eyebrow: 'CONTINUUM MECHANICS / v0.1',
+    eyebrow: 'CONTINUUM MECHANICS / v0.2',
     brand: 'Interactive Textbook',
     pilot: 'PILOT CHAPTER',
-    progress: 'v0.1 progress',
+    progress: 'Chapter progress',
     language: 'Language',
     notationLabel: 'Notation',
     notationNames: {
