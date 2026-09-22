@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'isotropic' | 'anisotropic'
@@ -46,6 +47,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В мягких тканях анизотропия часто связана с коллагеновыми волокнами и их распределением по ориентациям. Поэтому вместо одного направления a₀ могут использоваться несколько семейств волокон или распределённые ориентационные модели.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к линейной упругости →',
   },
   en: {
     back:'← C02',
@@ -82,12 +84,13 @@ const text = {
     research:'Research note',
     researchText:'Soft-tissue anisotropy is often associated with collagen fibers and their orientation distribution. Models may use several fiber families or distributed orientation descriptions instead of a single direction a₀.',
     interactive:'INTERACTIVE',
+    next:'Continue to linear elasticity →',
   }
 } as const
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function MaterialSymmetry({notation,language,onBack}:Props){
+export function MaterialSymmetry({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('anisotropic')
   const [strain,setStrain]=useState(.25)
@@ -150,6 +153,8 @@ export function MaterialSymmetry({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
