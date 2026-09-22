@@ -2825,3 +2825,16 @@ input[type="range"] {
     grid-template-columns:1fr;
   }
 }
+
+
+.transport-challenge-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
+  gap:14px;
+}
+
+@media (max-width:980px){
+  .transport-challenge-grid {
+    grid-template-columns:1fr;
+  }
+}
