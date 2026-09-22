@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
+import { DepthNote } from './DepthNote'
 
 type Props = {
   notation: NotationMode
@@ -48,6 +49,10 @@ const text = {
     conclusionText:'Следующим шагом свяжем tr D с изменением объёма и производной якобиана J.',
     interactive:'ИНТЕРАКТИВНО',
     next:'Перейти к изменению объёма →',
+    deepen:'Углубиться',
+    deepenText:'Для малого текущего вектора dx скорость изменения его квадрата длины определяется только D: d/dt(dx·dx) = 2 dx·D dx. Кососимметричная часть W в этот скалярный продукт не вносит вклад, поэтому именно D отвечает за мгновенное изменение метрики.',
+    research:'Исследовательское замечание',
+    researchText:'W зависит от наблюдателя и сам по себе не является объективной мерой вращения материала на конечном интервале времени. При построении скоростных конститутивных моделей отсюда возникает необходимость объективных тензорных производных — например, производной Яуманна или других corotational rates.',
   },
   en: {
     back:'← T04',
@@ -85,6 +90,10 @@ const text = {
     conclusionText:'Next we connect tr D with volume change and the time derivative of the Jacobian J.',
     interactive:'INTERACTIVE',
     next:'Continue to volume change →',
+    deepen:'Go deeper',
+    deepenText:'For a small current vector dx, the rate of its squared length depends only on D: d/dt(dx·dx) = 2 dx·D dx. The skew part W contributes nothing to this scalar product, which is why D controls instantaneous metric change.',
+    research:'Research note',
+    researchText:'W is observer-dependent and is not by itself an objective finite-time measure of material rotation. In rate-type constitutive models this motivates objective tensor rates, such as the Jaumann rate and other corotational rates.',
   }
 } as const
 
