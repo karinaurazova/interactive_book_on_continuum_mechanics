@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'material' | 'spatial'
@@ -46,6 +47,7 @@ const text = {
     interactive: 'ИНТЕРАКТИВНО',
     reference: 'референсная конфигурация',
     current: 'текущая конфигурация',
+    next: 'Перейти к ускорению →',
   },
   en: {
     back: '← T00',
@@ -83,6 +85,7 @@ const text = {
     interactive: 'INTERACTIVE',
     reference: 'reference configuration',
     current: 'current configuration',
+    next: 'Continue to acceleration →',
   },
 } as const
 
@@ -90,7 +93,7 @@ function fmt(v:number,d=2){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function MaterialSpatialVelocity({notation,language,onBack}:Props){
+export function MaterialSpatialVelocity({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('material')
   const [time,setTime]=useState(0.30)
@@ -157,6 +160,8 @@ export function MaterialSpatialVelocity({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
