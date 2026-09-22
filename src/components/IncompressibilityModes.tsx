@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'exact' | 'near'
@@ -44,6 +45,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В мягких тканях почти несжимаемость особенно важна из-за высокого содержания жидкости. В FEM это часто требует смешанных u–p элементов или других стабилизированных постановок, чтобы избежать объёмной блокировки.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти за пределы линейной упругости →',
   },
   en: {
     back:'← C07',
@@ -78,12 +80,13 @@ const text = {
     research:'Research note',
     researchText:'Near incompressibility is especially important in soft tissues because of their high fluid content. FEM often uses mixed u–p elements or stabilized formulations to avoid volumetric locking.',
     interactive:'INTERACTIVE',
+    next:'Continue beyond linear elasticity →',
   }
 } as const
 
 function fmt(v:number,d=4){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function IncompressibilityModes({notation,language,onBack}:Props){
+export function IncompressibilityModes({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('near')
   const [Jnear,setJnear]=useState(1.03)
@@ -152,6 +155,8 @@ export function IncompressibilityModes({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
