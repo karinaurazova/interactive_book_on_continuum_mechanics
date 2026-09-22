@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Part = 'balance' | 'kinematics' | 'constitutive' | 'initial' | 'boundary'
@@ -45,6 +46,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В нелинейной механике мягких тканей неизвестные могут включать давление несжимаемости, внутренние переменные, концентрации, поля роста и ремоделирования. Тогда постановка становится многополевой и требует согласованного выбора дополнительных уравнений и условий.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к слабой форме →',
   },
   en: {
     back:'← B07',
@@ -80,10 +82,11 @@ const text = {
     research:'Research note',
     researchText:'In nonlinear soft-tissue mechanics the unknowns may also include incompressibility pressure, internal variables, concentrations, growth fields, and remodeling fields. The problem then becomes multiphysics and requires consistent additional equations and conditions.',
     interactive:'INTERACTIVE',
+    next:'Continue to the weak form →',
   }
 } as const
 
-export function InitialBoundaryProblem({notation,language,onBack}:Props){
+export function InitialBoundaryProblem({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [parts,setParts]=useState<Record<Part,boolean>>({
     balance:true,
@@ -138,6 +141,8 @@ export function InitialBoundaryProblem({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
