@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.4.2-progressive-depth
+      - v0.5-balance-laws
   workflow_dispatch:
 
 permissions:
