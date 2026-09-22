@@ -37,6 +37,7 @@ import { VolumeRateJacobian } from '../components/VolumeRateJacobian'
 import { MaterialTransportTheorem } from '../components/MaterialTransportTheorem'
 import { ControlVolumeFlux } from '../components/ControlVolumeFlux'
 import { GeneralReynoldsTransport } from '../components/GeneralReynoldsTransport'
+import { TransportFinalChallenge } from '../components/TransportFinalChallenge'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -44,7 +45,7 @@ export type ModuleId =
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
-  | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09'
+  | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport'
 
@@ -98,7 +99,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'transport',
     title: { ru: 'Кинематика во времени и транспорт', en: 'Kinematics in time and transport' },
     shortTitle: { ru: 'Время и транспорт', en: 'Time & transport' },
-    moduleIds: ['T00', 'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08', 'T09'],
+    moduleIds: ['T00', 'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08', 'T09', 'T10'],
   },
 ]
 
@@ -140,7 +141,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'T06', chapterId: 'transport', title: { ru: 'Дивергенция скорости и изменение объёма', en: 'Velocity divergence and volume change' }, subtitle: { ru: 'J̇ = J tr D = J ∇·v', en: 'J̇ = J tr D = J ∇·v' }, render: ({notation,language,goTo}) => <VolumeRateJacobian notation={notation} language={language} onBack={() => goTo('T05')} onNext={() => goTo('T07')} /> },
   { id: 'T07', chapterId: 'transport', title: { ru: 'Транспортная теорема для материальной области', en: 'Transport theorem for a material region' }, subtitle: { ru: 'd/dt ∫Ωₜ φ dv', en: 'd/dt ∫Ωₜ φ dv' }, render: ({notation,language,goTo}) => <MaterialTransportTheorem notation={notation} language={language} onBack={() => goTo('T06')} onNext={() => goTo('T08')} /> },
   { id: 'T08', chapterId: 'transport', title: { ru: 'Контрольный объём и поток через границу', en: 'Control volume and boundary flux' }, subtitle: { ru: 'накопление + поток', en: 'accumulation + flux' }, render: ({notation,language,goTo}) => <ControlVolumeFlux notation={notation} language={language} onBack={() => goTo('T07')} onNext={() => goTo('T09')} /> },
-  { id: 'T09', chapterId: 'transport', title: { ru: 'Общая теорема Рейнольдса', en: 'General Reynolds transport theorem' }, subtitle: { ru: 'относительная скорость v−w', en: 'relative velocity v−w' }, render: ({notation,language,goTo}) => <GeneralReynoldsTransport notation={notation} language={language} onBack={() => goTo('T08')} /> },
+  { id: 'T09', chapterId: 'transport', title: { ru: 'Общая теорема Рейнольдса', en: 'General Reynolds transport theorem' }, subtitle: { ru: 'относительная скорость v−w', en: 'relative velocity v−w' }, render: ({notation,language,goTo}) => <GeneralReynoldsTransport notation={notation} language={language} onBack={() => goTo('T08')} onNext={() => goTo('T10')} /> },
+  { id: 'T10', chapterId: 'transport', title: { ru: 'Итоговая самопроверка по времени и транспорту', en: 'Final self-check on time and transport' }, subtitle: { ru: 'самостоятельные кинематические эксперименты', en: 'independent kinematic experiments' }, render: ({notation,language,goTo}) => <TransportFinalChallenge notation={notation} language={language} onBack={() => goTo('T09')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
