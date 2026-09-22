@@ -24,7 +24,7 @@ const text = {
     frequency: 'частота',
     materialPoint: 'материальная метка X',
     position: 'текущее положение x',
-    velocity: 'скорость v',
+    velocity: 'материальная скорость V',
     speed: 'модуль скорости',
     trajectory: 'траектория выбранной материальной точки',
     question: 'ВОПРОС ДЛЯ ПРОВЕРКИ',
@@ -52,7 +52,7 @@ const text = {
     frequency: 'frequency',
     materialPoint: 'material label X',
     position: 'current position x',
-    velocity: 'velocity v',
+    velocity: 'material velocity V',
     speed: 'speed',
     trajectory: 'trajectory of the selected material point',
     question: 'CHECKPOINT',
@@ -107,10 +107,10 @@ export function MotionToVelocity({notation,language,onNext}:Props){
   const pathPoints=path.map(q=>map(q).join(',')).join(' ')
 
   const notationLine =
-    notation==='Index' ? 'vᵢ(X,t) = (∂χᵢ/∂t)_X' :
-    notation==='Matrix' ? 'v(X,t) = ∂x(X,t)/∂t' :
-    notation==='Python' ? 'v = dchi_dt(X, t)' :
-    '𝐯(𝐗,t) = (∂χ(𝐗,t)/∂t)_X'
+    notation==='Index' ? 'Vᵢ(X,t) = (∂χᵢ/∂t)_X' :
+    notation==='Matrix' ? 'V(X,t) = ∂x(X,t)/∂t' :
+    notation==='Python' ? 'V = dchi_dt(X, t)' :
+    '𝐕(𝐗,t) = (∂χ(𝐗,t)/∂t)_X'
 
   return (
     <section className="module-view module-view-stacked">
@@ -155,7 +155,7 @@ export function MotionToVelocity({notation,language,onNext}:Props){
             <line x1={p[0]} y1={p[1]} x2={pv[0]} y2={pv[1]} stroke="#2864FF" strokeWidth="1.5"/>
             <circle cx={map(X)[0]} cy={map(X)[1]} r="1.2" fill="#F4F2EC" opacity=".55"/>
             <text x={p[0]+2.5} y={p[1]-2} fill="#A9E3D2" fontSize="2.7">x(t)</text>
-            <text x={pv[0]+1.5} y={pv[1]-1} fill="#2864FF" fontSize="2.7">v</text>
+            <text x={pv[0]+1.5} y={pv[1]-1} fill="#2864FF" fontSize="2.7">V</text>
             <text x="9" y="13" fill="#8E96A3" fontSize="2.7">{copy.trajectory}</text>
           </svg>
 
