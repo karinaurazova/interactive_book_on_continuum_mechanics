@@ -2953,3 +2953,20 @@ input[type="range"] {
     min-width: 0;
   }
 }
+
+
+.weak-step-switch {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  width: 100%;
+}
+
+.weak-step-switch .constitutive-mode-button {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .weak-step-switch {
+    grid-template-columns: 1fr 1fr;
+  }
+}
