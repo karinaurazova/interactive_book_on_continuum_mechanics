@@ -131,3 +131,58 @@ The symbol \(\boldsymbol\chi\) (chi) normally denotes the mapping itself, not a 
 Some texts also use other symbols such as \(\mathbf a\), \(\mathbf X_0\), \(\boldsymbol\varphi\), or \(\boldsymbol\phi\). Symbol choice is author-dependent.
 
 **Rule for students:** identify the physical role from the definition and configuration before interpreting a symbol. Do not assume that a letter has a universal meaning across textbooks.
+
+
+## Kinematics terminology / Терминология кинематики
+
+For the Russian interface and teaching text, use the following preferred terms consistently:
+
+- reference configuration — референсная конфигурация; «исходная конфигурация» may be used in introductory explanatory text when it improves readability;
+- current configuration — текущая конфигурация;
+- material coordinate / material label — материальная координата / материальная метка;
+- spatial coordinate — пространственная координата;
+- motion map — отображение движения;
+- deformation gradient — градиент деформации;
+- Jacobian — якобиан движения, \(J=\det\mathbf F\);
+- right Cauchy–Green tensor — правый тензор Коши–Грина, \(\mathbf C=\mathbf F^T\mathbf F\);
+- left Cauchy–Green tensor — левый тензор Коши–Грина, \(\mathbf B=\mathbf F\mathbf F^T\);
+- Green–Lagrange strain tensor — тензор деформации Грина–Лагранжа;
+- Euler–Almansi strain tensor — тензор деформации Эйлера–Альманси;
+- polar decomposition — полярное разложение;
+- right stretch tensor — правый тензор растяжения \(\mathbf U\);
+- left stretch tensor — левый тензор растяжения \(\mathbf V\);
+- proper rotation — собственно поворот / собственно ортогональное вращение; in introductory text «жёсткий поворот» is acceptable when \(\det\mathbf R=+1\) is clear;
+- principal stretch — главное растяжение;
+- principal direction — главное направление;
+- rigid motion — жёсткое движение;
+- simple shear — простой сдвиг.
+
+### Configuration rule
+
+Whenever two tensors belong to different configurations, the teaching text must state this explicitly rather than comparing their components directly.
+
+In particular:
+
+\[
+\mathbf C=\mathbf F^T\mathbf F
+\]
+
+belongs to the reference/material description, while
+
+\[
+\mathbf B=\mathbf F\mathbf F^T
+\]
+
+belongs to the current/spatial description.
+
+Likewise, \(\mathbf E\) (Green–Lagrange) and \(\mathbf e\) (Euler–Almansi) must not be presented as directly component-wise comparable without an appropriate mapping between configurations.
+
+### Admissibility rule
+
+For an ordinary orientation-preserving continuum deformation, use
+
+\[
+J=\det\mathbf F>0.
+\]
+
+State separately that local positivity of \(J\) does not by itself guarantee global injectivity of the motion.
