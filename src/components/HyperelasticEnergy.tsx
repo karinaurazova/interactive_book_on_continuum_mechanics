@@ -47,7 +47,6 @@ const text = {
     warningTitle:'Гиперупругость не означает линейность и не означает несжимаемость.',
     warningText:'Модель может быть сильно нелинейной и сжимаемой; несжимаемость вводится отдельно как ограничение или объёмный штраф.',
     back:'← D01',
-    next:'D03 → deformation invariants',
     next:'D03 → инварианты деформации',
     interactive:'ИНТЕРАКТИВНО',
   },
@@ -86,6 +85,7 @@ const text = {
     warningText:'A hyperelastic model may be strongly nonlinear and compressible; incompressibility is introduced separately as a constraint or volumetric penalty.',
     back:'← D01',
     interactive:'INTERACTIVE',
+    next:'D03 → deformation invariants',
   }
 } as const
 
