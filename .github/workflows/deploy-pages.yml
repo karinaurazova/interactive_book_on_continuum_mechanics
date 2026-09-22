@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.4-transport
+      - v0.4.1-hardening
   workflow_dispatch:
 
 permissions:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Kinematics sanity checks
         run: npm run test:kinematics
+
+      - name: Transport sanity checks
+        run: npm run test:transport
 
       - name: Build
         run: npm run build
