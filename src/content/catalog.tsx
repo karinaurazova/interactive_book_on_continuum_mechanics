@@ -61,6 +61,7 @@ import { IncompressibilityModes } from '../components/IncompressibilityModes'
 import { BeyondLinearElasticity } from '../components/BeyondLinearElasticity'
 import { ConstitutiveLab } from '../components/ConstitutiveLab'
 import { ConstitutiveFinalChallenge } from '../components/ConstitutiveFinalChallenge'
+import { WhyFiniteStrain } from '../components/WhyFiniteStrain'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -71,8 +72,9 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
+  | 'D00'
 
-export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling'
+export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
 type RenderContext = {
   notation: NotationMode
@@ -137,6 +139,12 @@ export const chapters: ChapterDefinition[] = [
     title: { ru: 'Конститутивные соотношения и модели материала', en: 'Constitutive relations and material models' },
     shortTitle: { ru: 'Материалы', en: 'Materials' },
     moduleIds: ['C00', 'C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C11'],
+  },
+  {
+    id: 'finite-strain-hyperelasticity',
+    title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
+    shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
+    moduleIds: ['D00'],
   },
 ]
 
@@ -203,6 +211,7 @@ export const modules: ModuleDefinition[] = [
   { id: 'C09', chapterId: 'constitutive-modeling', title: { ru: 'Что ломается за пределами линейной упругости?', en: 'What breaks down beyond linear elasticity?' }, subtitle: { ru: 'большие деформации · память · повреждение · анизотропия', en: 'large strain · memory · damage · anisotropy' }, render: ({notation,language,goTo}) => <BeyondLinearElasticity notation={notation} language={language} onBack={() => goTo('C08')} onNext={() => goTo('C10')} /> },
   { id: 'C10', chapterId: 'constitutive-modeling', title: { ru: 'Конститутивная лаборатория', en: 'Constitutive laboratory' }, subtitle: { ru: 'сравнение редуцированных моделей', en: 'compare reduced models' }, render: ({notation,language,goTo}) => <ConstitutiveLab notation={notation} language={language} onBack={() => goTo('C09')} onNext={() => goTo('C11')} /> },
   { id: 'C11', chapterId: 'constitutive-modeling', title: { ru: 'Итоговая самопроверка по конститутивному моделированию', en: 'Final self-check on constitutive modeling' }, subtitle: { ru: 'параметры · несжимаемость · диссипация · анизотропия', en: 'parameters · incompressibility · dissipation · anisotropy' }, render: ({notation,language,goTo}) => <ConstitutiveFinalChallenge notation={notation} language={language} onBack={() => goTo('C10')} /> },
+  { id: 'D00', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Почему нужны конечные деформации?', en: 'Why do we need finite-strain mechanics?' }, subtitle: { ru: 'геометрическая нелинейность и объективные меры', en: 'geometric nonlinearity and objective measures' }, render: ({notation,language}) => <WhyFiniteStrain notation={notation} language={language} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
