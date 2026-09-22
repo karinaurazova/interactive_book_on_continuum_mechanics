@@ -3,7 +3,7 @@ export type NotationMode = 'Tensor' | 'Index' | 'Matrix' | 'Python'
 
 export const ui = {
   ru: {
-    eyebrow: 'МЕХАНИКА СПЛОШНЫХ СРЕД / v0.3.1',
+    eyebrow: 'МЕХАНИКА СПЛОШНЫХ СРЕД / v0.4',
     brand: 'Интерактивный учебник',
     pilot: 'ПИЛОТНАЯ ГЛАВА',
     progress: 'Прогресс главы',
@@ -17,7 +17,7 @@ export const ui = {
     },
   },
   en: {
-    eyebrow: 'CONTINUUM MECHANICS / v0.3.1',
+    eyebrow: 'CONTINUUM MECHANICS / v0.4',
     brand: 'Interactive Textbook',
     pilot: 'PILOT CHAPTER',
     progress: 'Chapter progress',
