@@ -179,11 +179,13 @@ export function ControlVolumeFlux({notation,language,onBack,onNext}:Props){
             <rect x="5" y="6" width="90" height="54" rx="9" fill="#111318"/>
             <rect x="18" y="20" width="64" height="28" rx="3" fill="rgba(40,100,255,.08)" stroke="#2864FF" strokeWidth=".85"/>
             <text x="42" y="17" fill="#8E96A3" fontSize="2.7">{copy.volume}</text>
-            <text x="10" y="34" fill="#A9E3D2" fontSize="2.6">{copy.inlet}</text>
-            <text x="84" y="34" fill="#A9E3D2" fontSize="2.6">{copy.outlet}</text>
+            <rect x="8" y="21" width="13" height="5.4" rx="2" fill="rgba(17,19,24,.90)"/>
+            <rect x="78.5" y="21" width="14" height="5.4" rx="2" fill="rgba(17,19,24,.90)"/>
+            <text x="10" y="24.8" fill="#A9E3D2" fontSize="2.4">{copy.inlet}</text>
+            <text x="80.5" y="24.8" fill="#A9E3D2" fontSize="2.4">{copy.outlet}</text>
 
-            <line x1="10" y1="34" x2="18" y2="34" stroke="#A9E3D2" strokeWidth="1.2"/>
-            <line x1="82" y1="34" x2="90" y2="34" stroke="#A9E3D2" strokeWidth="1.2"/>
+            <line x1="10" y1="35.5" x2="18" y2="35.5" stroke="#A9E3D2" strokeWidth="1.2"/>
+            <line x1="82" y1="35.5" x2="90" y2="35.5" stroke="#A9E3D2" strokeWidth="1.2"/>
 
             {particles.map((x,i)=>(
               <circle key={i} cx={xMap(x)} cy={28+(i%3)*6} r="1.15" fill={x>=0&&x<=1?"#F4F2EC":"#69717C"} />
