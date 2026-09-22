@@ -7,6 +7,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack?: () => void
+  onNext?: () => void
 }
 
 const text = {
@@ -43,6 +44,7 @@ const text = {
     warningTitle:'Объективность и изотропия — не одно и то же.',
     warningText:'Объективность относится к смене наблюдателя, а изотропия — к симметрии самого материала. Анизотропная модель тоже обязана быть объективной.',
     back:'← D02',
+    next:'D04 → Neo-Hookean vs Mooney–Rivlin',
     interactive:'ИНТЕРАКТИВНО',
   },
   en: {
@@ -78,6 +80,7 @@ const text = {
     warningTitle:'Objectivity and isotropy are not the same thing.',
     warningText:'Objectivity concerns observer changes; isotropy concerns material symmetry. An anisotropic constitutive law must still be objective.',
     back:'← D02',
+    next:'D04 → Neo-Hookean vs Mooney–Rivlin',
     interactive:'INTERACTIVE',
   }
 } as const
@@ -96,7 +99,7 @@ function invariants2D(F:number[][]){
   return {C,I1,I2,J}
 }
 
-export function DeformationInvariants({notation,language,onBack}:Props){
+export function DeformationInvariants({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [l1,setL1]=useState(1.25)
   const [l2,setL2]=useState(.85)
@@ -171,7 +174,7 @@ export function DeformationInvariants({notation,language,onBack}:Props){
           {ru:'Армированные композиты',en:'Fiber-reinforced composites'},
         ]}/>
 
-        {onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}
+        <div className="mini-toggle-row" style={{marginTop:20}}>{onBack && <button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext && <button className="primary-button" onClick={onNext}>{copy.next}</button>}</div>
       </div>
 
       <div className="scene-column">
