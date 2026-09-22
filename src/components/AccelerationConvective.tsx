@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -39,6 +40,7 @@ const text = {
     conclusionTitle:'Материальная производная соединяет два описания движения.',
     conclusionText:'Следующий модуль введёт оператор D/Dt как общий способ дифференцировать любое поле вдоль движения частицы.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к материальной производной →',
   },
   en: {
     back:'← T01',
@@ -71,6 +73,7 @@ const text = {
     conclusionTitle:'The material derivative connects the two descriptions of motion.',
     conclusionText:'The next module introduces D/Dt as the general operator for differentiating any field along particle motion.',
     interactive:'INTERACTIVE',
+    next:'Continue to the material derivative →',
   }
 } as const
 
@@ -78,7 +81,7 @@ function fmt(v:number,d=3){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function AccelerationConvective({notation,language,onBack}:Props){
+export function AccelerationConvective({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.28)
   const [X,setX]=useState(0.32)
@@ -155,6 +158,8 @@ export function AccelerationConvective({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
