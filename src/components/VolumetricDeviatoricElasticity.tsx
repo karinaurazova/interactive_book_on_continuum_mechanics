@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -44,6 +45,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В моделях мягких тканей часто вводят отдельную объёмную штрафную энергию и изохорную часть. Это удобно численно, но требует аккуратного выбора меры деформации и не должно автоматически переноситься на любые анизотропные модели.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к несжимаемости →',
   },
   en: {
     back:'← C06',
@@ -80,12 +82,13 @@ const text = {
     research:'Research note',
     researchText:'Soft-tissue models often use a separate volumetric penalty energy and an isochoric part. This is numerically convenient but requires careful strain measures and should not be transferred blindly to all anisotropic models.',
     interactive:'INTERACTIVE',
+    next:'Continue to incompressibility →',
   }
 } as const
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function VolumetricDeviatoricElasticity({notation,language,onBack}:Props){
+export function VolumetricDeviatoricElasticity({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [K,setK]=useState(3.0)
   const [G,setG]=useState(1.0)
@@ -141,6 +144,8 @@ export function VolumetricDeviatoricElasticity({notation,language,onBack}:Props)
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
