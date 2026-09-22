@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'fixed' | 'material' | 'moving'
@@ -28,7 +29,7 @@ const text = {
     materialSpeed:'скорость вещества v',
     boundarySpeed:'скорость границы w',
     relativeSpeed:'относительная скорость v−w',
-    fieldLevel:'уровень поля φ',
+    fieldLevel:'градиент поля c',
     accumulation:'накопление внутри',
     relativeFlux:'относительный поток',
     total:'итоговая скорость изменения',
@@ -42,6 +43,7 @@ const text = {
     conclusionTitle:'Фиксированная, движущаяся и материальная области объединяются одной формулой.',
     conclusionText:'После этого кинематический аппарат готов к переходу к законам сохранения.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к итоговой самопроверке →',
   },
   en: {
     back:'← T08',
@@ -61,7 +63,7 @@ const text = {
     materialSpeed:'material speed v',
     boundarySpeed:'boundary speed w',
     relativeSpeed:'relative speed v−w',
-    fieldLevel:'field level φ',
+    fieldLevel:'field gradient c',
     accumulation:'accumulation inside',
     relativeFlux:'relative flux',
     total:'total rate',
@@ -75,6 +77,7 @@ const text = {
     conclusionTitle:'Fixed, moving, and material regions are unified by one formula.',
     conclusionText:'The kinematic framework is now ready for the conservation laws.',
     interactive:'INTERACTIVE',
+    next:'Continue to the final self-check →',
   }
 } as const
 
@@ -82,7 +85,7 @@ function fmt(v:number,d=3){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function GeneralReynoldsTransport({notation,language,onBack}:Props){
+export function GeneralReynoldsTransport({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('moving')
   const [v,setV]=useState(0.75)
@@ -99,11 +102,11 @@ export function GeneralReynoldsTransport({notation,language,onBack}:Props){
     const accumulation=q
     // equal-length interval: net relative surface flux cancels for uniform phi.
     // To visualize a nonzero net term, use phi(x)=phi + c x with c fixed.
-    const c=0.35
+    const c=phi
     const netRelativeFlux=relative*c
     const total=accumulation+netRelativeFlux
     return {q,c,accumulation,netRelativeFlux,total}
-  },[relative])
+  },[relative,phi])
 
   const notationLine =
     notation==='Index'
@@ -147,6 +150,8 @@ export function GeneralReynoldsTransport({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
