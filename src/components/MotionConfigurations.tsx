@@ -4,6 +4,7 @@ import type { Language, NotationMode } from '../i18n'
 type Props = {
   notation: NotationMode
   language: Language
+  onNext: () => void
 }
 
 const text = {
@@ -30,6 +31,7 @@ const text = {
     sceneKicker: 'ДВИЖЕНИЕ ТЕЛА',
     sceneTitle: 'сравни исходную и текущую конфигурации',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к координатам X и x →',
   },
   en: {
     title: 'Motion and configurations',
@@ -54,6 +56,7 @@ const text = {
     sceneKicker: 'BODY MOTION',
     sceneTitle: 'compare reference and current configurations',
     interactive: 'INTERACTIVE',
+    next: 'Continue to X and x coordinates →',
   },
 } as const
 
@@ -61,7 +64,7 @@ function fmt(v: number) {
   return v.toFixed(2)
 }
 
-export function MotionConfigurations({ notation, language }: Props) {
+export function MotionConfigurations({ notation, language, onNext }: Props) {
   const copy = text[language]
   const [time, setTime] = useState(0.65)
   const [stretch, setStretch] = useState(1.15)
@@ -130,6 +133,8 @@ export function MotionConfigurations({ notation, language }: Props) {
           <div className="formula">{notationLine}</div>
           <p>{copy.mappingText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
