@@ -1992,3 +1992,92 @@ input[type="range"] {
     grid-template-columns: 1fr;
   }
 }
+
+
+.kinematics-warning {
+  margin-top: 24px;
+  min-height: auto;
+}
+
+.kinematics-warning p {
+  margin: 8px 0 0;
+  line-height: 1.5;
+  color: rgba(17,19,24,0.72);
+}
+
+.gradient-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.55fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.gradient-scene {
+  width: 100%;
+  min-height: 360px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+.gradient-matrix-card {
+  padding: 14px;
+  border-radius: 13px;
+  background: rgba(244,242,236,0.045);
+  border: 1px solid rgba(244,242,236,0.08);
+  align-self: stretch;
+}
+
+.gradient-matrix-card > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--mint);
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 1.1rem;
+}
+
+.gradient-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(60px,1fr));
+  gap: 8px;
+}
+
+.gradient-matrix strong {
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(244,242,236,0.055);
+}
+
+.gradient-column-note {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gradient-column-note > div {
+  padding: 10px;
+  border-radius: 9px;
+  background: rgba(169,227,210,0.07);
+}
+
+.gradient-column-note span,
+.gradient-column-note strong {
+  display: block;
+}
+
+.gradient-column-note span {
+  color: rgba(244,242,236,0.48);
+  font-size: 0.68rem;
+  margin-bottom: 4px;
+}
+
+.gradient-column-note strong {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+  .gradient-layout {
+    grid-template-columns: 1fr;
+  }
+}
