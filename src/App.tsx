@@ -53,7 +53,7 @@ export default function App() {
               </button>
             ))}
           </div>
-          <div className="version">v0.6.0</div>
+          <div className="version">v0.6.1</div>
         </div>
       </header>
 
