@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -44,6 +45,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В вычислительной механике именно эта локальная форма лежит в основе сильной постановки. В методе конечных элементов обычно переходят к слабой форме, где производные напряжений переносятся на тестовые функции, а естественные граничные условия входят через поверхностный член.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к балансу момента импульса →',
   },
   en: {
     back:'← B01',
@@ -80,6 +82,7 @@ const text = {
     research:'Research note',
     researchText:'In computational mechanics this local equation defines the strong form. Finite-element methods usually pass to a weak form, transferring derivatives from stresses to test functions and introducing natural boundary conditions through the surface term.',
     interactive:'INTERACTIVE',
+    next:'Continue to angular momentum balance →',
   }
 } as const
 
@@ -87,7 +90,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function LinearMomentumBalance({notation,language,onBack}:Props){
+export function LinearMomentumBalance({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [rho,setRho]=useState(1.00)
   const [sigmaL,setSigmaL]=useState(0.30)
@@ -153,6 +156,8 @@ export function LinearMomentumBalance({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
