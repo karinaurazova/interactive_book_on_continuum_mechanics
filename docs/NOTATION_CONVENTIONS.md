@@ -88,3 +88,46 @@ Preferred Russian terms:
 - deviatoric stress — девиаторная часть напряжения
 
 English terms may be shown in parentheses at first appearance when useful.
+
+
+## Kinematics: reference and current coordinates
+
+The textbook uses the canonical pair
+
+\[
+\mathbf X \longrightarrow \mathbf x=\boldsymbol\chi(\mathbf X,t),
+\]
+
+where:
+
+- \(\mathbf X\) labels a material point in the reference configuration;
+- \(\mathbf x\) is the current spatial position of that same material point;
+- \(\boldsymbol\chi\) is the motion map.
+
+### Equivalent notation in the literature
+
+Different authors may use different symbols for the same physical roles.
+
+Examples include:
+
+\[
+\mathbf X \mapsto \mathbf x,
+\qquad
+\boldsymbol\xi \mapsto \mathbf x,
+\]
+
+with the motion written, for example, as
+
+\[
+\mathbf x=\boldsymbol\chi(\mathbf X,t)
+\quad\text{or}\quad
+\mathbf x=\boldsymbol\chi(\boldsymbol\xi,t).
+\]
+
+The symbol \(\boldsymbol\xi\) (xi) may therefore play the same role as \(\mathbf X\): a material/reference label.
+
+The symbol \(\boldsymbol\chi\) (chi) normally denotes the mapping itself, not a third coordinate system.
+
+Some texts also use other symbols such as \(\mathbf a\), \(\mathbf X_0\), \(\boldsymbol\varphi\), or \(\boldsymbol\phi\). Symbol choice is author-dependent.
+
+**Rule for students:** identify the physical role from the definition and configuration before interpreting a symbol. Do not assume that a letter has a universal meaning across textbooks.
