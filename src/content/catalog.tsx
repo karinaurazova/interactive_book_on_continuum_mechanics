@@ -29,6 +29,7 @@ import { KinematicsComputationalLab } from '../components/KinematicsComputationa
 import { KinematicsFinalChallenge } from '../components/KinematicsFinalChallenge'
 import { MotionToVelocity } from '../components/MotionToVelocity'
 import { MaterialSpatialVelocity } from '../components/MaterialSpatialVelocity'
+import { AccelerationConvective } from '../components/AccelerationConvective'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -36,7 +37,7 @@ export type ModuleId =
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
-  | 'T00' | 'T01'
+  | 'T00' | 'T01' | 'T02'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport'
 
@@ -90,7 +91,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'transport',
     title: { ru: 'Кинематика во времени и транспорт', en: 'Kinematics in time and transport' },
     shortTitle: { ru: 'Время и транспорт', en: 'Time & transport' },
-    moduleIds: ['T00', 'T01'],
+    moduleIds: ['T00', 'T01', 'T02'],
   },
 ]
 
@@ -124,7 +125,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'K11', chapterId: 'kinematics', title: { ru: 'Вычислительная лаборатория кинематики', en: 'Computational kinematics laboratory' }, subtitle: { ru: 'F → J, C, B, E, e, U, V, R, λᵢ', en: 'F → J, C, B, E, e, U, V, R, λᵢ' }, render: ({notation,language,goTo}) => <KinematicsComputationalLab notation={notation} language={language} onBack={() => goTo('K10')} onNext={() => goTo('K12')} /> },
   { id: 'K12', chapterId: 'kinematics', title: { ru: 'Итоговая самопроверка по кинематике', en: 'Final kinematics self-check' }, subtitle: { ru: 'Самостоятельное исследование F', en: 'Independent investigation of F' }, render: ({notation,language,goTo}) => <KinematicsFinalChallenge notation={notation} language={language} onBack={() => goTo('K11')} /> },
   { id: 'T00', chapterId: 'transport', title: { ru: 'От движения к скорости', en: 'From motion to velocity' }, subtitle: { ru: '∂χ/∂t при фиксированной материальной метке X', en: '∂χ/∂t at fixed material label X' }, render: ({notation,language,goTo}) => <MotionToVelocity notation={notation} language={language} onNext={() => goTo('T01')} /> },
-  { id: 'T01', chapterId: 'transport', title: { ru: 'Материальное и пространственное описание скорости', en: 'Material and spatial descriptions of velocity' }, subtitle: { ru: 'V(X,t) ↔ v(x,t)', en: 'V(X,t) ↔ v(x,t)' }, render: ({notation,language,goTo}) => <MaterialSpatialVelocity notation={notation} language={language} onBack={() => goTo('T00')} /> },
+  { id: 'T01', chapterId: 'transport', title: { ru: 'Материальное и пространственное описание скорости', en: 'Material and spatial descriptions of velocity' }, subtitle: { ru: 'V(X,t) ↔ v(x,t)', en: 'V(X,t) ↔ v(x,t)' }, render: ({notation,language,goTo}) => <MaterialSpatialVelocity notation={notation} language={language} onBack={() => goTo('T00')} onNext={() => goTo('T02')} /> },
+  { id: 'T02', chapterId: 'transport', title: { ru: 'Ускорение и конвективный вклад', en: 'Acceleration and convective contribution' }, subtitle: { ru: 'a = ∂v/∂t + (v·∇)v', en: 'a = ∂v/∂t + (v·∇)v' }, render: ({notation,language,goTo}) => <AccelerationConvective notation={notation} language={language} onBack={() => goTo('T01')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
