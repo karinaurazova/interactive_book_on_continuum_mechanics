@@ -32,7 +32,7 @@ const text = {
     rotationValue: 'угол поворота',
     stretchValue: 'коэффициент растяжения',
     shearValue: 'параметр сдвига',
-    sceneKicker: 'SANITY CHECK',
+    sceneKicker: 'ЭТАЛОННАЯ ПРОВЕРКА',
     sceneTitle: 'переключай предельные случаи и проверяй кинематические признаки',
     fStatus: 'F',
     jStatus: 'J',
