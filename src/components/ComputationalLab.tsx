@@ -208,7 +208,7 @@ I3 = np.linalg.det(sigma)`
   ] as const
 
   return (
-    <section className="module-view module-view-wide-title">
+    <section className="module-view module-view-stacked">
       <div className="lesson-copy">
         <button className="text-button" onClick={onBack}>{copy.back}</button>
         <div className="lesson-index">M13 / 14</div>
