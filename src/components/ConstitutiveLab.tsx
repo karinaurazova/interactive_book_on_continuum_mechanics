@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'linear' | 'nonlinear' | 'visco' | 'fiber'
@@ -52,6 +53,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В реальной идентификации моделей одного одноосного теста часто недостаточно. Для мягких тканей используют многоосные протоколы, разные скорости, релаксацию/ползучесть и структурную информацию, чтобы разделить конкурирующие механизмы.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к итоговой самопроверке →',
   },
   en: {
     back:'← C09',
@@ -94,12 +96,13 @@ const text = {
     research:'Research note',
     researchText:'In model identification, one uniaxial test is often insufficient. Soft-tissue studies use multiaxial protocols, multiple rates, relaxation/creep, and structural information to separate competing mechanisms.',
     interactive:'INTERACTIVE',
+    next:'Continue to final self-check →',
   }
 } as const
 
 function fmt(v:number,d=3){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function ConstitutiveLab({notation,language,onBack}:Props){
+export function ConstitutiveLab({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('linear')
   const [eps,setEps]=useState(.20)
@@ -180,6 +183,8 @@ export function ConstitutiveLab({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
