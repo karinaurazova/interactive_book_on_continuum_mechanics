@@ -65,6 +65,7 @@ import { WhyFiniteStrain } from '../components/WhyFiniteStrain'
 import { FiniteStrainStressMeasures } from '../components/FiniteStrainStressMeasures'
 import { HyperelasticEnergy } from '../components/HyperelasticEnergy'
 import { DeformationInvariants } from '../components/DeformationInvariants'
+import { HyperelasticModelComparison } from '../components/HyperelasticModelComparison'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -75,7 +76,7 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
-  | 'D00' | 'D01' | 'D02' | 'D03'
+  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
@@ -147,7 +148,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'finite-strain-hyperelasticity',
     title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
     shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
-    moduleIds: ['D00', 'D01', 'D02', 'D03'],
+    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04'],
   },
 ]
 
@@ -217,7 +218,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'D00', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Почему нужны конечные деформации?', en: 'Why do we need finite-strain mechanics?' }, subtitle: { ru: 'геометрическая нелинейность и объективные меры', en: 'geometric nonlinearity and objective measures' }, render: ({notation,language,goTo}) => <WhyFiniteStrain notation={notation} language={language} onNext={() => goTo('D01')} /> },
   { id: 'D01', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Меры напряжений при конечных деформациях', en: 'Stress measures at finite strain' }, subtitle: { ru: 'σ · τ · P · S и конфигурации', en: 'σ · τ · P · S and configurations' }, render: ({notation,language,goTo}) => <FiniteStrainStressMeasures notation={notation} language={language} onBack={() => goTo('D00')} onNext={() => goTo('D02')} /> },
   { id: 'D02', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Гиперупругость через функцию энергии', en: 'Hyperelasticity through a strain-energy function' }, subtitle: { ru: 'Ψ → S, P, σ и касательная жёсткость', en: 'Ψ → S, P, σ and tangent stiffness' }, render: ({notation,language,goTo}) => <HyperelasticEnergy notation={notation} language={language} onBack={() => goTo('D01')} onNext={() => goTo('D03')} /> },
-  { id: 'D03', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Инварианты деформации и объективная гиперупругость', en: 'Deformation invariants and objective hyperelasticity' }, subtitle: { ru: 'I₁ · I₂ · I₃ · J и проверка поворота', en: 'I₁ · I₂ · I₃ · J and rotation check' }, render: ({notation,language,goTo}) => <DeformationInvariants notation={notation} language={language} onBack={() => goTo('D02')} /> },
+  { id: 'D03', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Инварианты деформации и объективная гиперупругость', en: 'Deformation invariants and objective hyperelasticity' }, subtitle: { ru: 'I₁ · I₂ · I₃ · J и проверка поворота', en: 'I₁ · I₂ · I₃ · J and rotation check' }, render: ({notation,language,goTo}) => <DeformationInvariants notation={notation} language={language} onBack={() => goTo('D02')} onNext={() => goTo('D04')} /> },
+  { id: 'D04', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Neo-Hookean и Mooney–Rivlin', en: 'Neo-Hookean and Mooney–Rivlin' }, subtitle: { ru: 'что меняет зависимость от I₂', en: 'what changes when I₂ enters the energy' }, render: ({notation,language,goTo}) => <HyperelasticModelComparison notation={notation} language={language} onBack={() => goTo('D03')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
