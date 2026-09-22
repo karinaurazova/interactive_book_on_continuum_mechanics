@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -43,6 +44,7 @@ const text = {
     researchText:'В конечной термомеханике выбор свободной энергии и диссипативных механизмов определяет конститутивную структуру. Для гиперупругих материалов часть σ:D связана с обратимым накоплением энергии, а при вязкости, повреждении, пластичности или ремоделировании появляется необратимая диссипация.',
     interactive:'ИНТЕРАКТИВНО',
     heatLabel:'тепло',
+    next:'Перейти к мощности напряжений →',
   },
   en: {
     back:'← B03',
@@ -78,6 +80,7 @@ const text = {
     researchText:'In finite thermomechanics, the choice of free energy and dissipative mechanisms determines constitutive structure. In hyperelasticity part of σ:D corresponds to reversible energy storage, while viscosity, damage, plasticity, or remodeling introduce irreversible dissipation.',
     interactive:'INTERACTIVE',
     heatLabel:'heat',
+    next:'Continue to stress power →',
   }
 } as const
 
@@ -85,7 +88,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function EnergyBalance({notation,language,onBack}:Props){
+export function EnergyBalance({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [rho,setRho]=useState(1.0)
   const [stressPower,setStressPower]=useState(.45)
@@ -146,6 +149,8 @@ export function EnergyBalance({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
