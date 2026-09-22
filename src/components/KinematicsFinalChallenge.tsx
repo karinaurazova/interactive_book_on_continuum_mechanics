@@ -23,7 +23,7 @@ const text = {
     task3:'Найди изотропное растяжение',
     task3Text:'Добейся |λ₁ − λ₂| < 0.02, причём растяжение должно отличаться от единицы.',
     task4:'Проверь полярное разложение',
-    task4Text:'Для допустимой F убедись, что F ≈ R U с малой численной ошибкой.',
+    task4Text:'Для допустимой нетривиальной F (не I) убедись, что F ≈ R U с малой численной ошибкой.',
     capture:'зафиксировать',
     verify:'проверить',
     reset:'сбросить',
@@ -53,7 +53,7 @@ const text = {
     task3:'Find isotropic stretch',
     task3Text:'Reach |λ₁ − λ₂| < 0.02, with stretch different from one.',
     task4:'Verify polar decomposition',
-    task4Text:'For an admissible F, verify F ≈ R U with small numerical error.',
+    task4Text:'For an admissible nontrivial F (not I), verify F ≈ R U with small numerical error.',
     capture:'capture',
     verify:'verify',
     reset:'reset',
@@ -128,7 +128,7 @@ export function KinematicsFinalChallenge({notation,language,onBack}:Props){
     Math.abs(data.J-1)<.02 && data.strain<.02 && data.identityError>.08,
     Math.abs(data.J-1)<.02 && data.strain>.08,
     Math.abs(data.lam[0]-data.lam[1])<.02 && Math.abs(.5*(data.lam[0]+data.lam[1])-1)>.08,
-    data.J>0 && data.polarError<1e-7,
+    data.J>0 && data.identityError>.08 && data.polarError<1e-7,
   ]
 
   const mark=(i:number)=>{
