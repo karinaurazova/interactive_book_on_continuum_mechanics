@@ -48,7 +48,6 @@ const text = {
     researchText:'В нелинейной FEM выбор меры напряжений связан с тем, в какой конфигурации формулируется слабая форма: total Lagrangian, updated Lagrangian или пространственная постановка.',
     interactive:'ИНТЕРАКТИВНО',
     back:'← D00',
-    next:'D02 → hyperelasticity via Ψ',
     next:'D02 → гиперупругость через Ψ',
   },
   en: {
@@ -86,6 +85,7 @@ const text = {
     researchText:'In nonlinear FEM, stress measure choice follows the configuration used for the weak form: total Lagrangian, updated Lagrangian, or spatial formulations.',
     interactive:'INTERACTIVE',
     back:'← D00',
+    next:'D02 → hyperelasticity via Ψ',
   }
 } as const
 
