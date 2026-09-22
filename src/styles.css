@@ -2807,3 +2807,8 @@ input[type="range"] {
     grid-template-columns:1fr;
   }
 }
+
+
+.transport-metrics {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
