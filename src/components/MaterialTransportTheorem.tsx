@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -42,6 +43,7 @@ const text = {
     conclusionTitle:'Транспортная теорема переносит локальную кинематику на интегральные величины.',
     conclusionText:'Именно она станет мостом к законам сохранения массы, импульса и энергии.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к контрольному объёму →',
   },
   en: {
     back:'← T06',
@@ -77,6 +79,7 @@ const text = {
     conclusionTitle:'The transport theorem lifts local kinematics to integral quantities.',
     conclusionText:'It becomes the bridge to conservation of mass, momentum, and energy.',
     interactive:'INTERACTIVE',
+    next:'Continue to the control volume →',
   }
 } as const
 
@@ -84,7 +87,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function MaterialTransportTheorem({notation,language,onBack}:Props){
+export function MaterialTransportTheorem({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.45)
   const [kappa,setKappa]=useState(0.35)
@@ -158,6 +161,8 @@ export function MaterialTransportTheorem({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
