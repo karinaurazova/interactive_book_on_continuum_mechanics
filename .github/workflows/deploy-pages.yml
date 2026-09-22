@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.1-foundation
+      - v0.3-kinematics
   workflow_dispatch:
 
 permissions:
