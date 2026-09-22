@@ -2838,3 +2838,64 @@ input[type="range"] {
     grid-template-columns:1fr;
   }
 }
+
+
+/* Progressive depth: optional layers stay visually quiet until opened. */
+.depth-note {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.depth-note summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 0;
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+.depth-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.depth-note summary span {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(40,100,255,.07);
+  color: var(--blue);
+  flex: 0 0 auto;
+}
+
+.depth-note-research summary span {
+  background: rgba(169,227,210,.16);
+  color: #39796b;
+}
+
+.depth-note-body {
+  padding: 2px 0 14px 28px;
+  max-width: 820px;
+  color: var(--muted);
+  line-height: 1.58;
+  font-size: .84rem;
+}
+
+.depth-note-body p {
+  margin: 0;
+}
+
+.depth-note[open] summary {
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .depth-note-body {
+    padding-left: 0;
+  }
+}
