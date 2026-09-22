@@ -17,7 +17,7 @@ const text = {
     key:'ОТНОСИТЕЛЬНАЯ СКОРОСТЬ ЧЕРЕЗ ГРАНИЦУ',
     keyText:'Для движущегося контрольного объёма V(t) поверхностный поток определяется величиной φ(v−w)·n.',
     general:'Общая форма',
-    generalText:'Скорость изменения интеграла по движущемуся контрольному объёму складывается из локального накопления и относительного потока через его границу.',
+    generalText:'Транспортный баланс для материала складывается из скорости изменения интеграла внутри движущегося контрольного объёма и относительного потока через его границу.',
     limits:'Два важных предельных случая',
     limitsText:'Если w = 0, получаем фиксированный контрольный объём. Если w = v на границе, относительный поток исчезает и область становится материальной.',
     fixed:'фиксированный объём',
@@ -50,7 +50,7 @@ const text = {
     key:'RELATIVE VELOCITY THROUGH THE BOUNDARY',
     keyText:'For a moving control volume V(t), the surface transport term is governed by φ(v−w)·n.',
     general:'General form',
-    generalText:'The rate of change of an integral over a moving control volume combines local accumulation and relative transport through its boundary.',
+    generalText:'The material transport balance combines the rate of change inside the moving control volume with relative transport through its boundary.',
     limits:'Two important limiting cases',
     limitsText:'If w = 0, the control volume is fixed. If w = v at the boundary, relative flux vanishes and the region is material.',
     fixed:'fixed volume',
@@ -107,12 +107,12 @@ export function GeneralReynoldsTransport({notation,language,onBack}:Props){
 
   const notationLine =
     notation==='Index'
-      ? 'd/dt ∫V(t) φ dv = ∫V(t) ∂φ/∂t dv − ∫∂V(t) φ (vᵢ−wᵢ)nᵢ da'
+      ? 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (vᵢ−wᵢ)nᵢ da'
       : notation==='Matrix'
-      ? 'd/dt ∫V(t) φ dv = ∫V(t) ∂φ/∂t dv − ∫∂V(t) φ (v−w)·n da'
+      ? 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (v−w)·n da'
       : notation==='Python'
-      ? 'rate = accumulation - relative_boundary_flux'
-      : 'd/dt ∫V(t) φ dv = ∫V(t) ∂φ/∂t dv − ∫∂V(t) φ (𝐯−𝐰)·𝐧 da'
+      ? 'rate = accumulation + relative_boundary_flux'
+      : 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (𝐯−𝐰)·𝐧 da'
 
   const boxX=22+10*boundarySpeed
   const boxW=52
