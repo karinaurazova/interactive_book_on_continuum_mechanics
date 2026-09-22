@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Dependency = 'history' | 'temperature' | 'internal' | 'structure'
@@ -51,6 +52,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В моделях роста и ремоделирования внутренними переменными могут быть естественная конфигурация, массовые доли компонентов, deposition stretch, повреждение, ориентация волокон или параметры адаптации. Их выбор фактически задаёт научную гипотезу о механизмах материала.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к материальной объективности →',
   },
   en: {
     back:'← C00',
@@ -92,6 +94,7 @@ const text = {
     research:'Research note',
     researchText:'Growth and remodeling models may use natural configuration, constituent mass fractions, deposition stretch, damage, fiber orientation, or adaptation variables as internal state descriptors. Choosing them is itself a mechanistic hypothesis.',
     interactive:'INTERACTIVE',
+    next:'Continue to material objectivity →',
   }
 } as const
 
@@ -99,7 +102,7 @@ function fmt(v:number,d=3){
   return v.toFixed(d)
 }
 
-export function ConstitutiveStateSpace({notation,language,onBack}:Props){
+export function ConstitutiveStateSpace({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [strain,setStrain]=useState(.25)
   const [history,setHistory]=useState(true)
@@ -168,6 +171,8 @@ export function ConstitutiveStateSpace({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
