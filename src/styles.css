@@ -2689,3 +2689,70 @@ input[type="range"] {
   font-size: .78rem;
   line-height: 1.45;
 }
+
+
+/* Shared responsive rules for kinematics scenes.
+   Keep SVG geometry proportional and prevent long scene headings from colliding. */
+.scene-head {
+  min-width: 0;
+}
+
+.scene-head > div:first-child {
+  min-width: 0;
+}
+
+.scene-head h2 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.decomp-toggle-row {
+  flex-wrap: wrap;
+}
+
+.kinematics-scene,
+.gradient-scene,
+.mode-scene,
+.jacobian-scene,
+.cg-scene,
+.polar-scene,
+.principal-stretch-scene,
+.limit-scene,
+.kin-lab-scene,
+.kin-challenge-scene {
+  display: block;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 720px) {
+  .scene-head {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .scene-head h2 {
+    font-size: clamp(1.25rem, 5.6vw, 1.8rem);
+    line-height: 1.05;
+  }
+
+  .live-badge {
+    flex: 0 0 auto;
+  }
+
+  .control-stack label > span {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 520px) {
+  .scene-head {
+    flex-direction: column;
+  }
+
+  .live-badge {
+    align-self: flex-start;
+  }
+}
