@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Effect = 'large' | 'nonlinear' | 'memory' | 'damage' | 'anisotropy'
@@ -49,6 +50,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для мягких тканей часто одновременно важны большие деформации, почти несжимаемость, анизотропия и вязкоупругость. Тогда конститутивная модель становится модульной и должна быть согласована с термодинамикой и доступными экспериментальными протоколами.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти в конститутивную лабораторию →',
   },
   en: {
     back:'← C08',
@@ -88,10 +90,11 @@ const text = {
     research:'Research note',
     researchText:'Soft tissues often combine large deformation, near incompressibility, anisotropy, and viscoelasticity. The constitutive model then becomes modular and must remain consistent with thermodynamics and available experimental protocols.',
     interactive:'INTERACTIVE',
+    next:'Continue to the constitutive laboratory →',
   }
 } as const
 
-export function BeyondLinearElasticity({notation,language,onBack}:Props){
+export function BeyondLinearElasticity({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [effects,setEffects]=useState<Record<Effect,boolean>>({
     large:false,
@@ -160,6 +163,8 @@ export function BeyondLinearElasticity({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
