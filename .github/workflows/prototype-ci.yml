@@ -11,6 +11,7 @@ on:
       - v0.4.1-hardening
       - v0.4.2-progressive-depth
       - v0.5-balance-laws
+      - v0.5.1-hardening
   pull_request:
     branches:
       - main
@@ -35,6 +36,9 @@ jobs:
 
       - name: Transport sanity checks
         run: npm run test:transport
+
+      - name: Balance-law sanity checks
+        run: npm run test:balance
 
       - name: Build
         run: npm run build
