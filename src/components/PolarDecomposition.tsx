@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -40,6 +41,7 @@ const text = {
     conclusionTitle: 'Полярное разложение даёт строгий смысл словам «растяжение» и «поворот» внутри F.',
     conclusionText: 'После этого естественно перейти к главным растяжениям — собственным значениям U и V.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к главным растяжениям →',
   },
   en: {
     back: '← K07',
@@ -73,6 +75,7 @@ const text = {
     conclusionTitle: 'Polar decomposition gives a rigorous meaning to stretch and rotation inside F.',
     conclusionText: 'This naturally leads to principal stretches — the eigenvalues of U and V.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to principal stretches →',
   },
 } as const
 
@@ -89,7 +92,7 @@ function frobDiff(a:number[][],b:number[][]) {
   return Math.sqrt(a.flat().reduce((s,v,i)=>s+(v-b.flat()[i])**2,0))
 }
 
-export function PolarDecomposition({notation,language,onBack}:Props) {
+export function PolarDecomposition({notation,language,onBack,onNext}:Props) {
   const copy=text[language]
   const [rotationDeg,setRotationDeg]=useState(32)
   const [u11,setU11]=useState(1.30)
@@ -163,6 +166,8 @@ export function PolarDecomposition({notation,language,onBack}:Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
