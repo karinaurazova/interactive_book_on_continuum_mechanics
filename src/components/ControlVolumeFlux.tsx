@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -43,6 +44,7 @@ const text = {
     conclusionTitle:'Контрольный объём отделяет локальное накопление от переноса через границу.',
     conclusionText:'Следующий шаг — объединить material volume и control volume в общей форме транспортной теоремы Рейнольдса.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к общей теореме Рейнольдса →',
   },
   en: {
     back:'← T07',
@@ -79,6 +81,7 @@ const text = {
     conclusionTitle:'A control volume separates local accumulation from transport across the boundary.',
     conclusionText:'Next we combine material and control-volume viewpoints in the general Reynolds transport theorem.',
     interactive:'INTERACTIVE',
+    next:'Continue to the general Reynolds theorem →',
   }
 } as const
 
@@ -86,7 +89,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function ControlVolumeFlux({notation,language,onBack}:Props){
+export function ControlVolumeFlux({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.35)
   const [speed,setSpeed]=useState(0.65)
@@ -158,6 +161,8 @@ export function ControlVolumeFlux({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
