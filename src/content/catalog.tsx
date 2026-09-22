@@ -71,6 +71,7 @@ import { IsochoricVolumetricSplit } from '../components/IsochoricVolumetricSplit
 import { NearIncompressibility } from '../components/NearIncompressibility'
 import { NonlinearFEMNewton } from '../components/NonlinearFEMNewton'
 import { TangentStiffnessStability } from '../components/TangentStiffnessStability'
+import { BifurcationPostcritical } from '../components/BifurcationPostcritical'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -81,7 +82,7 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
-  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09'
+  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09' | 'D10'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
@@ -153,7 +154,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'finite-strain-hyperelasticity',
     title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
     shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
-    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08', 'D09'],
+    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08', 'D09', 'D10'],
   },
 ]
 
@@ -229,7 +230,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'D06', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Изохорно-объёмное разложение', en: 'Isochoric–volumetric split' }, subtitle: { ru: 'форма · объём · почти несжимаемость', en: 'shape · volume · near incompressibility' }, render: ({notation,language,goTo}) => <IsochoricVolumetricSplit notation={notation} language={language} onBack={() => goTo('D05')} onNext={() => goTo('D07')} /> },
   { id: 'D07', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Почти несжимаемость: давление и смешанная u–p постановка', en: 'Near incompressibility: pressure and mixed u–p formulation' }, subtitle: { ru: 'штрафной метод · давление · объёмная блокировка', en: 'penalty method · pressure · volumetric locking' }, render: ({notation,language,goTo}) => <NearIncompressibility notation={notation} language={language} onBack={() => goTo('D06')} onNext={() => goTo('D08')} /> },
   { id: 'D08', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Нелинейный МКЭ: остаток, касательная жёсткость и метод Ньютона', en: 'Nonlinear FEM: residual, tangent stiffness, and Newton method' }, subtitle: { ru: 'R(u) · K_T · итерации Ньютона', en: 'R(u) · K_T · Newton iterations' }, render: ({notation,language,goTo}) => <NonlinearFEMNewton notation={notation} language={language} onBack={() => goTo('D07')} onNext={() => goTo('D09')} /> },
-  { id: 'D09', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Материальная и геометрическая жёсткость. Потеря устойчивости', en: 'Material and geometric stiffness. Loss of stability' }, subtitle: { ru: 'K_mat · K_geo · λ_min(K_T)', en: 'K_mat · K_geo · λ_min(K_T)' }, render: ({notation,language,goTo}) => <TangentStiffnessStability notation={notation} language={language} onBack={() => goTo('D08')} /> },
+  { id: 'D09', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Материальная и геометрическая жёсткость. Потеря устойчивости', en: 'Material and geometric stiffness. Loss of stability' }, subtitle: { ru: 'K_mat · K_geo · λ_min(K_T)', en: 'K_mat · K_geo · λ_min(K_T)' }, render: ({notation,language,goTo}) => <TangentStiffnessStability notation={notation} language={language} onBack={() => goTo('D08')} onNext={() => goTo('D10')} /> },
+  { id: 'D10', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Бифуркации и посткритическое поведение', en: 'Bifurcations and post-critical behavior' }, subtitle: { ru: 'ветви равновесия · критическая точка · энергетический ландшафт', en: 'equilibrium branches · critical point · energy landscape' }, render: ({notation,language,goTo}) => <BifurcationPostcritical notation={notation} language={language} onBack={() => goTo('D09')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
