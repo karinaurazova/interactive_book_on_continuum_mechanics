@@ -38,6 +38,7 @@ import { MaterialTransportTheorem } from '../components/MaterialTransportTheorem
 import { ControlVolumeFlux } from '../components/ControlVolumeFlux'
 import { GeneralReynoldsTransport } from '../components/GeneralReynoldsTransport'
 import { TransportFinalChallenge } from '../components/TransportFinalChallenge'
+import { BalanceStructure } from '../components/BalanceStructure'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -46,8 +47,9 @@ export type ModuleId =
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
+  | 'B00'
 
-export type ChapterId = 'stress-state' | 'kinematics' | 'transport'
+export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws'
 
 type RenderContext = {
   notation: NotationMode
@@ -101,6 +103,12 @@ export const chapters: ChapterDefinition[] = [
     shortTitle: { ru: 'Время и транспорт', en: 'Time & transport' },
     moduleIds: ['T00', 'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08', 'T09', 'T10'],
   },
+  {
+    id: 'balance-laws',
+    title: { ru: 'Законы баланса', en: 'Balance laws' },
+    shortTitle: { ru: 'Балансы', en: 'Balances' },
+    moduleIds: ['B00'],
+  },
 ]
 
 export const modules: ModuleDefinition[] = [
@@ -143,6 +151,7 @@ export const modules: ModuleDefinition[] = [
   { id: 'T08', chapterId: 'transport', title: { ru: 'Контрольный объём и поток через границу', en: 'Control volume and boundary flux' }, subtitle: { ru: 'накопление + поток', en: 'accumulation + flux' }, render: ({notation,language,goTo}) => <ControlVolumeFlux notation={notation} language={language} onBack={() => goTo('T07')} onNext={() => goTo('T09')} /> },
   { id: 'T09', chapterId: 'transport', title: { ru: 'Общая теорема Рейнольдса', en: 'General Reynolds transport theorem' }, subtitle: { ru: 'относительная скорость v−w', en: 'relative velocity v−w' }, render: ({notation,language,goTo}) => <GeneralReynoldsTransport notation={notation} language={language} onBack={() => goTo('T08')} onNext={() => goTo('T10')} /> },
   { id: 'T10', chapterId: 'transport', title: { ru: 'Итоговая самопроверка по времени и транспорту', en: 'Final self-check on time and transport' }, subtitle: { ru: 'самостоятельные кинематические эксперименты', en: 'independent kinematic experiments' }, render: ({notation,language,goTo}) => <TransportFinalChallenge notation={notation} language={language} onBack={() => goTo('T09')} /> },
+  { id: 'B00', chapterId: 'balance-laws', title: { ru: 'Что означает закон баланса?', en: 'What does a balance law mean?' }, subtitle: { ru: 'накопление + отток = источники', en: 'accumulation + outflux = sources' }, render: ({notation,language}) => <BalanceStructure notation={notation} language={language} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
