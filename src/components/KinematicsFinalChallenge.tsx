@@ -183,7 +183,7 @@ export function KinematicsFinalChallenge({notation,language,onBack}:Props){
           <div className="kin-challenge-grid">
             <div>
               <div className="kin-lab-matrix-editor">
-                {F.flatMap((row,i)=>row.map((v,j)=><input key={`${i}-${j}`} type="number" step=".01" value={v} onChange={e=>setEntry(i,j,e.target.value)}/>))}
+                {F.flatMap((row,i)=>row.map((v,j)=><input key={`${i}-${j}`} aria-label={`F${i+1}${j+1}`} type="number" step=".01" value={v} onChange={e=>setEntry(i,j,e.target.value)}/>))}
               </div>
 
               <svg className="kin-challenge-scene" viewBox="0 0 100 72">
