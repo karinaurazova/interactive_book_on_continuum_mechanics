@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -41,6 +42,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для почти несжимаемых мягких тканей параметризация через K и G часто физически прозрачнее, но численно требует аккуратной постановки. В смешанных FEM-формулировках давление вводится как дополнительное поле, чтобы избежать блокировки.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к объёмному и девиаторному отклику →',
   },
   en: {
     back:'← C05',
@@ -74,6 +76,7 @@ const text = {
     research:'Research note',
     researchText:'For nearly incompressible soft tissues, K–G parameterization is often more transparent physically but numerically delicate. Mixed FEM formulations introduce pressure as an additional field to avoid volumetric locking.',
     interactive:'INTERACTIVE',
+    next:'Continue to volumetric and deviatoric response →',
   }
 } as const
 
@@ -82,7 +85,7 @@ function fmt(v:number,d=3){
   return (Math.abs(v)<1e-12?0:v).toFixed(d)
 }
 
-export function IsotropicElasticConstants({notation,language,onBack}:Props){
+export function IsotropicElasticConstants({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [E,setE]=useState(1.5)
   const [nu,setNu]=useState(.30)
@@ -136,6 +139,8 @@ export function IsotropicElasticConstants({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
