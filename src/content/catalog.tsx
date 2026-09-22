@@ -63,6 +63,7 @@ import { ConstitutiveLab } from '../components/ConstitutiveLab'
 import { ConstitutiveFinalChallenge } from '../components/ConstitutiveFinalChallenge'
 import { WhyFiniteStrain } from '../components/WhyFiniteStrain'
 import { FiniteStrainStressMeasures } from '../components/FiniteStrainStressMeasures'
+import { HyperelasticEnergy } from '../components/HyperelasticEnergy'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -73,7 +74,7 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
-  | 'D00' | 'D01'
+  | 'D00' | 'D01' | 'D02'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
@@ -145,7 +146,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'finite-strain-hyperelasticity',
     title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
     shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
-    moduleIds: ['D00', 'D01'],
+    moduleIds: ['D00', 'D01', 'D02'],
   },
 ]
 
@@ -213,7 +214,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'C10', chapterId: 'constitutive-modeling', title: { ru: 'Конститутивная лаборатория', en: 'Constitutive laboratory' }, subtitle: { ru: 'сравнение редуцированных моделей', en: 'compare reduced models' }, render: ({notation,language,goTo}) => <ConstitutiveLab notation={notation} language={language} onBack={() => goTo('C09')} onNext={() => goTo('C11')} /> },
   { id: 'C11', chapterId: 'constitutive-modeling', title: { ru: 'Итоговая самопроверка по конститутивному моделированию', en: 'Final self-check on constitutive modeling' }, subtitle: { ru: 'параметры · несжимаемость · диссипация · анизотропия', en: 'parameters · incompressibility · dissipation · anisotropy' }, render: ({notation,language,goTo}) => <ConstitutiveFinalChallenge notation={notation} language={language} onBack={() => goTo('C10')} /> },
   { id: 'D00', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Почему нужны конечные деформации?', en: 'Why do we need finite-strain mechanics?' }, subtitle: { ru: 'геометрическая нелинейность и объективные меры', en: 'geometric nonlinearity and objective measures' }, render: ({notation,language,goTo}) => <WhyFiniteStrain notation={notation} language={language} onNext={() => goTo('D01')} /> },
-  { id: 'D01', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Меры напряжений при конечных деформациях', en: 'Stress measures at finite strain' }, subtitle: { ru: 'σ · τ · P · S и конфигурации', en: 'σ · τ · P · S and configurations' }, render: ({notation,language,goTo}) => <FiniteStrainStressMeasures notation={notation} language={language} onBack={() => goTo('D00')} /> },
+  { id: 'D01', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Меры напряжений при конечных деформациях', en: 'Stress measures at finite strain' }, subtitle: { ru: 'σ · τ · P · S и конфигурации', en: 'σ · τ · P · S and configurations' }, render: ({notation,language,goTo}) => <FiniteStrainStressMeasures notation={notation} language={language} onBack={() => goTo('D00')} onNext={() => goTo('D02')} /> },
+  { id: 'D02', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Гиперупругость через функцию энергии', en: 'Hyperelasticity through a strain-energy function' }, subtitle: { ru: 'Ψ → S, P, σ и касательная жёсткость', en: 'Ψ → S, P, σ and tangent stiffness' }, render: ({notation,language,goTo}) => <HyperelasticEnergy notation={notation} language={language} onBack={() => goTo('D01')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
