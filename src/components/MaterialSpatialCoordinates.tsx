@@ -124,7 +124,7 @@ export function MaterialSpatialCoordinates({ notation, language, onBack }: Props
   const pCur = curMap(activeCur)
 
   return (
-    <section className="module-view">
+    <section className="module-view module-view-stacked">
       <div className="lesson-copy">
         <button className="text-button" onClick={onBack}>{copy.back}</button>
         <div className="lesson-index">K01 / 13</div>
