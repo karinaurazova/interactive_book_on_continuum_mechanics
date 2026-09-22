@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type M2 = [[number,number],[number,number]]
@@ -46,6 +47,7 @@ const text = {
     conclusionTitle:'Дивергенция скорости — это локальная относительная скорость изменения объёма.',
     conclusionText:'Следующий шаг — транспортная теорема, где этот локальный результат появится внутри интеграла по движущейся области.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к транспортной теореме →',
   },
   en: {
     back:'← T05',
@@ -83,6 +85,7 @@ const text = {
     conclusionTitle:'Velocity divergence is the local relative rate of volume change.',
     conclusionText:'Next we move to the transport theorem, where this local result appears inside an integral over a moving region.',
     interactive:'INTERACTIVE',
+    next:'Continue to the transport theorem →',
   }
 } as const
 
@@ -116,7 +119,7 @@ function scale(A:M2,s:number):M2{
   return [[s*A[0][0],s*A[0][1]],[s*A[1][0],s*A[1][1]]]
 }
 
-export function VolumeRateJacobian({notation,language,onBack}:Props){
+export function VolumeRateJacobian({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.55)
   const [alpha,setAlpha]=useState(0.35)
@@ -190,6 +193,8 @@ export function VolumeRateJacobian({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
