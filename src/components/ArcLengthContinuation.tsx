@@ -3,7 +3,7 @@ import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
 import { ApplicationLinks } from './ApplicationLinks'
 
-type Props={notation:NotationMode;language:Language;onBack?:()=>void}
+type Props={notation:NotationMode;language:Language;onBack?:()=>void;onNext?:()=>void}
 
 const text={
 ru:{
@@ -25,7 +25,7 @@ ru:{
  research:'Исследовательское замечание',researchText:'На практике существуют разные варианты дугового продолжения: сферическое, цилиндрическое, метод Рикса и их модификации. Они различаются выбором ограничения, нормировки и стратегией коррекции шага.',
  warning:'ВАЖНО',warningTitle:'Метод длины дуги не делает неустойчивую ветвь физически устойчивой.',
  warningText:'Он лишь позволяет вычислительно проследить равновесный путь. Физическая реализуемость состояния по-прежнему требует отдельного анализа устойчивости.',
- back:'← D10',interactive:'ИНТЕРАКТИВНО'
+ back:'← D10',next:'D12 →',interactive:'ИНТЕРАКТИВНО'
 },
 en:{
  title:'Solution continuation and the arc-length method',
@@ -46,7 +46,7 @@ en:{
  research:'Research note',researchText:'Several arc-length variants are used in practice, including spherical and cylindrical constraints, the Riks method, and related modifications. They differ in the constraint, normalization, and step-correction strategy.',
  warning:'IMPORTANT',warningTitle:'The arc-length method does not make an unstable branch physically stable.',
  warningText:'It only allows the equilibrium path to be traced numerically. Physical realizability still requires a separate stability analysis.',
- back:'← D10',interactive:'INTERACTIVE'
+ back:'← D10',next:'D12 →',interactive:'INTERACTIVE'
 }} as const
 
 function curvePoint(t:number){
@@ -61,7 +61,7 @@ function mapPoint(u:number,lambda:number){
  return {x,y}
 }
 
-export function ArcLengthContinuation({notation,language,onBack}:Props){
+export function ArcLengthContinuation({notation,language,onBack,onNext}:Props){
  const copy=text[language]
  const [method,setMethod]=useState<'load'|'arc'>('arc')
  const [step,setStep]=useState(8)
@@ -94,7 +94,7 @@ export function ArcLengthContinuation({notation,language,onBack}:Props){
   <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
   <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
   <ApplicationLinks language={language} items={[{ru:'Посткритический анализ конструкций',en:'Post-buckling analysis'},{ru:'Нелинейный метод конечных элементов',en:'Nonlinear finite element analysis'},{ru:'Предельные точки',en:'Limit points'},{ru:'Продолжение ветвей решения',en:'Solution continuation'}]}/>
-  {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
+  <div className="lesson-nav">{onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}{onNext&&<button className="text-button" onClick={onNext}>{copy.next}</button>}</div>
  </div><div className="scene-column">
   <div className="scene-card">
    <div className="scene-head"><div><span className="scene-kicker">{copy.sceneKicker}</span><h2>{copy.sceneTitle}</h2></div><div className="live-badge">{copy.interactive}</div></div>
