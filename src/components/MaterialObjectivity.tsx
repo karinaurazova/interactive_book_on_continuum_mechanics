@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type M2 = [[number,number],[number,number]]
@@ -45,6 +46,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'Для скоростных конститутивных моделей возникает дополнительная проблема: обычная компонентная производная тензора не является объективной. Тогда вводят объективные тензорные скорости или формулируют модель через объективные конечнодеформационные меры.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к изотропии и анизотропии →',
   },
   en: {
     back:'← C01',
@@ -80,6 +82,7 @@ const text = {
     research:'Research note',
     researchText:'Rate-type constitutive models add another issue: an ordinary componentwise tensor time derivative is not objective. One then introduces objective tensor rates or formulates the model using objective finite-strain measures.',
     interactive:'INTERACTIVE',
+    next:'Continue to isotropy and anisotropy →',
   }
 } as const
 
@@ -94,7 +97,7 @@ function sub(A:M2,B:M2):M2 { return [[A[0][0]-B[0][0],A[0][1]-B[0][1]],[A[1][0]-
 function norm(A:M2){ return Math.sqrt(A.flat().reduce((s,x)=>s+x*x,0)) }
 function fmt(v:number,d=4){ return (Math.abs(v)<1e-12?0:v).toFixed(d) }
 
-export function MaterialObjectivity({notation,language,onBack}:Props){
+export function MaterialObjectivity({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [angle,setAngle]=useState(35)
   const [l1,setL1]=useState(1.25)
@@ -166,6 +169,8 @@ export function MaterialObjectivity({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
