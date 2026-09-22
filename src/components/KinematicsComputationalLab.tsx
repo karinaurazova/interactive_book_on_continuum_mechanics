@@ -34,7 +34,7 @@ const text = {
     ok:'OK',
     fail:'ПРОБЛЕМА',
     python:'Python / NumPy',
-    sceneKicker:'KINEMATICS LAB',
+    sceneKicker:'ВЫЧИСЛИТЕЛЬНАЯ ЛАБОРАТОРИЯ',
     sceneTitle:'редактируй F и наблюдай всю кинематику одновременно',
     warning:'ВАЖНО',
     warningTitle:'Полярное разложение математически и физически требует аккуратной интерпретации.',
