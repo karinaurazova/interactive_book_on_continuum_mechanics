@@ -148,9 +148,9 @@ export function ConstitutiveAdmissibility({notation,language,onBack,onNext}:Prop
           <strong>{copy.keyText}</strong>
         </div>
 
-        <div className="decomp-toggle-row">
-          <button className={mode==='elastic'?'decomp-toggle active':'decomp-toggle'} onClick={()=>setMode('elastic')}>{copy.elastic}</button>
-          <button className={mode==='viscous'?'decomp-toggle active':'decomp-toggle'} onClick={()=>setMode('viscous')}>{copy.viscous}</button>
+        <div className="constitutive-mode-switch" role="group" aria-label={language==='ru'?'Режим модели':'Model mode'}>
+          <button className={mode==='elastic'?'constitutive-mode-button active':'constitutive-mode-button'} onClick={()=>setMode('elastic')}>{copy.elastic}</button>
+          <button className={mode==='viscous'?'constitutive-mode-button active':'constitutive-mode-button'} onClick={()=>setMode('viscous')}>{copy.viscous}</button>
         </div>
 
         <div className="definition">
