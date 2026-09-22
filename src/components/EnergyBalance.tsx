@@ -42,6 +42,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В конечной термомеханике выбор свободной энергии и диссипативных механизмов определяет конститутивную структуру. Для гиперупругих материалов часть σ:D связана с обратимым накоплением энергии, а при вязкости, повреждении, пластичности или ремоделировании появляется необратимая диссипация.',
     interactive:'ИНТЕРАКТИВНО',
+    heatLabel:'тепло',
   },
   en: {
     back:'← B03',
@@ -76,6 +77,7 @@ const text = {
     research:'Research note',
     researchText:'In finite thermomechanics, the choice of free energy and dissipative mechanisms determines constitutive structure. In hyperelasticity part of σ:D corresponds to reversible energy storage, while viscosity, damage, plasticity, or remodeling introduce irreversible dissipation.',
     interactive:'INTERACTIVE',
+    heatLabel:'heat',
   }
 } as const
 
@@ -165,7 +167,7 @@ export function EnergyBalance({notation,language,onBack}:Props){
             <rect x="64" y={48-totalBar} width="12" height={totalBar} rx="2" fill="rgba(169,227,210,.34)"/>
 
             <text x="23" y="57" fill="#2864FF" fontSize="2.35">σ:D</text>
-            <text x="43" y="57" fill="#DD7A2B" fontSize="2.35">heat</text>
+            <text x="43" y="57" fill="#DD7A2B" fontSize="2.35">{copy.heatLabel}</text>
             <text x="63" y="57" fill="#A9E3D2" fontSize="2.35">ρDe/Dt</text>
           </svg>
 
