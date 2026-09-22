@@ -6,6 +6,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -45,6 +46,7 @@ const text = {
     research:'Исследовательское замечание',
     researchText:'В теориях смесей и роста баланс массы записывается отдельно для компонентов и может содержать источники. Тогда правая часть уравнения неразрывности не равна нулю и отражает химические реакции, обмен между фазами или массовое накопление.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к балансу импульса →',
   },
   en: {
     back:'← B00',
@@ -82,6 +84,7 @@ const text = {
     research:'Research note',
     researchText:'In mixture and growth theories, mass balance is written for each constituent and may include source terms. The right-hand side of the continuity equation can then represent reactions, phase exchange, or mass deposition.',
     interactive:'INTERACTIVE',
+    next:'Continue to momentum balance →',
   }
 } as const
 
@@ -89,7 +92,7 @@ function fmt(v:number,d=4){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function MassBalance({notation,language,onBack}:Props){
+export function MassBalance({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.65)
   const [kappa,setKappa]=useState(0.35)
@@ -158,6 +161,8 @@ export function MassBalance({notation,language,onBack}:Props){
 
         <DepthNote label={copy.deepen}><p>{copy.deepenText}</p></DepthNote>
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
