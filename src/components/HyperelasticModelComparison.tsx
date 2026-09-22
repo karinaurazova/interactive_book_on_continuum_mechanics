@@ -49,7 +49,7 @@ const text = {
     warningTitle:'Больше параметров не означает автоматически лучшую физическую модель.',
     warningText:'Дополнительный параметр полезен только тогда, когда данные способны его идентифицировать и модель проходит проверку вне калибровочного режима.',
     back:'← D03',
-    next:'D05 → Ogden',
+    next:'D05 → модель Огдена',
     interactive:'ИНТЕРАКТИВНО',
   },
   en: {
@@ -88,7 +88,7 @@ const text = {
     warningTitle:'More parameters do not automatically mean a better physical model.',
     warningText:'An extra parameter is useful only when the data can identify it and the model survives validation outside the calibration regime.',
     back:'← D03',
-    next:'D05 → Ogden',
+    next:'D05 → модель Огдена',
     interactive:'INTERACTIVE',
   }
 } as const
