@@ -5,6 +5,7 @@ on:
     branches:
       - v0.1-foundation
       - v0.2-platform
+      - v0.3-kinematics
   pull_request:
     branches:
       - main
