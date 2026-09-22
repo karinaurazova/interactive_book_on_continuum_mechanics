@@ -37,7 +37,7 @@ const text = {
     sceneKicker:'KINEMATICS LAB',
     sceneTitle:'редактируй F и наблюдай всю кинематику одновременно',
     warning:'ВАЖНО',
-    warningTitle:'Полярное разложение математически и физически требуют аккуратной интерпретации.',
+    warningTitle:'Полярное разложение математически и физически требует аккуратной интерпретации.',
     warningText:'Для обычной деформации континуума мы ожидаем J > 0. При почти вырожденной F обратные тензоры и мера Эйлера–Альманси становятся численно неустойчивыми. При J < 0 ортогональный фактор имеет det R = −1 и содержит отражение, поэтому его нельзя интерпретировать как чистый поворот.',
     question:'ВОПРОС ДЛЯ ПРОВЕРКИ',
     questionTitle:'Что изменится при умножении F слева на чистый поворот R₀?',
@@ -244,7 +244,7 @@ print("principal stretches =", lam)`
                 {presets.map(([label,m])=><button key={label} onClick={()=>setF(m)}>{label}</button>)}
               </div>
               <div className="kin-lab-matrix-editor">
-                {F.flatMap((row,i)=>row.map((v,j)=><input key={`${i}-${j}`} type="number" step=".01" value={v} onChange={e=>setEntry(i,j,e.target.value)}/>))}
+                {F.flatMap((row,i)=>row.map((v,j)=><input key={`${i}-${j}`} aria-label={`F${i+1}${j+1}`} type="number" step=".01" value={v} onChange={e=>setEntry(i,j,e.target.value)}/>))}
               </div>
               <div className="kin-lab-primary">
                 <div><span>J = det F</span><strong>{fmt(data.J)}</strong></div>
