@@ -38,7 +38,7 @@ const text = {
     sceneTitle:'редактируй F и наблюдай всю кинематику одновременно',
     warning:'ВАЖНО',
     warningTitle:'Полярное разложение математически и физически требуют аккуратной интерпретации.',
-    warningText:'Для обычной деформации континуума мы ожидаем J > 0. При почти вырожденной F обратные тензоры и Euler–Almansi становятся численно неустойчивыми.',
+    warningText:'Для обычной деформации континуума мы ожидаем J > 0. При почти вырожденной F обратные тензоры и мера Эйлера–Альманси становятся численно неустойчивыми. При J < 0 ортогональный фактор имеет det R = −1 и содержит отражение, поэтому его нельзя интерпретировать как чистый поворот.',
     question:'ВОПРОС ДЛЯ ПРОВЕРКИ',
     questionTitle:'Что изменится при умножении F слева на чистый поворот R₀?',
     questionText:'C и главные растяжения останутся теми же, а B, R и пространственные направления повернутся.',
@@ -143,12 +143,14 @@ export function KinematicsComputationalLab({notation,language,onBack,onNext}:Pro
     const U=sqrtSPD(C)
     const Uinv=U?inv(U):null
     const R=Uinv?mul(F,Uinv):null
-    const V=R&&U?mul(mul(R,U),tr(R)):null
+    const detR=R?det(R):NaN
+    const properRotation=R&&detR>0
+    const V=properRotation&&U?mul(mul(R,U),tr(R)):null
     const eig=eigSym(C)
     const lambdas=eig.map(v=>v>=0?Math.sqrt(v):NaN)
     const polarError=R&&U?frob(diff(F,mul(R,U))):Infinity
     const metricError=frob(diff(C,mul(tr(F),F)))
-    return {J,C,B,E,e,U,R,V,lambdas,polarError,metricError}
+    return {J,C,B,E,e,U,R,V,lambdas,polarError,metricError,detR,properRotation}
   },[F])
 
   const setEntry=(i:number,j:number,value:string)=>{
@@ -168,7 +170,7 @@ export function KinematicsComputationalLab({notation,language,onBack,onNext}:Pro
 
   const validJ=data.J>0
   const nonsingular=Math.abs(data.J)>1e-8
-  const polarOK=data.polarError<1e-7
+  const polarOK=data.properRotation && data.polarError<1e-7
   const metricOK=data.metricError<1e-10
 
   const square:[[number,number],[number,number],[number,number],[number,number]]=[[0,0],[1,0],[1,1],[0,1]]
@@ -202,14 +204,17 @@ lam = np.sqrt(np.clip(lam2, 0.0, None))
 w, Q = np.linalg.eigh(C)
 U = Q @ np.diag(np.sqrt(np.clip(w, 0.0, None))) @ Q.T
 R = F @ np.linalg.inv(U)
-V = R @ U @ R.T
+if np.linalg.det(R) > 0:
+    V = R @ U @ R.T
+else:
+    print("orthogonal factor contains a reflection: det(R) <= 0")
 
 print("J =", J)
 print("principal stretches =", lam)`
 
   const cards:[string,M2|null][]=[
     ['C',data.C],['B',data.B],['E',data.E],['e',data.e],
-    ['U',data.U],['V',data.V],['R',data.R]
+    ['U',data.U],['V',data.V],['R',data.properRotation?data.R:null]
   ]
 
   return (
