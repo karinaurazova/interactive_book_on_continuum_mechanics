@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.5.1-hardening
+      - v0.6-constitutive-modeling
   workflow_dispatch:
 
 permissions:
