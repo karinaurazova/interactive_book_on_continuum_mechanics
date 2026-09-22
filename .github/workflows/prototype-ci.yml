@@ -7,6 +7,7 @@ on:
       - v0.2-platform
       - v0.3-kinematics
       - v0.3.1-hardening
+      - v0.4-transport
   pull_request:
     branches:
       - main
