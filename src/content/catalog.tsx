@@ -35,6 +35,7 @@ import { VelocityGradient } from '../components/VelocityGradient'
 import { RateDeformationSpin } from '../components/RateDeformationSpin'
 import { VolumeRateJacobian } from '../components/VolumeRateJacobian'
 import { MaterialTransportTheorem } from '../components/MaterialTransportTheorem'
+import { ControlVolumeFlux } from '../components/ControlVolumeFlux'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -42,7 +43,7 @@ export type ModuleId =
   | 'M05' | 'M06' | 'M07' | 'M08' | 'M09'
   | 'M10' | 'M11' | 'M12' | 'M13' | 'M14'
   | 'K00' | 'K01' | 'K02' | 'K03' | 'K04' | 'K05' | 'K06' | 'K07' | 'K08' | 'K09' | 'K10' | 'K11' | 'K12'
-  | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07'
+  | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport'
 
@@ -96,7 +97,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'transport',
     title: { ru: 'Кинематика во времени и транспорт', en: 'Kinematics in time and transport' },
     shortTitle: { ru: 'Время и транспорт', en: 'Time & transport' },
-    moduleIds: ['T00', 'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07'],
+    moduleIds: ['T00', 'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08'],
   },
 ]
 
@@ -136,7 +137,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'T04', chapterId: 'transport', title: { ru: 'Градиент скорости', en: 'Velocity gradient' }, subtitle: { ru: 'L = ∇v = ḞF⁻¹', en: 'L = ∇v = ḞF⁻¹' }, render: ({notation,language,goTo}) => <VelocityGradient notation={notation} language={language} onBack={() => goTo('T03')} onNext={() => goTo('T05')} /> },
   { id: 'T05', chapterId: 'transport', title: { ru: 'Скорость деформации и локальный спин', en: 'Rate of deformation and local spin' }, subtitle: { ru: 'L = D + W', en: 'L = D + W' }, render: ({notation,language,goTo}) => <RateDeformationSpin notation={notation} language={language} onBack={() => goTo('T04')} onNext={() => goTo('T06')} /> },
   { id: 'T06', chapterId: 'transport', title: { ru: 'Дивергенция скорости и изменение объёма', en: 'Velocity divergence and volume change' }, subtitle: { ru: 'J̇ = J tr D = J ∇·v', en: 'J̇ = J tr D = J ∇·v' }, render: ({notation,language,goTo}) => <VolumeRateJacobian notation={notation} language={language} onBack={() => goTo('T05')} onNext={() => goTo('T07')} /> },
-  { id: 'T07', chapterId: 'transport', title: { ru: 'Транспортная теорема для материальной области', en: 'Transport theorem for a material region' }, subtitle: { ru: 'd/dt ∫Ωₜ φ dv', en: 'd/dt ∫Ωₜ φ dv' }, render: ({notation,language,goTo}) => <MaterialTransportTheorem notation={notation} language={language} onBack={() => goTo('T06')} /> },
+  { id: 'T07', chapterId: 'transport', title: { ru: 'Транспортная теорема для материальной области', en: 'Transport theorem for a material region' }, subtitle: { ru: 'd/dt ∫Ωₜ φ dv', en: 'd/dt ∫Ωₜ φ dv' }, render: ({notation,language,goTo}) => <MaterialTransportTheorem notation={notation} language={language} onBack={() => goTo('T06')} onNext={() => goTo('T08')} /> },
+  { id: 'T08', chapterId: 'transport', title: { ru: 'Контрольный объём и поток через границу', en: 'Control volume and boundary flux' }, subtitle: { ru: 'накопление + поток', en: 'accumulation + flux' }, render: ({notation,language,goTo}) => <ControlVolumeFlux notation={notation} language={language} onBack={() => goTo('T07')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
