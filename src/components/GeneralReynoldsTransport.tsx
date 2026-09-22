@@ -18,7 +18,7 @@ const text = {
     key:'ОТНОСИТЕЛЬНАЯ СКОРОСТЬ ЧЕРЕЗ ГРАНИЦУ',
     keyText:'Для движущегося контрольного объёма V(t) поверхностный поток определяется величиной φ(v−w)·n.',
     general:'Общая форма',
-    generalText:'Скорость изменения соответствующей интегральной величины для материала равна сумме производной интеграла по движущемуся контрольному объёму и относительного потока через его границу.',
+    generalText:'Здесь ℛₘₐₜ обозначает скорость изменения соответствующей интегральной величины для материальной системы. Она равна сумме производной интеграла по движущемуся контрольному объёму и относительного потока через его границу.',
     limits:'Два важных предельных случая',
     limitsText:'Если w = 0, получаем фиксированный контрольный объём. Если w = v на границе, относительный поток исчезает и область становится материальной.',
     fixed:'фиксированный объём',
@@ -52,7 +52,7 @@ const text = {
     key:'RELATIVE VELOCITY THROUGH THE BOUNDARY',
     keyText:'For a moving control volume V(t), the surface transport term is governed by φ(v−w)·n.',
     general:'General form',
-    generalText:'The rate of the corresponding integral quantity for the material equals the derivative over the moving control volume plus the relative flux through its boundary.',
+    generalText:'Here ℛₘₐₜ denotes the rate of the corresponding integral quantity for the material system. It equals the derivative over the moving control volume plus the relative flux through its boundary.',
     limits:'Two important limiting cases',
     limitsText:'If w = 0, the control volume is fixed. If w = v at the boundary, relative flux vanishes and the region is material.',
     fixed:'fixed volume',
@@ -111,12 +111,12 @@ export function GeneralReynoldsTransport({notation,language,onBack,onNext}:Props
 
   const notationLine =
     notation==='Index'
-      ? 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (vᵢ−wᵢ)nᵢ da'
+      ? 'ℛₘₐₜ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (vᵢ−wᵢ)nᵢ da'
       : notation==='Matrix'
-      ? 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (v−w)·n da'
+      ? 'ℛₘₐₜ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (v−w)·n da'
       : notation==='Python'
       ? 'rate = accumulation + relative_boundary_flux'
-      : 'ℛ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (𝐯−𝐰)·𝐧 da'
+      : 'ℛₘₐₜ = d/dt ∫V(t) φ dv + ∫∂V(t) φ (𝐯−𝐰)·𝐧 da'
 
   const boxX=22+10*boundarySpeed
   const boxW=52
