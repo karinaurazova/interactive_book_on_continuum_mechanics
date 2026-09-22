@@ -75,6 +75,7 @@ import { BifurcationPostcritical } from '../components/BifurcationPostcritical'
 import { ArcLengthContinuation } from '../components/ArcLengthContinuation'
 import { ImperfectionSensitivity } from '../components/ImperfectionSensitivity'
 import { FiniteStrainComputationalLab } from '../components/FiniteStrainComputationalLab'
+import { FiniteStrainFinalChallenge } from '../components/FiniteStrainFinalChallenge'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -85,7 +86,7 @@ export type ModuleId =
   | 'T00' | 'T01' | 'T02' | 'T03' | 'T04' | 'T05' | 'T06' | 'T07' | 'T08' | 'T09' | 'T10'
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
-  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09' | 'D10' | 'D11' | 'D12' | 'D13'
+  | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09' | 'D10' | 'D11' | 'D12' | 'D13' | 'D14'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity'
 
@@ -157,7 +158,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'finite-strain-hyperelasticity',
     title: { ru: 'Конечные деформации и гиперупругость', en: 'Finite strain and hyperelasticity' },
     shortTitle: { ru: 'Конечные деформации', en: 'Finite strain' },
-    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08', 'D09', 'D10', 'D11', 'D12', 'D13'],
+    moduleIds: ['D00', 'D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08', 'D09', 'D10', 'D11', 'D12', 'D13', 'D14'],
   },
 ]
 
@@ -237,7 +238,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'D10', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Бифуркации и посткритическое поведение', en: 'Bifurcations and post-critical behavior' }, subtitle: { ru: 'ветви равновесия · критическая точка · энергетический ландшафт', en: 'equilibrium branches · critical point · energy landscape' }, render: ({notation,language,goTo}) => <BifurcationPostcritical notation={notation} language={language} onBack={() => goTo('D09')} onNext={() => goTo('D11')} /> },
   { id: 'D11', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Продолжение ветвей решения и метод длины дуги', en: 'Solution continuation and the arc-length method' }, subtitle: { ru: 'управление нагрузкой · предельная точка · длина дуги', en: 'load control · limit point · arc length' }, render: ({notation,language,goTo}) => <ArcLengthContinuation notation={notation} language={language} onBack={() => goTo('D10')} onNext={() => goTo('D12')} /> },
   { id: 'D12', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Чувствительность к несовершенствам и реальная потеря устойчивости', en: 'Imperfection sensitivity and real instability' }, subtitle: { ru: 'идеальная симметрия · несовершенство · выбор ветви', en: 'perfect symmetry · imperfection · branch selection' }, render: ({notation,language,goTo}) => <ImperfectionSensitivity notation={notation} language={language} onBack={() => goTo('D11')} onNext={() => goTo('D13')} /> },
-  { id: 'D13', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Вычислительная лаборатория конечных деформаций и устойчивости', en: 'Computational laboratory for finite strain and stability' }, subtitle: { ru: 'гиперупругость · касательная жёсткость · ветви · несовершенства', en: 'hyperelasticity · tangent stiffness · branches · imperfections' }, render: ({notation,language,goTo}) => <FiniteStrainComputationalLab notation={notation} language={language} onBack={() => goTo('D12')} /> },
+  { id: 'D13', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Вычислительная лаборатория конечных деформаций и устойчивости', en: 'Computational laboratory for finite strain and stability' }, subtitle: { ru: 'гиперупругость · касательная жёсткость · ветви · несовершенства', en: 'hyperelasticity · tangent stiffness · branches · imperfections' }, render: ({notation,language,goTo}) => <FiniteStrainComputationalLab notation={notation} language={language} onBack={() => goTo('D12')} onNext={() => goTo('D14')} /> },
+  { id: 'D14', chapterId: 'finite-strain-hyperelasticity', title: { ru: 'Итоговая самопроверка по конечным деформациям и гиперупругости', en: 'Final self-check on finite strain and hyperelasticity' }, subtitle: { ru: 'энергия · напряжения · устойчивость · продолжение · несовершенства', en: 'energy · stresses · stability · continuation · imperfections' }, render: ({notation,language,goTo}) => <FiniteStrainFinalChallenge notation={notation} language={language} onBack={() => goTo('D13')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
