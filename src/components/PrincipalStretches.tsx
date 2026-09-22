@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -37,6 +38,7 @@ const text = {
     conclusionTitle: 'Главные растяжения дают самый компактный геометрический язык конечной деформации.',
     conclusionText: 'Через них удобно описывать анизотропию, большие деформации и далее строить конститутивные модели.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к предельным случаям →',
   },
   en: {
     back: '← K08',
@@ -67,6 +69,7 @@ const text = {
     conclusionTitle: 'Principal stretches provide the most compact geometric language for finite deformation.',
     conclusionText: 'They are especially useful for anisotropy, large deformation, and constitutive modeling.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to limiting cases →',
   },
 } as const
 
@@ -93,7 +96,7 @@ function eigSym2(a:number,b:number,d:number){
   return {l1,l2,n1:vec(l1),n2:vec(l2)}
 }
 
-export function PrincipalStretches({notation,language,onBack}:Props){
+export function PrincipalStretches({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [u11,setU11]=useState(1.35)
   const [u22,setU22]=useState(0.82)
@@ -155,6 +158,8 @@ export function PrincipalStretches({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
