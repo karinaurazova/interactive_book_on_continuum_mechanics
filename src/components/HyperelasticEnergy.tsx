@@ -29,7 +29,7 @@ const text = {
     energy:'Ψ',
     nominal:'P₁₁',
     cauchy:'σ₁₁',
-    sceneKicker:'ENERGY → STRESS',
+    sceneKicker:'ЭНЕРГИЯ → НАПРЯЖЕНИЕ',
     sceneTitle:'меняй растяжение и параметры и смотри, как энергия порождает напряжение',
     stvk:'Сен-Венан–Кирхгоф',
     neo:'Нео-Гук',
@@ -42,7 +42,7 @@ const text = {
     deepen:'Углубиться',
     deepenText:'Если Ψ = Ψ(C), то δΨ = 1/2 S:δC. Для Ψ = Ψ(F) имеем P = ∂Ψ/∂F. Эти записи эквивалентны при корректном преобразовании производных.',
     research:'Исследовательское замечание',
-    researchText:'В современных кодах гиперупругости полезно отделять функцию энергии от автоматического получения stress/tangent. Это упрощает проверку модели, автоматическое дифференцирование и добавление новых материалов.',
+    researchText:'В современных кодах гиперупругости полезно отделять функцию энергии от автоматического получения напряжений и касательной жёсткости (stress/tangent). Это упрощает проверку модели, автоматическое дифференцирование и добавление новых материалов.',
     warning:'ВАЖНО',
     warningTitle:'Гиперупругость не означает линейность и не означает несжимаемость.',
     warningText:'Модель может быть сильно нелинейной и сжимаемой; несжимаемость вводится отдельно как ограничение или объёмный штраф.',
@@ -66,7 +66,7 @@ const text = {
     energy:'Ψ',
     nominal:'P₁₁',
     cauchy:'σ₁₁',
-    sceneKicker:'ENERGY → STRESS',
+    sceneKicker:'ЭНЕРГИЯ → НАПРЯЖЕНИЕ',
     sceneTitle:'vary stretch and parameters and watch energy generate stress',
     stvk:'Saint Venant–Kirchhoff',
     neo:'Neo-Hookean',
@@ -180,7 +180,7 @@ export function HyperelasticEnergy({notation,language,onBack,onNext}:Props){
         <DepthNote label={copy.research} variant="research"><p>{copy.researchText}</p></DepthNote>
 
         <ApplicationLinks language={language} items={[
-          {ru:'Нелинейный FEM',en:'Nonlinear FEM'},
+          {ru:'Нелинейный МКЭ',en:'Nonlinear FEM'},
           {ru:'Мягкие ткани',en:'Soft tissues'},
           {ru:'Резина и эластомеры',en:'Rubber and elastomers'},
           {ru:'Механика полимеров',en:'Polymer mechanics'},
