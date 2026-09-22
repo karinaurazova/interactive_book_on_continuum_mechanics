@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 const text = {
@@ -41,6 +42,7 @@ const text = {
     conclusionTitle: 'J говорит о локальном изменении размера, но не описывает форму полностью.',
     conclusionText: 'Чтобы понять растяжения и изменения углов независимо от вращения, дальше понадобятся C и B.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к тензорам Коши–Грина →',
   },
   en: {
     back: '← K04',
@@ -75,6 +77,7 @@ const text = {
     conclusionTitle: 'J measures local size change, not the full change of shape.',
     conclusionText: 'To quantify stretches and angle changes independently of rotation, we will next need C and B.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to the Cauchy–Green tensors →',
   },
 } as const
 
@@ -82,7 +85,7 @@ function fmt(v:number, d=2) {
   return (Math.abs(v) < 1e-10 ? 0 : v).toFixed(d)
 }
 
-export function JacobianVolumeChange({ notation, language, onBack }: Props) {
+export function JacobianVolumeChange({ notation, language, onBack, onNext }: Props) {
   const copy=text[language]
   const [sx,setSx]=useState(1.25)
   const [sy,setSy]=useState(0.90)
@@ -141,6 +144,8 @@ export function JacobianVolumeChange({ notation, language, onBack }: Props) {
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
