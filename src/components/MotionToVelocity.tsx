@@ -4,6 +4,7 @@ import type { Language, NotationMode } from '../i18n'
 type Props = {
   notation: NotationMode
   language: Language
+  onNext: () => void
 }
 
 const text = {
@@ -33,6 +34,7 @@ const text = {
     conclusionTitle: 'Скорость — это временная производная движения, а не новое независимое поле.',
     conclusionText: 'Следующий шаг — показать, как эта же скорость описывается как поле v(x,t) в текущей конфигурации.',
     interactive: 'ИНТЕРАКТИВНО',
+    next: 'Перейти к двум описаниям скорости →',
   },
   en: {
     title: 'From motion to velocity',
@@ -60,6 +62,7 @@ const text = {
     conclusionTitle: 'Velocity is the time derivative of motion, not an independent new field.',
     conclusionText: 'The next step is to describe the same velocity as a field v(x,t) in the current configuration.',
     interactive: 'INTERACTIVE',
+    next: 'Continue to the two velocity descriptions →',
   },
 } as const
 
@@ -67,7 +70,7 @@ function fmt(v:number,d=2){
   return (Math.abs(v)<1e-10?0:v).toFixed(d)
 }
 
-export function MotionToVelocity({notation,language}:Props){
+export function MotionToVelocity({notation,language,onNext}:Props){
   const copy=text[language]
   const [time,setTime]=useState(0.35)
   const [amplitude,setAmplitude]=useState(0.55)
@@ -104,10 +107,10 @@ export function MotionToVelocity({notation,language}:Props){
   const pathPoints=path.map(q=>map(q).join(',')).join(' ')
 
   const notationLine =
-    notation==='Index' ? 'vᵢ(X,t) = (∂χᵢ/∂t)ₓ' :
+    notation==='Index' ? 'vᵢ(X,t) = (∂χᵢ/∂t)_X' :
     notation==='Matrix' ? 'v(X,t) = ∂x(X,t)/∂t' :
     notation==='Python' ? 'v = dchi_dt(X, t)' :
-    '𝐯(𝐗,t) = ∂χ(𝐗,t)/∂t |𝐗'
+    '𝐯(𝐗,t) = (∂χ(𝐗,t)/∂t)_X'
 
   return (
     <section className="module-view module-view-stacked">
@@ -131,6 +134,8 @@ export function MotionToVelocity({notation,language}:Props){
           <div className="definition-label">{copy.fixed}</div>
           <p>{copy.fixedText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
