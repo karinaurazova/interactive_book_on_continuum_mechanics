@@ -2381,3 +2381,66 @@ input[type="range"] {
     min-height: 300px;
   }
 }
+
+
+.principal-stretch-scene {
+  width: 100%;
+  min-height: 360px;
+  border-radius: 14px;
+  background: #111318;
+}
+
+.principal-stretch-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr);
+  gap: 10px;
+}
+
+.principal-values-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px;
+}
+
+.principal-values-card > div,
+.principal-stretch-metrics > div {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(244,242,236,0.055);
+  border: 1px solid rgba(244,242,236,0.07);
+}
+
+.principal-values-card span,
+.principal-values-card strong,
+.principal-stretch-metrics span,
+.principal-stretch-metrics strong {
+  display: block;
+}
+
+.principal-values-card span,
+.principal-stretch-metrics span {
+  color: rgba(244,242,236,0.55);
+  font-size: 0.68rem;
+  margin-bottom: 4px;
+}
+
+.principal-stretch-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 820px) {
+  .principal-stretch-grid,
+  .principal-stretch-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .principal-stretch-grid,
+  .principal-values-card,
+  .principal-stretch-metrics {
+    grid-template-columns: 1fr;
+  }
+}
