@@ -9,6 +9,12 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('ru')
 
   const copy = ui[language]
+
+  const goTo = (id: ModuleId) => {
+    const target = moduleById[id]
+    setActive(id)
+    if (target.chapterId !== activeChapter) setActiveChapter(target.chapterId)
+  }
   const activeModule = moduleById[active]
   const chapter = chapterById[activeChapter]
   const moduleIndex = chapter.moduleIds.indexOf(active)
@@ -47,7 +53,7 @@ export default function App() {
               </button>
             ))}
           </div>
-          <div className="version">v0.5.0</div>
+          <div className="version">v0.5.1</div>
         </div>
       </header>
 
@@ -99,7 +105,7 @@ export default function App() {
           {activeModule.render({
             notation,
             language,
-            goTo: setActive,
+            goTo,
           })}
         </main>
       </div>
