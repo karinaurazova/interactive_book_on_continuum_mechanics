@@ -13,6 +13,7 @@ on:
       - v0.5-balance-laws
       - v0.5.1-hardening
       - v0.6-constitutive-modeling
+      - v0.6.1-hardening
   pull_request:
     branches:
       - main
@@ -40,6 +41,9 @@ jobs:
 
       - name: Balance-law sanity checks
         run: npm run test:balance
+
+      - name: Constitutive sanity checks
+        run: npm run test:constitutive
 
       - name: Build
         run: npm run build
