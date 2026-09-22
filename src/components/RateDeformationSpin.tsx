@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack: () => void
+  onNext: () => void
 }
 
 type Mode = 'stretch' | 'rotation' | 'mixed'
@@ -46,6 +47,7 @@ const text = {
     conclusionTitle:'D и W разделяют локальную кинематику на деформационную и вращательную части.',
     conclusionText:'Следующим шагом свяжем tr D с изменением объёма и производной якобиана J.',
     interactive:'ИНТЕРАКТИВНО',
+    next:'Перейти к изменению объёма →',
   },
   en: {
     back:'← T04',
@@ -82,6 +84,7 @@ const text = {
     conclusionTitle:'D and W split local kinematics into deformational and rotational parts.',
     conclusionText:'Next we connect tr D with volume change and the time derivative of the Jacobian J.',
     interactive:'INTERACTIVE',
+    next:'Continue to volume change →',
   }
 } as const
 
@@ -109,7 +112,7 @@ function frob(A:M2){
   return Math.sqrt(A.flat().reduce((s,v)=>s+v*v,0))
 }
 
-export function RateDeformationSpin({notation,language,onBack}:Props){
+export function RateDeformationSpin({notation,language,onBack,onNext}:Props){
   const copy=text[language]
   const [mode,setMode]=useState<Mode>('mixed')
   const [rate,setRate]=useState(0.55)
@@ -179,6 +182,8 @@ export function RateDeformationSpin({notation,language,onBack}:Props){
           <strong>{copy.warningTitle}</strong>
           <p>{copy.warningText}</p>
         </div>
+
+        <button className="primary-button" onClick={onNext}>{copy.next}</button>
       </div>
 
       <div className="scene-column">
