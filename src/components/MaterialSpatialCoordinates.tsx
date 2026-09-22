@@ -38,6 +38,15 @@ const text = {
     conclusionText: 'Дальше производные по X приведут нас к градиенту деформации F, а производные по x — к пространственным мерам.',
     interactive: 'ИНТЕРАКТИВНО',
     notationLabel: 'Форма записи',
+    notationVariants: 'Как это обозначают в разных книгах',
+    notationVariantsText: 'Буквы меняются, но физические роли остаются теми же. Всегда сначала выясняй: какой символ метит материальную точку, какой задаёт её текущее положение и какой обозначает отображение движения.',
+    convention1: 'Часто: X → x',
+    convention1Text: 'X — материальная (референсная) координата, x — пространственная (текущая): x = χ(X,t).',
+    convention2: 'Встречается: ξ → x',
+    convention2Text: 'ξ (кси) используется как материальная метка вместо X: x = χ(ξ,t). Физический смысл тот же.',
+    convention3: 'χ — это отображение',
+    convention3Text: 'χ (хи) обычно обозначает отображение движения (motion map): оно связывает материальную метку с текущим положением. Это не «третья координата».',
+    notationCaution: 'Важно: одна и та же буква у разных авторов может означать разное. Смотри на определение и конфигурацию, а не только на символ.',
     next: 'Перейти к локальной окрестности →',
   },
   en: {
@@ -67,6 +76,15 @@ const text = {
     conclusionText: 'Later, derivatives with respect to X lead to the deformation gradient F, while derivatives with respect to x lead to spatial measures.',
     interactive: 'INTERACTIVE',
     notationLabel: 'Notation',
+    notationVariants: 'How different books write this',
+    notationVariantsText: 'Symbols vary, but the physical roles stay the same. First identify which symbol labels the material point, which gives its current position, and which denotes the motion map.',
+    convention1: 'Common: X → x',
+    convention1Text: 'X is the material/reference coordinate and x is the spatial/current coordinate: x = χ(X,t).',
+    convention2: 'Also used: ξ → x',
+    convention2Text: 'ξ (xi) may label the material point instead of X: x = χ(ξ,t). The physical meaning is unchanged.',
+    convention3: 'χ is the mapping',
+    convention3Text: 'χ (chi) usually denotes the motion map connecting a material label to the current position. It is not a third coordinate system.',
+    notationCaution: 'Important: the same letter may mean different things in different texts. Read the definition and configuration, not the symbol alone.',
     next: 'Continue to the local neighborhood →',
   },
 } as const
@@ -154,6 +172,26 @@ export function MaterialSpatialCoordinates({ notation, language, onBack, onNext 
         <div className="definition">
           <div className="definition-label">{copy.notationLabel}</div>
           <div className="formula">{notationLine}</div>
+        </div>
+
+        <div className="notation-guide">
+          <div className="definition-label">{copy.notationVariants}</div>
+          <p className="notation-guide-intro">{copy.notationVariantsText}</p>
+          <div className="notation-guide-grid">
+            <div>
+              <strong>{copy.convention1}</strong>
+              <span>{copy.convention1Text}</span>
+            </div>
+            <div>
+              <strong>{copy.convention2}</strong>
+              <span>{copy.convention2Text}</span>
+            </div>
+            <div>
+              <strong>{copy.convention3}</strong>
+              <span>{copy.convention3Text}</span>
+            </div>
+          </div>
+          <p className="notation-caution">{copy.notationCaution}</p>
         </div>
 
         <button className="primary-button" onClick={onNext}>{copy.next}</button>
