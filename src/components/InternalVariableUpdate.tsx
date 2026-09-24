@@ -24,18 +24,18 @@ scheme:'схема',explicit:'явная',implicit:'неявная',
 dt:'шаг Δt',tau:'время τ',epsn:'εₙ',eps1:'εₙ₊₁',qn:'qₙ',alpha:'нелинейность α',
 q1:'qₙ₊₁',sigma:'σₙ₊₁',res:'|R|',iters:'итерации',tangentValue:'dσ/dε',
 warning:'ВАЖНО',
-warningTitle:'Устойчивость локальное обновление и сходимость global Newton — разные вещи.',
+warningTitle:'Устойчивость локальное обновление и сходимость глобального метода Ньютона — разные вещи.',
 warningText:'Implicit-схема может быть устойчивой по времени, но плохая или несогласованная касательная всё равно замедлит глобальные итерации FEM.',
 question:'ВОПРОС ДЛЯ ПРОВЕРКИ',
 questionTitle:'Почему внутренние переменные нельзя обновлять только после завершения глобального шага?',
-questionText:'Потому что напряжение и касательная на каждой глобальной итерации зависят от согласованного текущего состояния материала. Отложенное обновление нарушает локальную согласованность constitutive response.',
+questionText:'Потому что напряжение и касательная на каждой глобальной итерации зависят от согласованного текущего состояния материала. Отложенное обновление нарушает локальную согласованность конститутивного отклика.',
 conclusion:'ВЫВОД',
 conclusionTitle:'Материал в FEM — это отображение состояния: (εₙ₊₁,qₙ,Δt) → (σₙ₊₁,qₙ₊₁,C_alg).',
 conclusionText:'Следующий шаг — перейти к идентификации параметров: какие эксперименты действительно позволяют восстановить τ, модули и нелинейные параметры без неидентифицируемости.',
 deepen:'Углубиться',
-deepenText:'В реальной конечнодеформационной модели вместо скаляра q хранится тензорная внутренняя переменная, например Fᵥ, Cᵥ или несколько branch-states. Локальный residual становится тензорным, но структура алгоритма остаётся той же: trial state → local solve → stress → согласованная касательная.',
+deepenText:'В реальной конечнодеформационной модели вместо скаляра q хранится тензорная внутренняя переменная, например Fᵥ, Cᵥ или несколько branch-states. Локальный residual становится тензорным, но структура алгоритма остаётся той же: пробное состояние state → local solve → stress → согласованная касательная.',
 research:'Исследовательское замечание',
-researchText:'Для production-кода полезно отделять constitutive kernel от глобального FEM-решателя. Тогда один и тот же material update можно тестировать на single-point benchmarks, подключать к разным FE-фреймворкам и проверять finite-difference/automatic-differentiation тестами.',
+researchText:'Для рабочего кода полезно отделять constitutive kernel от глобального FEM-решателя. Тогда один и тот же material update можно тестировать на одноточечных тестах, подключать к разным МКЭ-фреймворкам и проверять тестами конечных разностей и автоматического дифференцирования.',
 back:'← E09',next:'E11 → идентификация параметров'
 },
 en:{
@@ -59,12 +59,12 @@ warningTitle:'Time-integration stability and global Newton convergence are diffe
 warningText:'An implicit update may be stable in time, but an inconsistent or poor tangent can still make the global FEM iterations converge slowly.',
 question:'CHECKPOINT',
 questionTitle:'Why not update internal variables only after the global step converges?',
-questionText:'Because stress and tangent at each global iteration depend on a consistent current material state. Delayed updates break the local consistency of the constitutive response.',
+questionText:'Because stress and tangent at each global iteration depend on a consistent current material state. Delayed updates break the local consistency of the конститутивного отклика.',
 conclusion:'CONCLUSION',
 conclusionTitle:'A FEM material is a state map: (εₙ₊₁,qₙ,Δt) → (σₙ₊₁,qₙ₊₁,C_alg).',
 conclusionText:'Next we turn to parameter identification: which experiments can actually recover relaxation times, moduli, and nonlinear parameters without practical non-identifiability.',
 deepen:'Go deeper',
-deepenText:'In a finite-strain model the scalar q is replaced by tensor-valued variables such as Fᵥ, Cᵥ, or several branch states. The local residual becomes tensorial, but the algorithmic structure is unchanged: trial state → local solve → stress → согласованная касательная.',
+deepenText:'In a finite-strain model the scalar q is replaced by tensor-valued variables such as Fᵥ, Cᵥ, or several branch states. The local residual becomes tensorial, but the algorithmic structure is unchanged: пробное состояние state → local solve → stress → согласованная касательная.',
 research:'Research note',
 researchText:'For production code it is useful to separate the constitutive kernel from the global FEM solver. The same material update can then be benchmarked in single-point tests, reused across FE frameworks, and verified with finite-difference or automatic-differentiation checks.',
 back:'← E09',next:'E11 → parameter identification'
@@ -163,7 +163,7 @@ return <section className="module-view module-view-stacked">
 <text x="82" y={py(data.q1)-1} fill="#2864FF" fontSize="2">qₙ₊₁</text>
 <circle cx="80" cy={py(data.exact)} r="1.5" fill="none" stroke="#F4F2EC" strokeWidth=".7"/>
 <path d={"M20 "+py(qn)+" C38 "+py(qn)+", 58 "+py(data.q1)+", 80 "+py(data.q1)} fill="none" stroke={scheme==='implicit'?'#2864FF':'#DD7A2B'} strokeWidth="1.2"/>
-{scheme==='explicit'&&<><circle cx="50" cy={py(explicitTrial)} r="1.3" fill="#DD7A2B"/><text x="43" y={py(explicitTrial)-2} fill="#DD7A2B" fontSize="1.8">trial</text></>}
+{scheme==='explicit'&&<><circle cx="50" cy={py(explicitTrial)} r="1.3" fill="#DD7A2B"/><text x="43" y={py(explicitTrial)-2} fill="#DD7A2B" fontSize="1.8">пробное состояние</text></>}
 <text x="10" y="62" fill="#8C939D" fontSize="1.8">n</text><text x="78" y="62" fill="#8C939D" fontSize="1.8">n+1</text>
 
 <text x="8" y="17" fill="#F4F2EC" fontSize="2.1">{scheme==='implicit'?'R(qₙ₊₁)=0':'forward step'}</text>
