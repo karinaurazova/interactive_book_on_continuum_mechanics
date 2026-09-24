@@ -39,7 +39,7 @@ researchText:'Для рядов Прони особенно опасны пер�
 back:'← E10',next:'E12 → вычислительная лаборатория'
 },
 en:{
-title:'Parameter identification and practical identifiability',
+title:'Parameter identification and practical идентифицируемость',
 lead:'A good curve fit does not guarantee that model parameters are well determined. In viscoelasticity, several different combinations of moduli and relaxation times can reproduce nearly the same response over a limited experimental window.',
 key:'IDENTIFIABILITY DEPENDS ON THE EXPERIMENT AS WELL AS THE MODEL',
 keyText:'If measurements do not cover a timescale τᵢ, response чувствительность to that parameter is weak and its estimate becomes strongly correlated with other parameters.',
@@ -64,7 +64,7 @@ conclusion:'CONCLUSION',
 conclusionTitle:'Identification is a joint problem of model choice, планирование эксперимента, and parameterization.',
 conclusionText:'Next we assemble the chapter into a computational laboratory: choose a model, define an experiment, simulate it, and run physical sanity checks.',
 deepen:'Go deeper',
-deepenText:'Practical identifiability can be studied using сингулярные значения of the чувствительность matrix, the матрица информации Фишера, профиль правдоподобия, or байесовское апостериорное распределениеs. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
+deepenText:'Practical идентифицируемость can be studied using сингулярные значения of the чувствительность matrix, the матрица информации Фишера, профиль правдоподобия, or байесовское апостериорное распределениеs. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
 research:'Research note',
 researchText:'рядов Прони models are especially vulnerable to branch permutation symmetry, nearby τᵢ, and over-parameterization. Ordering τ₁<τ₂<..., log-parameterization of positive quantities, and model selection or regularization are useful safeguards.',
 back:'← E10',next:'E12 → computational laboratory'
@@ -161,7 +161,7 @@ return <section className="module-view module-view-stacked">
 
 <svg className="balance-scene" viewBox="0 0 100 68" role="img">
 <rect x="4" y="5" width="92" height="58" rx="9" fill="#111318"/>
-<text x="8" y="11" fill="#F4F2EC" fontSize="2.5">{experiment==='relaxation'?'response G(t)':'loss modulus E″(ω)'}</text>
+<text x="8" y="11" fill="#F4F2EC" fontSize="2.5">{experiment==='relaxation'?'отклик G(t)':'loss modulus E″(ω)'}</text>
 <line x1="8" y1="34" x2="48" y2="34" stroke="#69717C" strokeWidth=".5"/>
 <path d={mainPath} fill="none" stroke="#F4F2EC" strokeWidth="1.2"/>
 <text x="8" y="39" fill="#8C939D" fontSize="1.8">log {experiment==='relaxation'?'t':'ω'}</text>
@@ -172,7 +172,7 @@ return <section className="module-view module-view-stacked">
 <path d={s2Path} fill="none" stroke="#2864FF" strokeWidth="1.1"/>
 <text x="57" y="16" fill="#A9E3D2" fontSize="1.9">τ₁</text><text x="64" y="16" fill="#2864FF" fontSize="1.9">τ₂</text>
 
-<text x="56" y="43" fill="#F4F2EC" fontSize="2.3">identifiability</text>
+<text x="56" y="43" fill="#F4F2EC" fontSize="2.3">идентифицируемость</text>
 <line x1="57" y1="52" x2="91" y2="52" stroke="#69717C" strokeWidth="2.2"/>
 <circle cx={scoreX} cy="52" r="2.1" fill={d.score>.55?'#A9E3D2':d.score>.25?'#DD7A2B':'#F4F2EC'}/>
 <text x="57" y="59" fill="#8C939D" fontSize="1.8">0</text><text x="89" y="59" fill="#8C939D" fontSize="1.8">1</text>
