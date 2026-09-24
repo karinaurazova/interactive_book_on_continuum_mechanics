@@ -83,7 +83,8 @@ import { KelvinVoigtModel } from '../components/KelvinVoigtModel'
 import { StandardLinearSolid } from '../components/StandardLinearSolid'
 import { GeneralizedMaxwell } from '../components/GeneralizedMaxwell'
 import { HereditaryIntegral } from '../components/HereditaryIntegral'
-import { CyclicHysteresis } from '../components/CyclicHysteresis'\nimport { FrequencyDomain } from '../components/FrequencyDomain'
+import { CyclicHysteresis } from '../components/CyclicHysteresis'
+import { FrequencyDomain } from '../components/FrequencyDomain'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -262,7 +263,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'E04', chapterId: 'viscoelasticity-memory', title: { ru: 'Стандартная линейная модель твёрдого тела (модель Ценера)', en: 'Standard Linear Solid (Zener)' }, subtitle: { ru: 'мгновенная, релаксирующая и равновесная составляющие', en: 'instantaneous and equilibrium stiffness' }, render: ({notation,language,goTo}) => <StandardLinearSolid notation={notation} language={language} onBack={() => goTo('E03')} onNext={() => goTo('E05')} /> },
   { id: 'E05', chapterId: 'viscoelasticity-memory', title: { ru: 'Обобщённая модель Максвелла и спектр времён релаксации', en: 'Generalized Maxwell model and relaxation-time spectrum' }, subtitle: { ru: 'несколько временных масштабов · ряд Прони', en: 'multiple timescales · Prony series' }, render: ({notation,language,goTo}) => <GeneralizedMaxwell notation={notation} language={language} onBack={() => goTo('E04')} onNext={() => goTo('E06')} /> },
   { id: 'E06', chapterId: 'viscoelasticity-memory', title: { ru: 'Наследственный интеграл и принцип суперпозиции Больцмана', en: 'Hereditary integral and Boltzmann superposition principle' }, subtitle: { ru: 'ядро памяти · история деформации · свёртка', en: 'memory kernel · strain history · convolution' }, render: ({notation,language,goTo}) => <HereditaryIntegral notation={notation} language={language} onBack={() => goTo('E05')} onNext={() => goTo('E07')} /> },
-  { id: 'E07', chapterId: 'viscoelasticity-memory', title: { ru: 'Циклическое нагружение, фазовый сдвиг и гистерезис', en: 'Cyclic loading, phase lag, and hysteresis' }, subtitle: { ru: 'фазовый сдвиг · петля σ–ε · диссипация энергии', en: 'phase lag · σ–ε loop · energy dissipation' }, render: ({notation,language,goTo}) => <CyclicHysteresis notation={notation} language={language} onBack={() => goTo('E06')} onNext={() => goTo('E08')} /> },\n  { id: 'E08', chapterId: 'viscoelasticity-memory', title: { ru: 'Частотная область: модули хранения и потерь', en: 'Frequency domain: storage and loss moduli' }, subtitle: { ru: 'E′(ω) · E″(ω) · tanδ · ωτ', en: 'E′(ω) · E″(ω) · tanδ · ωτ' }, render: ({notation,language,goTo}) => <FrequencyDomain notation={notation} language={language} onBack={() => goTo('E07')} /> },
+  { id: 'E07', chapterId: 'viscoelasticity-memory', title: { ru: 'Циклическое нагружение, фазовый сдвиг и гистерезис', en: 'Cyclic loading, phase lag, and hysteresis' }, subtitle: { ru: 'фазовый сдвиг · петля σ–ε · диссипация энергии', en: 'phase lag · σ–ε loop · energy dissipation' }, render: ({notation,language,goTo}) => <CyclicHysteresis notation={notation} language={language} onBack={() => goTo('E06')} onNext={() => goTo('E08')} /> },
+  { id: 'E08', chapterId: 'viscoelasticity-memory', title: { ru: 'Частотная область: модули хранения и потерь', en: 'Frequency domain: storage and loss moduli' }, subtitle: { ru: 'E′(ω) · E″(ω) · tanδ · ωτ', en: 'E′(ω) · E″(ω) · tanδ · ωτ' }, render: ({notation,language,goTo}) => <FrequencyDomain notation={notation} language={language} onBack={() => goTo('E07')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
