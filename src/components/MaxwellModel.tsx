@@ -19,7 +19,7 @@ creep:'Ползучесть',
 creepText:'При σ=const деформация растёт без ограничения: ε(t)=σ₀/E + σ₀t/η.',
 sceneKicker:'MAXWELL',
 sceneTitle:'меняй E и η и наблюдай характерное время памяти',
-E:'модуль E',eta:'вязкость η',time:'время t',tau:'τ=η/E',relaxRatio:'σ/σ₀',creep:'ε при σ₀=1',
+E:'модуль E',eta:'вязкость η',time:'время t',tau:'τ=η/E',relaxRatio:'σ/σ₀',creepMetric:'ε при σ₀=1',
 warning:'ОГРАНИЧЕНИЕ',warningTitle:'Maxwell хорошо описывает релаксацию, но допускает неограниченную ползучесть.',warningText:'Поэтому для материалов с конечной долгосрочной жёсткостью одной ветви Maxwell обычно недостаточно.',
 question:'ВОПРОС ДЛЯ ПРОВЕРКИ',questionTitle:'Что происходит после разгрузки?',questionText:'Упругая часть восстанавливается сразу, но накопленная вязкая деформация в чистой модели Maxwell остаётся.',
 conclusion:'ВЫВОД',conclusionTitle:'Последовательное соединение естественно вводит релаксацию и необратимый вязкий вклад.',conclusionText:'Следом сравним параллельную схему Kelvin–Voigt, которая ведёт себя противоположно в базовых тестах.',
@@ -35,7 +35,7 @@ eq:'Constitutive equation',eqText:'Combining σ=Eεₑ and σ=η ε̇ᵥ gives �
 relax:'Relaxation',relaxText:'At fixed strain, stress decays exponentially: σ(t)=σ₀e^(−t/τ), with τ=η/E.',
 creep:'Creep',creepText:'At fixed stress, strain grows without bound: ε(t)=σ₀/E + σ₀t/η.',
 sceneKicker:'MAXWELL',sceneTitle:'change E and η and observe the memory timescale',
-E:'modulus E',eta:'viscosity η',time:'time t',tau:'τ=η/E',relaxRatio:'σ/σ₀',creep:'ε at σ₀=1',
+E:'modulus E',eta:'viscosity η',time:'time t',tau:'τ=η/E',relaxRatio:'σ/σ₀',creepMetric:'ε at σ₀=1',
 warning:'LIMITATION',warningTitle:'Maxwell captures relaxation well but predicts unbounded creep.',warningText:'For materials with finite long-term stiffness, a single Maxwell branch is therefore insufficient.',
 question:'CHECKPOINT',questionTitle:'What happens after unloading?',questionText:'The elastic strain recovers immediately, but accumulated viscous strain remains in the pure Maxwell model.',
 conclusion:'CONCLUSION',conclusionTitle:'Series coupling naturally produces relaxation and a persistent viscous contribution.',conclusionText:'Next we compare the parallel Kelvin–Voigt arrangement, which behaves differently in the same tests.',
@@ -64,7 +64,7 @@ return <section className="module-view module-view-stacked">
 <div className="control-stack"><label><span>{c.E} <strong>{fmt(E,1)}</strong></span><input type="range" min="1" max="20" step=".5" value={E} onChange={e=>setE(Number(e.target.value))}/></label>
 <label><span>{c.eta} <strong>{fmt(eta,1)}</strong></span><input type="range" min="2" max="60" step="1" value={eta} onChange={e=>setEta(Number(e.target.value))}/></label>
 <label><span>{c.time} <strong>{fmt(t,1)}</strong></span><input type="range" min="0" max="15" step=".1" value={t} onChange={e=>setT(Number(e.target.value))}/></label></div>
-<div className="transport-metrics"><div><span>{c.tau}</span><strong>{fmt(d.tau)}</strong></div><div><span>{c.relaxRatio}</span><strong>{fmt(d.relax)}</strong></div><div><span>{c.creep}</span><strong>{fmt(d.creep)}</strong></div></div></div>
+<div className="transport-metrics"><div><span>{c.tau}</span><strong>{fmt(d.tau)}</strong></div><div><span>{c.relaxRatio}</span><strong>{fmt(d.relax)}</strong></div><div><span>{c.creepMetric}</span><strong>{fmt(d.creep)}</strong></div></div></div>
 <div className="bottom-grid"><div className="prediction-card"><span>{c.question}</span><strong>{c.questionTitle}</strong><p>{c.questionText}</p></div><div className="author-card"><span>{c.conclusion}</span><strong>{c.conclusionTitle}</strong><p>{c.conclusionText}</p></div></div></div>
 </section>
 }
