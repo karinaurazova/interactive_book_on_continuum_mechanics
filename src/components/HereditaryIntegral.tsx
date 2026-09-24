@@ -80,6 +80,9 @@ const data=useMemo(()=>{
  const parts=impulses.map(p=>t>=p.time?p.amp*Math.exp(-(t-p.time)/tau):0)
  return{parts,sigma:parts.reduce((a,b)=>a+b,0)}
 },[t,tau])
+const history=Array.from({length:121},(_,i)=>{const tt=10*i/120;const val=impulses.reduce((s,p)=>s+(tt>=p.time?p.amp*Math.exp(-(tt-p.time)/tau):0),0);return[10+80*tt/10,57-24*val]})
+const historyPath=history.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' ')
+const tails=impulses.map(p=>Array.from({length:81},(_,i)=>{const tt=p.time+(10-p.time)*i/80;const val=p.amp*Math.exp(-(tt-p.time)/tau);return[10+80*tt/10,34-18*val/.5]}).map((q,i)=>(i?'L':'M')+q[0].toFixed(2)+' '+q[1].toFixed(2)).join(' '))
 const formula=notation==='Python'
 ?'sigma = quad(lambda xi: G(t-xi)*eps_dot(xi), -np.inf, t)'
 :notation==='Index'
@@ -103,9 +106,17 @@ return <section className="module-view module-view-stacked">
 ]}/>
 <div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div></div>
 <div className="scene-column"><div className="scene-card"><div className="scene-head"><div><span className="scene-kicker">{c.sceneKicker}</span><h2>{c.sceneTitle}</h2></div></div>
-<svg className="balance-scene" viewBox="0 0 100 68" role="img"><rect x="5" y="6" width="90" height="56" rx="9" fill="#111318"/>
-{impulses.map((p,i)=><g key={i}><line x1={10+8*p.time} y1="58" x2={10+8*p.time} y2={58-32*p.amp/.5} stroke="#A9E3D2" strokeWidth="1.1"/><text x={9+8*p.time} y="62" fill="#F4F2EC" fontSize="2.2">{String(i+1)}</text></g>)}
-<line x1={10+8*t} y1="14" x2={10+8*t} y2="58" stroke="#2864FF" strokeWidth=".9" strokeDasharray="2 2"/>
+<svg className="balance-scene" viewBox="0 0 100 68" role="img">
+<rect x="5" y="6" width="90" height="56" rx="9" fill="#111318"/>
+<text x="10" y="13" fill="#F4F2EC" fontSize="2.5">следы отдельных приращений</text>
+<line x1="10" y1="35" x2="90" y2="35" stroke="#69717C" strokeWidth=".5"/>
+{tails.map((d,i)=><path key={i} d={d} fill="none" stroke={i===0?'#A9E3D2':i===1?'#2864FF':'#DD7A2B'} strokeWidth="1.1"/>)}
+{impulses.map((p,i)=><g key={i}><line x1={10+8*p.time} y1="35" x2={10+8*p.time} y2={28} stroke={i===0?'#A9E3D2':i===1?'#2864FF':'#DD7A2B'} strokeWidth="1.3"/><circle cx={10+8*p.time} cy="28" r="1.3" fill={i===0?'#A9E3D2':i===1?'#2864FF':'#DD7A2B'}/></g>)}
+<text x="10" y="43" fill="#F4F2EC" fontSize="2.5">суммарное напряжение</text>
+<line x1="10" y1="57" x2="90" y2="57" stroke="#69717C" strokeWidth=".5"/>
+<path d={historyPath} fill="none" stroke="#F4F2EC" strokeWidth="1.5"/>
+<line x1={10+8*t} y1="11" x2={10+8*t} y2="59" stroke="#2864FF" strokeWidth=".9" strokeDasharray="2 2"/>
+<text x={Math.min(82,11+8*t)} y="16" fill="#2864FF" fontSize="2.1">t</text>
 </svg>
 <div className="control-stack">
 <label><span>{c.tau} <strong>{fmt(tau,1)}</strong></span><input type="range" min=".5" max="10" step=".1" value={tau} onChange={e=>setTau(Number(e.target.value))}/></label>
