@@ -88,6 +88,7 @@ import { FrequencyDomain } from '../components/FrequencyDomain'
 import { NonlinearFiniteViscoelasticity } from '../components/NonlinearFiniteViscoelasticity'
 import { InternalVariableUpdate } from '../components/InternalVariableUpdate'
 import { ParameterIdentifiability } from '../components/ParameterIdentifiability'
+import { ViscoelasticityComputationalLab } from '../components/ViscoelasticityComputationalLab'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -99,7 +100,7 @@ export type ModuleId =
   | 'B00' | 'B01' | 'B02' | 'B03' | 'B04' | 'B05' | 'B06' | 'B07' | 'B08' | 'B09' | 'B10'
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
   | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09' | 'D10' | 'D11' | 'D12' | 'D13' | 'D14'
-  | 'E00' | 'E01' | 'E02' | 'E03' | 'E04' | 'E05' | 'E06' | 'E07' | 'E08' | 'E09' | 'E10' | 'E11'
+  | 'E00' | 'E01' | 'E02' | 'E03' | 'E04' | 'E05' | 'E06' | 'E07' | 'E08' | 'E09' | 'E10' | 'E11' | 'E12'
 
 export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity' | 'viscoelasticity-memory'
 
@@ -177,7 +178,7 @@ export const chapters: ChapterDefinition[] = [
     id: 'viscoelasticity-memory',
     title: { ru: 'Вязкоупругость и память материала', en: 'Viscoelasticity and material memory' },
     shortTitle: { ru: 'Память материала', en: 'Material memory' },
-    moduleIds: ['E00', 'E01', 'E02', 'E03', 'E04', 'E05', 'E06', 'E07', 'E08', 'E09', 'E10', 'E11'],
+    moduleIds: ['E00', 'E01', 'E02', 'E03', 'E04', 'E05', 'E06', 'E07', 'E08', 'E09', 'E10', 'E11', 'E12'],
   },
 ]
 
@@ -270,7 +271,8 @@ export const modules: ModuleDefinition[] = [
   { id: 'E08', chapterId: 'viscoelasticity-memory', title: { ru: 'Частотная область: модули хранения и потерь', en: 'Frequency domain: storage and loss moduli' }, subtitle: { ru: 'E′(ω) · E″(ω) · tanδ · ωτ', en: 'E′(ω) · E″(ω) · tanδ · ωτ' }, render: ({notation,language,goTo}) => <FrequencyDomain notation={notation} language={language} onBack={() => goTo('E07')} onNext={() => goTo('E09')} /> },
   { id: 'E09', chapterId: 'viscoelasticity-memory', title: { ru: 'Нелинейная и конечно-деформационная вязкоупругость', en: 'Nonlinear and finite-strain viscoelasticity' }, subtitle: { ru: 'F=FₑFᵥ · внутренние переменные · τ(state)', en: 'F=FₑFᵥ · internal variables · τ(state)' }, render: ({notation,language,goTo}) => <NonlinearFiniteViscoelasticity notation={notation} language={language} onBack={() => goTo('E08')} onNext={() => goTo('E10')} /> },
   { id: 'E10', chapterId: 'viscoelasticity-memory', title: { ru: 'Внутренние переменные и вычислительное обновление состояния', en: 'Internal variables and computational state update' }, subtitle: { ru: 'local update · residual · Newton · consistent tangent', en: 'local update · residual · Newton · consistent tangent' }, render: ({notation,language,goTo}) => <InternalVariableUpdate notation={notation} language={language} onBack={() => goTo('E09')} onNext={() => goTo('E11')} /> },
-  { id: 'E11', chapterId: 'viscoelasticity-memory', title: { ru: 'Идентификация параметров и практическая идентифицируемость', en: 'Parameter identification and practical identifiability' }, subtitle: { ru: 'experiment design · sensitivity · correlation · τ₁/τ₂', en: 'experiment design · sensitivity · correlation · τ₁/τ₂' }, render: ({notation,language,goTo}) => <ParameterIdentifiability notation={notation} language={language} onBack={() => goTo('E10')} /> },
+  { id: 'E11', chapterId: 'viscoelasticity-memory', title: { ru: 'Идентификация параметров и практическая идентифицируемость', en: 'Parameter identification and practical identifiability' }, subtitle: { ru: 'experiment design · sensitivity · correlation · τ₁/τ₂', en: 'experiment design · sensitivity · correlation · τ₁/τ₂' }, render: ({notation,language,goTo}) => <ParameterIdentifiability notation={notation} language={language} onBack={() => goTo('E10')} onNext={() => goTo('E12')} /> },
+  { id: 'E12', chapterId: 'viscoelasticity-memory', title: { ru: 'Вычислительная лаборатория вязкоупругости', en: 'Computational viscoelasticity laboratory' }, subtitle: { ru: 'models · protocols · memory · dissipation · sanity checks', en: 'models · protocols · memory · dissipation · sanity checks' }, render: ({notation,language,goTo}) => <ViscoelasticityComputationalLab notation={notation} language={language} onBack={() => goTo('E11')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
