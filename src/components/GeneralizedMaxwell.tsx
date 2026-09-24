@@ -88,6 +88,11 @@ const pts=Array.from({length:101},(_,i)=>{
  return[10+80*tt/20,58-36*G/(Ginf+g1+g2+g3)]
 })
 const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' ')
+const totalRight=Array.from({length:101},(_,i)=>{const tt=20*i/100;const G=Ginf+g1*Math.exp(-tt/t1)+g2*Math.exp(-tt/t2)+g3*Math.exp(-tt/t3);return[55+38*tt/20,58-36*G/(Ginf+g1+g2+g3)]}).map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' ')
+const b1=Array.from({length:101},(_,i)=>{const tt=20*i/100;const y=g1*Math.exp(-tt/t1);return[55+38*tt/20,58-32*y/(Ginf+g1+g2+g3)]})
+const b2=Array.from({length:101},(_,i)=>{const tt=20*i/100;const y=g2*Math.exp(-tt/t2);return[55+38*tt/20,58-32*y/(Ginf+g1+g2+g3)]})
+const b3=Array.from({length:101},(_,i)=>{const tt=20*i/100;const y=g3*Math.exp(-tt/t3);return[55+38*tt/20,58-32*y/(Ginf+g1+g2+g3)]})
+const bp=(a:number[][])=>a.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' ')
 return <section className="module-view module-view-stacked">
 <div className="lesson-copy"><div className="lesson-index">E05</div><h1>{c.title}</h1><p className="lead">{c.lead}</p>
 <div className="concept-card"><span>{c.key}</span><strong>{c.keyText}</strong></div>
@@ -105,7 +110,22 @@ return <section className="module-view module-view-stacked">
 ]}/>
 <div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div></div>
 <div className="scene-column"><div className="scene-card"><div className="scene-head"><div><span className="scene-kicker">{c.sceneKicker}</span><h2>{c.sceneTitle}</h2></div></div>
-<svg className="balance-scene" viewBox="0 0 100 68" role="img"><rect x="5" y="6" width="90" height="56" rx="9" fill="#111318"/><line x1="10" y1="58" x2="90" y2="58" stroke="#69717C" strokeWidth=".6"/><line x1="10" y1="18" x2="10" y2="58" stroke="#69717C" strokeWidth=".6"/><path d={path} fill="none" stroke="#A9E3D2" strokeWidth="1.2"/></svg>
+<svg className="balance-scene" viewBox="0 0 100 68" role="img">
+<rect x="4" y="5" width="92" height="58" rx="9" fill="#111318"/>
+<text x="9" y="12" fill="#F4F2EC" fontSize="2.5">дискретный спектр</text>
+<line x1="10" y1="55" x2="43" y2="55" stroke="#69717C" strokeWidth=".6"/>
+<line x1="10" y1="18" x2="10" y2="55" stroke="#69717C" strokeWidth=".6"/>
+{[[t1,g1],[t2,g2],[t3,g3]].map(([tt,gg],i)=>{const x=12+29*Math.log10(tt/.2)/Math.log10(20/.2);const h=27*gg/10;return <g key={i}><line x1={x} y1="55" x2={x} y2={55-h} stroke={i===0?'#A9E3D2':i===1?'#2864FF':'#DD7A2B'} strokeWidth="2.2"/><circle cx={x} cy={55-h} r="1.4" fill={i===0?'#A9E3D2':i===1?'#2864FF':'#DD7A2B'}/></g>})}
+<text x="23" y="61" fill="#8C939D" fontSize="2.1">log τ</text>
+<text x="55" y="12" fill="#F4F2EC" fontSize="2.5">релаксационный отклик</text>
+<line x1="55" y1="58" x2="93" y2="58" stroke="#69717C" strokeWidth=".6"/>
+<line x1="55" y1="18" x2="55" y2="58" stroke="#69717C" strokeWidth=".6"/>
+<path d={bp(b1)} fill="none" stroke="#A9E3D2" strokeWidth=".8" opacity=".75"/>
+<path d={bp(b2)} fill="none" stroke="#2864FF" strokeWidth=".8" opacity=".75"/>
+<path d={bp(b3)} fill="none" stroke="#DD7A2B" strokeWidth=".8" opacity=".75"/>
+<path d={totalRight} fill="none" stroke="#F4F2EC" strokeWidth="1.5"/>
+<text x="70" y="17" fill="#A9E3D2" fontSize="2.1">Σ вкладов</text>
+</svg>
 <div className="control-stack">
 <label><span>{c.g1} <strong>{fmt(g1,1)}</strong></span><input type="range" min=".5" max="10" step=".5" value={g1} onChange={e=>setG1(Number(e.target.value))}/></label>
 <label><span>{c.tau1} <strong>{fmt(t1,1)}</strong></span><input type="range" min=".2" max="3" step=".1" value={t1} onChange={e=>setT1(Number(e.target.value))}/></label>
