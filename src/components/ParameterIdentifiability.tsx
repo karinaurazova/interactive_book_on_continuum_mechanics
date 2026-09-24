@@ -13,19 +13,19 @@ lead:'Хорошая подгонка кривой ещё не означает,
 key:'ИДЕНТИФИЦИРУЕМОСТЬ ЗАВИСИТ НЕ ТОЛЬКО ОТ МОДЕЛИ, НО И ОТ ЭКСПЕРИМЕНТА',
 keyText:'Если измерения не охватывают временной масштаб τᵢ, чувствительность отклика к этому параметру мала, а его оценка становится сильно коррелированной с другими параметрами.',
 experiments:'Какие эксперименты несут разную информацию',
-experimentsText:'Relaxation-тест напрямую зондирует спад G(t); frequency sweep разделяет E′(ω) и E″(ω). Creep и циклические тесты добавляют другую комбинацию чувствительностей. Совместная идентификация по нескольким протоколам обычно устойчивее.',
-sensitivity:'Чувствительность и корреляция параметров',
-sensitivityText:'Локально информацию о параметрах можно оценивать через матрицу чувствительности J=∂y/∂θ. Почти параллельные столбцы J означают, что разные параметры меняют данные практически одинаково и потому плохо различимы.',
+experimentsText:'Relaxation-тест напрямую зондирует спад G(t); частотный проход разделяет E′(ω) и E″(ω). Ползучесть и циклические тесты добавляют другую комбинацию чувствительностей. Совместная идентификация по нескольким протоколам обычно устойчивее.',
+чувствительность:'Чувствительность и корреляция параметров',
+чувствительностьText:'Локально информацию о параметрах можно оценивать через матрицу чувствительности J=∂y/∂θ. Почти параллельные столбцы J означают, что разные параметры меняют данные практически одинаково и потому плохо различимы.',
 window:'Экспериментальное окно',
 windowText:'Для времени релаксации τ полезно иметь измерения и до, и после соответствующего перехода: грубо говоря, диапазон наблюдения должен включать t≈τ или ωτ≈1.',
-sceneKicker:'IDENTIFIABILITY LAB',
+sceneKicker:'ЛАБОРАТОРИЯ ИДЕНТИФИЦИРУЕМОСТИ',
 sceneTitle:'Измени экспериментальное окно и расстояние между τ₁ и τ₂',
-experiment:'эксперимент',relaxation:'relaxation',frequency:'frequency sweep',
+experiment:'эксперимент',relaxation:'релаксация',frequency:'частотный проход',
 span:'ширина окна, декады',center:'центр окна',tau1:'τ₁',ratio:'τ₂/τ₁',
-corr:'корреляция чувствительностей',score:'identifiability score',coverage:'покрытие переходов',
+corr:'корреляция чувствительностей',score:'оценка идентифицируемости',coverage:'покрытие переходов',
 warning:'ВАЖНО',
 warningTitle:'Малый residual не гарантирует уникальности параметров.',
-warningText:'Оптимизатор может найти очень хорошую подгонку вдоль длинной плоской долины функции ошибки. В таком случае прогноз внутри calibration window может быть хорошим, а параметры и экстраполяция — ненадёжными.',
+warningText:'Оптимизатор может найти очень хорошую подгонку вдоль длинной плоской долины функции ошибки. В таком случае прогноз внутри окне калибровки может быть хорошим, а параметры и экстраполяция — ненадёжными.',
 question:'ВОПРОС ДЛЯ ПРОВЕРКИ',
 questionTitle:'Что лучше для разделения двух близких времён релаксации: больше точек в узком окне или более широкий диапазон?',
 questionText:'Обычно важнее расширить окно так, чтобы наблюдать оба переходных масштаба. Простое увеличение числа точек в области, где оба механизма выглядят одинаково, почти не добавляет независимой информации.',
@@ -33,40 +33,40 @@ conclusion:'ВЫВОД',
 conclusionTitle:'Идентификация — это задача совместного выбора модели, протокола эксперимента и параметризации.',
 conclusionText:'Следующий шаг — собрать всю главу в вычислительную лабораторию: выбрать модель, задать эксперимент, провести simulation и проверить физические sanity checks.',
 deepen:'Углубиться',
-deepenText:'Практическую идентифицируемость можно анализировать через singular values матрицы чувствительности, Fisher information matrix, profile likelihood или Bayesian posterior. Разные методы отвечают на немного разные вопросы, но все показывают, насколько данные действительно ограничивают параметры.',
+deepenText:'Практическую идентифицируемость можно анализировать через сингулярные значения матрицы чувствительности, матрица информации Фишера, профиль правдоподобия или байесовское апостериорное распределение. Разные методы отвечают на немного разные вопросы, но все показывают, насколько данные действительно ограничивают параметры.',
 research:'Исследовательское замечание',
-researchText:'Для Prony-series особенно опасны перестановочная симметрия ветвей, близкие τᵢ и слишком большое число ветвей. Полезны упорядочивание τ₁<τ₂<..., логарифмическая параметризация положительных параметров и penalization/model selection.',
+researchText:'Для рядов Прони особенно опасны перестановочная симметрия ветвей, близкие τᵢ и слишком большое число ветвей. Полезны упорядочивание τ₁<τ₂<..., логарифмическая параметризация положительных параметров и penalization/model selection.',
 back:'← E10',next:'E12 → вычислительная лаборатория'
 },
 en:{
 title:'Parameter identification and practical identifiability',
 lead:'A good curve fit does not guarantee that model parameters are well determined. In viscoelasticity, several different combinations of moduli and relaxation times can reproduce nearly the same response over a limited experimental window.',
 key:'IDENTIFIABILITY DEPENDS ON THE EXPERIMENT AS WELL AS THE MODEL',
-keyText:'If measurements do not cover a timescale τᵢ, response sensitivity to that parameter is weak and its estimate becomes strongly correlated with other parameters.',
+keyText:'If measurements do not cover a timescale τᵢ, response чувствительность to that parameter is weak and its estimate becomes strongly correlated with other parameters.',
 experiments:'Different experiments carry different information',
-experimentsText:'Relaxation directly probes G(t), while a frequency sweep separates E′(ω) and E″(ω). Creep and cyclic tests add other sensitivity combinations. Joint identification across multiple protocols is usually more robust.',
-sensitivity:'Sensitivity and parameter correlation',
-sensitivityText:'Locally, parameter information can be assessed using a sensitivity matrix J=∂y/∂θ. Nearly parallel columns of J mean that different parameters change the data in almost the same way and are difficult to distinguish.',
+experimentsText:'Relaxation directly probes G(t), while a частотный проход separates E′(ω) and E″(ω). Ползучесть and cyclic tests add other чувствительность combinations. Joint identification across multiple protocols is usually more robust.',
+чувствительность:'Sensitivity and parameter корреляция',
+чувствительностьText:'Locally, parameter information can be assessed using a чувствительность matrix J=∂y/∂θ. Nearly parallel columns of J mean that different parameters change the data in almost the same way and are difficult to distinguish.',
 window:'Experimental window',
 windowText:'For a relaxation time τ, measurements should span both sides of its transition, roughly including t≈τ or ωτ≈1.',
-sceneKicker:'IDENTIFIABILITY LAB',
+sceneKicker:'ЛАБОРАТОРИЯ ИДЕНТИФИЦИРУЕМОСТИ',
 sceneTitle:'Change the experimental window and separation between τ₁ and τ₂',
-experiment:'experiment',relaxation:'relaxation',frequency:'frequency sweep',
+experiment:'experiment',relaxation:'релаксация',frequency:'частотный проход',
 span:'window width, decades',center:'window center',tau1:'τ₁',ratio:'τ₂/τ₁',
-corr:'sensitivity correlation',score:'identifiability score',coverage:'transition coverage',
+corr:'чувствительность корреляция',score:'оценка идентифицируемости',coverage:'transition coverage',
 warning:'IMPORTANT',
 warningTitle:'A small residual does not guarantee unique parameters.',
-warningText:'An optimizer may fit data extremely well along a long flat valley of the objective function. Predictions inside the calibration window can then look good while parameters and extrapolation remain unreliable.',
+warningText:'An optimizer may fit data extremely well along a long flat valley of the objective function. Predictions inside the окне калибровки can then look good while parameters and extrapolation remain unreliable.',
 question:'CHECKPOINT',
 questionTitle:'What separates two nearby relaxation times better: more points in a narrow window or a broader window?',
 questionText:'Usually the broader window is more valuable if it captures both transition scales. More points where both mechanisms look alike add little independent information.',
 conclusion:'CONCLUSION',
-conclusionTitle:'Identification is a joint problem of model choice, experiment design, and parameterization.',
+conclusionTitle:'Identification is a joint problem of model choice, планирование эксперимента, and parameterization.',
 conclusionText:'Next we assemble the chapter into a computational laboratory: choose a model, define an experiment, simulate it, and run physical sanity checks.',
 deepen:'Go deeper',
-deepenText:'Practical identifiability can be studied using singular values of the sensitivity matrix, the Fisher information matrix, profile likelihood, or Bayesian posteriors. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
+deepenText:'Practical identifiability can be studied using сингулярные значения of the чувствительность matrix, the матрица информации Фишера, профиль правдоподобия, or байесовское апостериорное распределениеs. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
 research:'Research note',
-researchText:'Prony-series models are especially vulnerable to branch permutation symmetry, nearby τᵢ, and over-parameterization. Ordering τ₁<τ₂<..., log-parameterization of positive quantities, and model selection or regularization are useful safeguards.',
+researchText:'рядов Прони models are especially vulnerable to branch permutation symmetry, nearby τᵢ, and over-parameterization. Ordering τ₁<τ₂<..., log-parameterization of positive quantities, and model selection or regularization are useful safeguards.',
 back:'← E10',next:'E12 → computational laboratory'
 }} as const
 
@@ -137,16 +137,16 @@ return <section className="module-view module-view-stacked">
 <div className="lesson-index">E11</div><h1>{c.title}</h1><p className="lead">{c.lead}</p>
 <div className="concept-card"><span>{c.key}</span><strong>{c.keyText}</strong></div>
 <div className="definition"><div className="definition-label">{c.experiments}</div><p>{c.experimentsText}</p></div>
-<div className="definition"><div className="definition-label">{c.sensitivity}</div><div className="formula">{formula}</div><p>{c.sensitivityText}</p></div>
+<div className="definition"><div className="definition-label">{c.чувствительность}</div><div className="formula">{formula}</div><p>{c.чувствительностьText}</p></div>
 <div className="definition"><div className="definition-label">{c.window}</div><p>{c.windowText}</p></div>
 <div className="warning-card kinematics-warning"><span>{c.warning}</span><strong>{c.warningTitle}</strong><p>{c.warningText}</p></div>
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
 <DepthNote label={c.research} variant="research"><p>{c.researchText}</p></DepthNote>
 <ApplicationLinks language={language} items={[
-{ru:'DMA и частотные sweep-тесты',en:'DMA and frequency sweeps'},
+{ru:'DMA и частотные sweep-тесты',en:'DMA and частотный проходs'},
 {ru:'Релаксация напряжений',en:'Stress-relaxation tests'},
 {ru:'Inverse problems в биомеханике',en:'Inverse problems in biomechanics'},
-{ru:'Калибровка Prony-series',en:'Prony-series calibration'}
+{ru:'Калибровка рядов Прони',en:'рядов Прони calibration'}
 ]}/>
 <div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div>
 </div>
