@@ -182,7 +182,7 @@ return <section className="module-view module-view-stacked">
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
 <DepthNote label={c.research} variant="research"><p>{c.researchText}</p></DepthNote>
 <ApplicationLinks language={language} items={[
-{ru:'Верификация constitutive models',en:'Constitutive-model верификация'},
+{ru:'Верификация конститутивных моделей',en:'Constitutive-model верификация'},
 {ru:'ДМА и реологические протоколы',en:'DMA and rheology workflows'},
 {ru:'Тестирование материала в МКЭ',en:'Тестирование материала в МКЭ'},
 {ru:'Биомеханика мягких тканей',en:'Soft-tissue biomechanics'}
@@ -202,7 +202,7 @@ return <section className="module-view module-view-stacked">
 
 <svg className="balance-scene" viewBox="0 0 100 68" role="img">
 <rect x="4" y="5" width="92" height="58" rx="9" fill="#111318"/>
-<text x="8" y="11" fill="#F4F2EC" fontSize="2.5">{protocol==='relaxation'?'σ(t)':protocol==='creep'?'ε(t)':'response vs cycle'}</text>
+<text x="8" y="11" fill="#F4F2EC" fontSize="2.5">{protocol==='relaxation'?'σ(t)':protocol==='creep'?'ε(t)':'отклик по циклу'}</text>
 <line x1="9" y1="56" x2="48" y2="56" stroke="#69717C" strokeWidth=".5"/>
 <line x1="9" y1="16" x2="9" y2="56" stroke="#69717C" strokeWidth=".5"/>
 <path d={path} fill="none" stroke="#A9E3D2" strokeWidth="1.25"/>
