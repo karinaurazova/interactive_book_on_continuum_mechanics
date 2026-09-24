@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.7-finite-strain-hyperelasticity
+      - v0.8-viscoelasticity-memory
   workflow_dispatch:
 
 permissions:
