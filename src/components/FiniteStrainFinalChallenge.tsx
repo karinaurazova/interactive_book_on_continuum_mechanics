@@ -5,6 +5,7 @@ type Props = {
   notation: NotationMode
   language: Language
   onBack?: () => void
+  onNext?: () => void
 }
 
 type Question = {
@@ -33,6 +34,8 @@ const text = {
     takeawayTitle:'Конечные деформации — это не просто “другая формула для напряжения”.',
     takeawayText:'Это связанная система: кинематика задаёт меру деформации, конститутивный закон формирует внутренний отклик, текущая геометрия меняет касательную жёсткость, а устойчивость и алгоритм продолжения определяют доступный путь равновесия.',
     back:'← D13',
+    next:'E00 → material memory',
+    next:'E00 → память материала',
     perfect:'Отлично: каркас главы собран целиком.',
     good:'Хорошо: основная логика есть, но пару связей стоит повторить.',
     retry:'Есть смысл ещё раз пройти D08–D12 и вернуться к тесту.',
@@ -188,7 +191,7 @@ const questions: Record<Language, Question[]> = {
   ],
 }
 
-export function FiniteStrainFinalChallenge({language,onBack}:Props){
+export function FiniteStrainFinalChallenge({language,onBack,onNext}:Props){
   const copy = text[language]
   const qs = questions[language]
   const [answers,setAnswers] = useState<Record<number,number>>({})
@@ -214,7 +217,10 @@ export function FiniteStrainFinalChallenge({language,onBack}:Props){
         <p>{copy.answered}: {answered}/{qs.length}{finished ? ` · ${verdict}` : ''}</p>
       </div>
       <button className="text-button" onClick={reset}>{copy.reset}</button>
-      {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
+      <div className="module-actions">
+        {onBack&&<button className="text-button" onClick={onBack}>{copy.back}</button>}
+        {onNext&&<button className="primary-button" onClick={onNext}>{copy.next}</button>}
+      </div>
     </div>
 
     <div className="scene-column">
