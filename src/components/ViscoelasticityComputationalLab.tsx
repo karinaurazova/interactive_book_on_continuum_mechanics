@@ -14,64 +14,64 @@ lead:'Здесь собраны ключевые идеи всей главы: �
 key:'МОДЕЛЬ НУЖНО ПРОВЕРЯТЬ НЕ ОДНОЙ КРИВОЙ, А НАБОРОМ ФИЗИЧЕСКИХ ТЕСТОВ',
 keyText:'Одна и та же параметризация должна выдерживать relaxation, creep, cyclic response, limits при t→0 и t→∞, а также проверку неотрицательной диссипации.',
 models:'Модель материала',
-modelsText:'В лаборатории доступны редуцированные варианты Maxwell, Standard Linear Solid, generalized Maxwell и state-dependent relaxation. Это учебные аналоги, которые сохраняют основные механизмы памяти и диссипации.',
+modelsText:'В лаборатории доступны редуцированные варианты Maxwell, Standard Linear Solid, обобщённая модель Максвелла и зависимая от состояния relaxation. Это учебные аналоги, которые сохраняют основные механизмы памяти и диссипации.',
 protocols:'Протоколы нагружения',
 protocolsText:'Relaxation проверяет спад напряжения при фиксированной деформации, creep — рост деформации при фиксированном напряжении, cyclic protocol — фазовый сдвиг и площадь петли.',
 checks:'Sanity checks',
 checksText:'Проверяем монотонность релаксации, корректные пределы, отсутствие отрицательной диссипации в установившемся цикле и чувствительность к отношению внешнего и внутреннего временных масштабов.',
-sceneKicker:'INTEGRATED VISCOELASTIC LAB',
+sceneKicker:'ИНТЕГРИРОВАННАЯ ЛАБОРАТОРИЯ ВЯЗКОУПРУГОСТИ',
 sceneTitle:'выбери модель и протокол и проверь физические свойства отклика',
-model:'модель',protocol:'протокол',maxwell:'Maxwell',sls:'SLS',generalized:'generalized Maxwell',state:'state-dependent',
-relaxation:'relaxation',creep:'creep',cyclic:'cyclic',
+model:'модель',protocol:'протокол',maxwell:'Maxwell',sls:'SLS',generalized:'обобщённая модель Максвелла',state:'зависимая от состояния',
+relaxation:'релаксация',creep:'ползучесть',cyclic:'циклическое нагружение',
 tau:'τ',tau2:'τ₂',E0:'E₀',Einf:'E∞',amp:'амплитуда',omega:'ω',beta:'β',
-memory:'memory index',diss:'dissipation',limit:'limit check',mono:'monotonicity',
+memory:'индекс памяти',diss:'диссипация',limit:'проверка предела',mono:'монотонность',
 pass:'OK',fail:'check',
 warning:'ВАЖНО',
 warningTitle:'Успех на одном протоколе не доказывает адекватность модели.',
 warningText:'Параметры, отлично описывающие relaxation, могут плохо предсказывать cyclic response или creep. Поэтому полноценная валидация должна быть многопротокольной.',
 question:'ИССЛЕДОВАТЕЛЬСКОЕ ЗАДАНИЕ',
-questionTitle:'Найди параметры, при которых модель хорошо проходит relaxation, но заметно меняет cyclic dissipation.',
+questionTitle:'Найди параметры, при которых модель хорошо проходит relaxation, но заметно меняет cyclic диссипация.',
 questionText:'Измени τ, ω и второй временной масштаб. Сформулируй, какой параметр отвечает за форму релаксации, а какой — за положение максимума диссипации по частоте.',
 conclusion:'ВЫВОД',
 conclusionTitle:'Вязкоупругость становится понятной, когда один материал проверяется через несколько независимых наблюдений.',
 conclusionText:'Следующий модуль — итоговая самопроверка главы, где придётся самостоятельно выбирать модель, интерпретировать эксперимент и находить некорректные выводы.',
 deepen:'Углубиться',
-deepenText:'В реальном workflow лаборатория должна дополняться автоматизированными regression tests: единичный скачок деформации, единичный скачок напряжения, harmonic sweep, Δt-refinement и проверка дискретного баланса энергии.',
+deepenText:'В реальном workflow лаборатория должна дополняться автоматизированными регрессионные тесты: единичный скачок деформации, единичный скачок напряжения, гармонический частотный проход, Δt-refinement и проверка дискретного баланса энергии.',
 research:'Исследовательское замечание',
-researchText:'Для nonlinear finite-strain моделей полезно разделять verification и validation. Verification отвечает на вопрос “правильно ли реализованы уравнения?”, validation — “подходит ли эта модель конкретному материалу и эксперименту?”.',
+researchText:'Для nonlinear finite-strain моделей полезно разделять верификация и валидация. Verification отвечает на вопрос “правильно ли реализованы уравнения?”, валидация — “подходит ли эта модель конкретному материалу и эксперименту?”.',
 back:'← E11',next:'E13 → итоговая самопроверка'
 },
 en:{
 title:'Computational viscoelasticity laboratory',
-lead:'This module combines the key ideas of the chapter: model choice, loading protocol, characteristic timescales, dissipation, memory, and limiting regimes. The goal is not a visually appealing curve but a response that is physically consistent with the chosen model.',
+lead:'This module combines the key ideas of the chapter: model choice, loading protocol, characteristic timescales, диссипация, memory, and limiting regimes. The goal is not a visually appealing curve but a response that is physically consistent with the chosen model.',
 key:'A MODEL SHOULD BE TESTED WITH A SET OF PHYSICAL CHECKS, NOT ONE CURVE',
-keyText:'A single parameter set should survive relaxation, creep, cyclic response, the t→0 and t→∞ limits, and a non-negative dissipation check.',
+keyText:'A single parameter set should survive relaxation, creep, cyclic response, the t→0 and t→∞ limits, and a non-negative диссипация check.',
 models:'Material model',
-modelsText:'The lab includes reduced Maxwell, Standard Linear Solid, generalized Maxwell, and state-dependent relaxation models. They are teaching analogues that preserve the central mechanisms of memory and dissipation.',
+modelsText:'The lab includes reduced Maxwell, Standard Linear Solid, обобщённая модель Максвелла, and зависимая от состояния relaxation models. They are teaching analogues that preserve the central mechanisms of memory and диссипация.',
 protocols:'Loading protocols',
-protocolsText:'Relaxation probes stress decay at fixed strain, creep probes strain growth at fixed stress, and cyclic loading reveals phase lag and hysteretic dissipation.',
+protocolsText:'Relaxation probes stress decay at fixed strain, creep probes strain growth at fixed stress, and cyclic loading reveals phase lag and hysteretic диссипация.',
 checks:'Sanity checks',
-checksText:'We test monotone relaxation, correct limits, non-negative steady-cycle dissipation, and sensitivity to the ratio of external and internal timescales.',
-sceneKicker:'INTEGRATED VISCOELASTIC LAB',
+checksText:'We test monotone relaxation, correct limits, non-negative steady-cycle диссипация, and sensitivity to the ratio of external and internal timescales.',
+sceneKicker:'ИНТЕГРИРОВАННАЯ ЛАБОРАТОРИЯ ВЯЗКОУПРУГОСТИ',
 sceneTitle:'choose a model and protocol and test the physical response',
-model:'model',protocol:'protocol',maxwell:'Maxwell',sls:'SLS',generalized:'generalized Maxwell',state:'state-dependent',
-relaxation:'relaxation',creep:'creep',cyclic:'cyclic',
+model:'model',protocol:'protocol',maxwell:'Maxwell',sls:'SLS',generalized:'обобщённая модель Максвелла',state:'зависимая от состояния',
+relaxation:'релаксация',creep:'ползучесть',cyclic:'циклическое нагружение',
 tau:'τ',tau2:'τ₂',E0:'E₀',Einf:'E∞',amp:'amplitude',omega:'ω',beta:'β',
-memory:'memory index',diss:'dissipation',limit:'limit check',mono:'monotonicity',
+memory:'индекс памяти',diss:'диссипация',limit:'проверка предела',mono:'монотонность',
 pass:'OK',fail:'check',
 warning:'IMPORTANT',
 warningTitle:'Success on one protocol does not prove model adequacy.',
-warningText:'Parameters that fit relaxation extremely well may predict cyclic response or creep poorly. Proper validation should therefore use multiple protocols.',
+warningText:'Parameters that fit relaxation extremely well may predict cyclic response or creep poorly. Proper валидация should therefore use multiple protocols.',
 question:'RESEARCH TASK',
-questionTitle:'Find parameters that preserve relaxation quality but strongly change cyclic dissipation.',
-questionText:'Vary τ, ω, and the second timescale. Identify which parameter controls the relaxation shape and which shifts the dissipation peak in frequency.',
+questionTitle:'Find parameters that preserve relaxation quality but strongly change cyclic диссипация.',
+questionText:'Vary τ, ω, and the second timescale. Identify which parameter controls the relaxation shape and which shifts the диссипация peak in frequency.',
 conclusion:'CONCLUSION',
 conclusionTitle:'Viscoelasticity becomes clearer when one material is tested through several independent observations.',
 conclusionText:'Next comes the final self-check, where you will choose models, interpret experiments, and identify incorrect conclusions on your own.',
 deepen:'Go deeper',
-deepenText:'A production workflow should include automated regression tests: strain step, stress step, harmonic sweep, Δt refinement, and a discrete energy-balance check.',
+deepenText:'A production workflow should include automated регрессионные тесты: strain step, stress step, гармонический частотный проход, Δt refinement, and a discrete energy-balance check.',
 research:'Research note',
-researchText:'For nonlinear finite-strain models it is useful to separate verification and validation. Verification asks “are the equations implemented correctly?”, while validation asks “is this model suitable for this material and experiment?”.',
+researchText:'For nonlinear finite-strain models it is useful to separate верификация and валидация. Verification asks “are the equations implemented correctly?”, while валидация asks “is this model suitable for this material and experiment?”.',
 back:'← E11',next:'E13 → final self-check'
 }} as const
 
@@ -157,7 +157,7 @@ const formula=notation==='Python'
 ?"\mathcal M(\theta,\mathcal H_t)\rightarrow\{\sigma_{ij}(t),q_a(t)\}"
 :notation==='Matrix'
 ?"𝓜(θ, history) → {σ(t), q(t), 𝒟(t)}"
-:"material model + loading history → stress, state, dissipation"
+:"material model + loading history → stress, state, диссипация"
 
 const path=data.pts.map((p,i)=>{
  const x=9+82*i/Math.max(1,data.pts.length-1)
@@ -182,9 +182,9 @@ return <section className="module-view module-view-stacked">
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
 <DepthNote label={c.research} variant="research"><p>{c.researchText}</p></DepthNote>
 <ApplicationLinks language={language} items={[
-{ru:'Верификация constitutive models',en:'Constitutive-model verification'},
-{ru:'DMA и rheology workflows',en:'DMA and rheology workflows'},
-{ru:'FEM material testing',en:'FEM material testing'},
+{ru:'Верификация constitutive models',en:'Constitutive-model верификация'},
+{ru:'ДМА и реологические протоколы',en:'DMA and rheology workflows'},
+{ru:'Тестирование материала в МКЭ',en:'Тестирование материала в МКЭ'},
 {ru:'Биомеханика мягких тканей',en:'Soft-tissue biomechanics'}
 ]}/>
 <div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div>
@@ -212,7 +212,7 @@ return <section className="module-view module-view-stacked">
 <line x1="72" y1="20" x2="72" y2="58" stroke="#69717C" strokeWidth=".5"/>
 <path d={loopPath} fill="rgba(221,122,43,.12)" stroke="#DD7A2B" strokeWidth="1.15"/>
 </>}
-<text x="56" y="61" fill="#8C939D" fontSize="1.9">{protocol==='cyclic'?'loop area = dissipation':'same parameters · different protocol'}</text>
+<text x="56" y="61" fill="#8C939D" fontSize="1.9">{protocol==='cyclic'?'loop area = диссипация':'same parameters · different protocol'}</text>
 </svg>
 
 <div className="control-stack">
