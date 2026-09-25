@@ -137,7 +137,7 @@ return <section className="module-view module-view-stacked">
 <div className="lesson-index">E11</div><h1>{c.title}</h1><p className="lead">{c.lead}</p>
 <div className="concept-card"><span>{c.key}</span><strong>{c.keyText}</strong></div>
 <div className="definition"><div className="definition-label">{c.experiments}</div><p>{c.experimentsText}</p></div>
-<div className="definition"><div className="definition-label">{c.чувствительность}</div><div className="formula">{formula}</div><p>{c.чувствительностьText}</p></div>
+<div className="definition"><div className="definition-label">{c.sensitivity}</div><div className="formula">{formula}</div><p>{c.sensitivityText}</p></div>
 <div className="definition"><div className="definition-label">{c.window}</div><p>{c.windowText}</p></div>
 <div className="warning-card kinematics-warning"><span>{c.warning}</span><strong>{c.warningTitle}</strong><p>{c.warningText}</p></div>
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
