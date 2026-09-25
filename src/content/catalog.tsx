@@ -90,6 +90,7 @@ import { InternalVariableUpdate } from '../components/InternalVariableUpdate'
 import { ParameterIdentifiability } from '../components/ParameterIdentifiability'
 import { ViscoelasticityComputationalLab } from '../components/ViscoelasticityComputationalLab'
 import { ViscoelasticityFinalChallenge } from '../components/ViscoelasticityFinalChallenge'
+import { SolidFluidTransition } from '../components/SolidFluidTransition'
 import type { Language, NotationMode } from '../i18n'
 
 export type ModuleId =
@@ -102,8 +103,9 @@ export type ModuleId =
   | 'C00' | 'C01' | 'C02' | 'C03' | 'C04' | 'C05' | 'C06' | 'C07' | 'C08' | 'C09' | 'C10' | 'C11'
   | 'D00' | 'D01' | 'D02' | 'D03' | 'D04' | 'D05' | 'D06' | 'D07' | 'D08' | 'D09' | 'D10' | 'D11' | 'D12' | 'D13' | 'D14'
   | 'E00' | 'E01' | 'E02' | 'E03' | 'E04' | 'E05' | 'E06' | 'E07' | 'E08' | 'E09' | 'E10' | 'E11' | 'E12' | 'E13'
+  | 'F00'
 
-export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity' | 'viscoelasticity-memory'
+export type ChapterId = 'stress-state' | 'kinematics' | 'transport' | 'balance-laws' | 'constitutive-modeling' | 'finite-strain-hyperelasticity' | 'viscoelasticity-memory' | 'fluid-mechanics-rheology'
 
 type RenderContext = {
   notation: NotationMode
@@ -180,6 +182,12 @@ export const chapters: ChapterDefinition[] = [
     title: { ru: 'Вязкоупругость и память материала', en: 'Viscoelasticity and material memory' },
     shortTitle: { ru: 'Память материала', en: 'Material memory' },
     moduleIds: ['E00', 'E01', 'E02', 'E03', 'E04', 'E05', 'E06', 'E07', 'E08', 'E09', 'E10', 'E11', 'E12', 'E13'],
+  },
+  {
+    id: 'fluid-mechanics-rheology',
+    title: { ru: 'Механика жидкостей и реология', en: 'Fluid mechanics and rheology' },
+    shortTitle: { ru: 'Жидкости и реология', en: 'Fluids & rheology' },
+    moduleIds: ['F00'],
   },
 ]
 
@@ -275,6 +283,7 @@ export const modules: ModuleDefinition[] = [
   { id: 'E11', chapterId: 'viscoelasticity-memory', title: { ru: 'Идентификация параметров и практическая идентифицируемость', en: 'Parameter identification and practical identifiability' }, subtitle: { ru: 'планирование эксперимента · чувствительность · корреляция · τ₁/τ₂', en: 'experiment design · sensitivity · correlation · τ₁/τ₂' }, render: ({notation,language,goTo}) => <ParameterIdentifiability notation={notation} language={language} onBack={() => goTo('E10')} onNext={() => goTo('E12')} /> },
   { id: 'E12', chapterId: 'viscoelasticity-memory', title: { ru: 'Вычислительная лаборатория вязкоупругости', en: 'Computational viscoelasticity laboratory' }, subtitle: { ru: 'модели · протоколы · память · диссипация · проверки корректности', en: 'models · protocols · memory · dissipation · sanity checks' }, render: ({notation,language,goTo}) => <ViscoelasticityComputationalLab notation={notation} language={language} onBack={() => goTo('E11')} onNext={() => goTo('E13')} /> },
   { id: 'E13', chapterId: 'viscoelasticity-memory', title: { ru: 'Итоговая самопроверка по вязкоупругости и памяти материала', en: 'Final self-check on viscoelasticity and material memory' }, subtitle: { ru: 'модели · эксперимент · идентифицируемость · численная реализация', en: 'models · experiment · identifiability · numerical implementation' }, render: ({notation,language,goTo}) => <ViscoelasticityFinalChallenge notation={notation} language={language} onBack={() => goTo('E12')} /> },
+  { id: 'F00', chapterId: 'fluid-mechanics-rheology', title: { ru: 'Твёрдое тело и жидкость: что меняется в конститутивной модели?', en: 'Solid and fluid: what changes in the constitutive model?' }, subtitle: { ru: 'деформация · скорость деформации · память · вязкость', en: 'deformation · deformation rate · memory · viscosity' }, render: ({notation,language,goTo}) => <SolidFluidTransition notation={notation} language={language} onBack={() => goTo('E13')} /> },
 ]
 
 export const moduleById = Object.fromEntries(modules.map((m) => [m.id, m])) as Record<ModuleId, ModuleDefinition>
