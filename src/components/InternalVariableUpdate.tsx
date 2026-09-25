@@ -153,7 +153,7 @@ return <section className="module-view module-view-stacked">
 
 <svg className="balance-scene" viewBox="0 0 100 68" role="img">
 <rect x="4" y="5" width="92" height="58" rx="9" fill="#111318"/>
-<text x="8" y="12" fill="#F4F2EC" fontSize="2.5">state update: qₙ → qₙ₊₁</text>
+<text x="8" y="12" fill="#F4F2EC" fontSize="2.5">{language==='ru'?'обновление состояния: qₙ → qₙ₊₁':'state update: qₙ → qₙ₊₁'}</text>
 <line x1={x0} y1="54" x2={x1} y2="54" stroke="#69717C" strokeWidth=".5"/>
 <line x1="20" y1="18" x2="20" y2="58" stroke="#69717C" strokeWidth=".5"/>
 <line x1="80" y1="18" x2="80" y2="58" stroke="#69717C" strokeWidth=".5" strokeDasharray="2 2"/>
@@ -166,9 +166,9 @@ return <section className="module-view module-view-stacked">
 {scheme==='explicit'&&<><circle cx="50" cy={py(explicitTrial)} r="1.3" fill="#DD7A2B"/><text x="43" y={py(explicitTrial)-2} fill="#DD7A2B" fontSize="1.8">пробное состояние</text></>}
 <text x="10" y="62" fill="#8C939D" fontSize="1.8">n</text><text x="78" y="62" fill="#8C939D" fontSize="1.8">n+1</text>
 
-<text x="8" y="17" fill="#F4F2EC" fontSize="2.1">{scheme==='implicit'?'R(qₙ₊₁)=0':'forward step'}</text>
+<text x="8" y="17" fill="#F4F2EC" fontSize="2.1">{scheme==='implicit'?'R(qₙ₊₁)=0':(language==='ru'?'явный шаг':'forward step')}</text>
 <text x="55" y="17" fill="#A9E3D2" fontSize="2.0">Δt/τ = {fmt(dt/tau,2)}</text>
-<text x="55" y="21" fill="#F4F2EC" fontSize="2.0">error = {fmt(data.err,5)}</text>
+<text x="55" y="21" fill="#F4F2EC" fontSize="2.0">{language==='ru'?'ошибка':'error'} = {fmt(data.err,5)}</text>
 </svg>
 
 <div className="control-stack">
