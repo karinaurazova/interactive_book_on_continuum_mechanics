@@ -166,7 +166,7 @@ return <section className="module-view module-view-stacked">
 <text x="8" y="42" fill="#F4F2EC" fontSize="2.5">2 · τ(t)</text>
 <line x1="9" y1="57" x2="47" y2="57" stroke="#69717C" strokeWidth=".5"/>
 <path d={tauPath} fill="none" stroke="#2864FF" strokeWidth="1.2"/>
-<text x="10" y="62" fill="#8C939D" fontSize="1.8">{mode==='constant'?'τ = const':'τ = τ(λ)'}</text>
+<text x="10" y="62" fill="#8C939D" fontSize="1.8">{mode==='constant'?(language==='ru'?'τ = постоянное':'τ = const'):'τ = τ(λ)'}</text>
 
 <text x="55" y="11" fill="#F4F2EC" fontSize="2.5">3 · σ–lnλ</text>
 <line x1="55" y1="40.5" x2="93" y2="40.5" stroke="#69717C" strokeWidth=".5"/>
