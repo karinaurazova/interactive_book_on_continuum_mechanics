@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Language, NotationMode } from '../i18n'
 import { DepthNote } from './DepthNote'
 
-type Props={notation:NotationMode;language:Language;onBack?:()=>void}
+type Props={notation:NotationMode;language:Language;onBack?:()=>void;onNext?:()=>void}
 type CaseId='model'|'experiment'|'identifiability'|'numerics'
 
 const text={
@@ -45,7 +45,7 @@ conclusionTitle:'Вязкоупругость — это теория состо
 conclusionText:'Теперь можно переходить к следующему крупному разделу МСС, сохранив связку: физика → конститутивная модель → эксперимент → идентификация → вычислительная реализация.',
 deepen:'Углубиться',
 deepenText:'Хорошая самостоятельная проверка главы — взять неизвестный набор синтетических данных и пройти полный цикл: выбрать класс модели, предложить эксперимент, оценить идентифицируемость, реализовать обновление состояния и провести независимую валидацию.',
-back:'← E12'
+back:'← E12',next:'F00 → жидкости и реология'
 },
 en:{
 title:'Final self-check on viscoelasticity and material memory',
@@ -67,12 +67,12 @@ warningText:'In real applications, several models may be compatible with one exp
 conclusion:'CHAPTER SUMMARY',conclusionTitle:'Viscoelasticity is a theory of state, history, and timescales.',
 conclusionText:'You can now move to the next major continuum-mechanics section while keeping the chain: physics → constitutive model → experiment → identification → computational implementation.',
 deepen:'Go deeper',deepenText:'A strong independent exercise is to take an unknown synthetic dataset and complete the full cycle: select a model class, design an experiment, assess identifiability, implement the update, and validate independently.',
-back:'← E12'
+back:'← E12',next:'F00 → fluids and rheology'
 }} as const
 
 const answers:Record<CaseId,number>={model:1,experiment:1,identifiability:1,numerics:0}
 
-export function ViscoelasticityFinalChallenge({notation,language,onBack}:Props){
+export function ViscoelasticityFinalChallenge({notation,language,onBack,onNext}:Props){
 const c=text[language]
 const [selected,setSelected]=useState<Record<CaseId,number|null>>({model:null,experiment:null,identifiability:null,numerics:null})
 const [checked,setChecked]=useState(false)
@@ -91,7 +91,7 @@ return <section className="module-view module-view-stacked">
 <div className="definition"><div className="definition-label">{c.caseLabel}</div><div className="formula">{formula}</div><p>{c.lead}</p></div>
 <div className="warning-card kinematics-warning"><span>{c.warning}</span><strong>{c.warningTitle}</strong><p>{c.warningText}</p></div>
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
-{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}
+<div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div>
 </div>
 <div className="scene-column">
 <div className="scene-card">
