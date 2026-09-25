@@ -166,7 +166,7 @@ return <section className="module-view module-view-stacked">
 <path d={mainPath} fill="none" stroke="#F4F2EC" strokeWidth="1.2"/>
 <text x="8" y="39" fill="#8C939D" fontSize="1.8">log {experiment==='relaxation'?'t':'ω'}</text>
 
-<text x="56" y="11" fill="#F4F2EC" fontSize="2.5">sensitivities to log τ</text>
+<text x="56" y="11" fill="#F4F2EC" fontSize="2.5">{language==='ru'?'чувствительности по ln τ':'sensitivities to log τ'}</text>
 <line x1="56" y1="27" x2="92" y2="27" stroke="#69717C" strokeWidth=".5"/>
 <path d={s1Path} fill="none" stroke="#A9E3D2" strokeWidth="1.1"/>
 <path d={s2Path} fill="none" stroke="#2864FF" strokeWidth="1.1"/>
