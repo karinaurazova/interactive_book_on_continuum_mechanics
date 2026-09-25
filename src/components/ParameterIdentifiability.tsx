@@ -39,34 +39,34 @@ researchText:'Для рядов Прони особенно опасны пер�
 back:'← E10',next:'E12 → вычислительная лаборатория'
 },
 en:{
-title:'Parameter identification and practical идентифицируемость',
+title:'Parameter identification and practical identifiability',
 lead:'A good curve fit does not guarantee that model parameters are well determined. In viscoelasticity, several different combinations of moduli and relaxation times can reproduce nearly the same response over a limited experimental window.',
 key:'IDENTIFIABILITY DEPENDS ON THE EXPERIMENT AS WELL AS THE MODEL',
-keyText:'If measurements do not cover a timescale τᵢ, response чувствительность to that parameter is weak and its estimate becomes strongly correlated with other parameters.',
+keyText:'If measurements do not cover a timescale τᵢ, response sensitivity to that parameter is weak and its estimate becomes strongly correlated with other parameters.',
 experiments:'Different experiments carry different information',
-experimentsText:'Relaxation directly probes G(t), while a частотный проход separates E′(ω) and E″(ω). Ползучесть and cyclic tests add other чувствительность combinations. Joint identification across multiple protocols is usually more robust.',
-чувствительность:'Sensitivity and parameter корреляция',
-чувствительностьText:'Locally, parameter information can be assessed using a чувствительность matrix J=∂y/∂θ. Nearly parallel columns of J mean that different parameters change the data in almost the same way and are difficult to distinguish.',
+experimentsText:'Relaxation directly probes G(t), while a frequency sweep separates E′(ω) and E″(ω). Creep and cyclic tests add other sensitivity combinations. Joint identification across multiple protocols is usually more robust.',
+sensitivity:'Sensitivity and parameter correlation',
+sensitivityText:'Locally, parameter information can be assessed using a sensitivity matrix J=∂y/∂θ. Nearly parallel columns of J mean that different parameters change the data in almost the same way and are difficult to distinguish.',
 window:'Experimental window',
 windowText:'For a relaxation time τ, measurements should span both sides of its transition, roughly including t≈τ or ωτ≈1.',
-sceneKicker:'ЛАБОРАТОРИЯ ИДЕНТИФИЦИРУЕМОСТИ',
+sceneKicker:'IDENTIFIABILITY LAB',
 sceneTitle:'Change the experimental window and separation between τ₁ and τ₂',
-experiment:'experiment',relaxation:'релаксация',frequency:'частотный проход',
+experiment:'experiment',relaxation:'relaxation',frequency:'frequency sweep',
 span:'window width, decades',center:'window center',tau1:'τ₁',ratio:'τ₂/τ₁',
-corr:'чувствительность корреляция',score:'оценка идентифицируемости',coverage:'transition coverage',
+corr:'sensitivity correlation',score:'identifiability score',coverage:'transition coverage',
 warning:'IMPORTANT',
 warningTitle:'A small residual does not guarantee unique parameters.',
-warningText:'An optimizer may fit data extremely well along a long flat valley of the objective function. Predictions inside the окне калибровки can then look good while parameters and extrapolation remain unreliable.',
+warningText:'An optimizer may fit data extremely well along a long flat valley of the objective function. Predictions inside the calibration window can then look good while parameters and extrapolation remain unreliable.',
 question:'CHECKPOINT',
 questionTitle:'What separates two nearby relaxation times better: more points in a narrow window or a broader window?',
 questionText:'Usually the broader window is more valuable if it captures both transition scales. More points where both mechanisms look alike add little independent information.',
 conclusion:'CONCLUSION',
-conclusionTitle:'Identification is a joint problem of model choice, планирование эксперимента, and parameterization.',
+conclusionTitle:'Identification is a joint problem of model choice, experiment design, and parameterization.',
 conclusionText:'Next we assemble the chapter into a computational laboratory: choose a model, define an experiment, simulate it, and run physical sanity checks.',
 deepen:'Go deeper',
-deepenText:'Practical идентифицируемость can be studied using сингулярные значения of the чувствительность matrix, the матрица информации Фишера, профиль правдоподобия, or байесовское апостериорное распределениеs. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
+deepenText:'Practical identifiability can be studied using singular values of the sensitivity matrix, the Fisher information matrix, profile likelihood, or Bayesian posteriors. These methods answer slightly different questions but all quantify how strongly data constrain parameters.',
 research:'Research note',
-researchText:'рядов Прони models are especially vulnerable to branch permutation symmetry, nearby τᵢ, and over-parameterization. Ordering τ₁<τ₂<..., log-parameterization of positive quantities, and model selection or regularization are useful safeguards.',
+researchText:'Prony-series models are especially vulnerable to branch permutation symmetry, nearby τᵢ, and over-parameterization. Ordering τ₁<τ₂<..., log-parameterization of positive quantities, and model selection or regularization are useful safeguards.',
 back:'← E10',next:'E12 → computational laboratory'
 }} as const
 
@@ -143,10 +143,10 @@ return <section className="module-view module-view-stacked">
 <DepthNote label={c.deepen}><p>{c.deepenText}</p></DepthNote>
 <DepthNote label={c.research} variant="research"><p>{c.researchText}</p></DepthNote>
 <ApplicationLinks language={language} items={[
-{ru:'DMA и частотные sweep-тесты',en:'DMA and частотный проходs'},
+{ru:'ДМА и частотные проходы',en:'DMA and frequency sweeps'},
 {ru:'Релаксация напряжений',en:'Stress-relaxation tests'},
-{ru:'Inverse problems в биомеханике',en:'Inverse problems in biomechanics'},
-{ru:'Калибровка рядов Прони',en:'рядов Прони calibration'}
+{ru:'Обратные задачи в биомеханике',en:'Inverse problems in biomechanics'},
+{ru:'Калибровка рядов Прони',en:'Prony-series calibration'}
 ]}/>
 <div className="module-actions">{onBack&&<button className="text-button" onClick={onBack}>{c.back}</button>}{onNext&&<button className="primary-button" onClick={onNext}>{c.next}</button>}</div>
 </div>
