@@ -3,7 +3,7 @@ name: deploy-pages
 on:
   push:
     branches:
-      - v0.8-viscoelasticity-memory
+      - v0.9-fluids-rheology
   workflow_dispatch:
 
 permissions:
